@@ -6,6 +6,8 @@ import X from '../components/simple-icons/x.astro'
 
 ---
 
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
 <Layout>
   <main class="min-h-dvh flex flex-col items-center justify-center bg-slate-50 font-mono px-4 py-8">
     <img src="https://avatars.githubusercontent.com/u/15872348" alt="Akshit Kr Nagpal" class="w-[200px] h-[200px] rounded-full shadow-lg mb-8 border-4 border-white" />
@@ -25,4 +27,164 @@ import X from '../components/simple-icons/x.astro'
       </a>
     </div>
   </main>
+  <section class="w-full max-w-2xl mx-auto my-12">
+    <h2 class="text-2xl font-bold mb-6 text-[#222]">Work Experience</h2>
+    <ul class="space-y-6" x-data="{}">
+      <li class="bg-white rounded-lg shadow p-5 border border-slate-200" x-data="{ open: false }">
+        <div class="flex items-center justify-between cursor-pointer" @click="open = !open">
+          <div>
+            <h3 class="text-lg font-semibold">Senior Software Engineer @ Whoppah</h3>
+            <p class="text-sm text-[#444] mt-1">Aug 2020 – Present, Amsterdam (Remote)</p>
+            <div class="mt-2 flex flex-wrap gap-2">
+              <span class="bg-slate-100 text-xs px-2 py-1 rounded">Next.js</span>
+              <span class="bg-slate-100 text-xs px-2 py-1 rounded">React.js</span>
+              <span class="bg-slate-100 text-xs px-2 py-1 rounded">TypeScript</span>
+              <span class="bg-slate-100 text-xs px-2 py-1 rounded">GraphQL</span>
+              <span class="bg-slate-100 text-xs px-2 py-1 rounded">Stripe</span>
+              <span class="bg-slate-100 text-xs px-2 py-1 rounded">Algolia</span>
+              <span class="bg-slate-100 text-xs px-2 py-1 rounded">AI tools</span>
+            </div>
+          </div>
+          <button class="ml-4 text-xl text-blue-600" aria-label="Toggle Details">
+            <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12m6-6H6" /></svg>
+            <svg x-show="open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 12H6" /></svg>
+          </button>
+        </div>
+        <div x-show="open" x-transition class="mt-3">
+          <ul class="list-disc ml-6 text-sm text-[#444] space-y-1">
+            <li>Rebuilt website with Next.js, improved speed, added multi-language & payments, led API and search initiatives.</li>
+            <li>Developed GraphQL API gateway and shopping cart system</li>
+            <li>Implemented Algolia search, Stripe payments, and AI moderation</li>
+            <li>Set up analytics, SEO, discount codes, and referral program</li>
+          </ul>
+        </div>
+      </li>
+      <li class="bg-white rounded-lg shadow p-5 border border-slate-200" x-data="{ open: false }">
+        <div class="flex items-center justify-between cursor-pointer" @click="open = !open">
+          <div>
+            <h3 class="text-lg font-semibold">Software Engineer @ Founders Network</h3>
+            <p class="text-sm text-[#444] mt-1">Mar 2020 – Oct 2020, London (Remote)</p>
+            <div class="mt-2 flex flex-wrap gap-2">
+              <span class="bg-slate-100 text-xs px-2 py-1 rounded">React</span>
+              <span class="bg-slate-100 text-xs px-2 py-1 rounded">TypeScript</span>
+              <span class="bg-slate-100 text-xs px-2 py-1 rounded">Next.js</span>
+              <span class="bg-slate-100 text-xs px-2 py-1 rounded">Apollo</span>
+              <span class="bg-slate-100 text-xs px-2 py-1 rounded">CapacitorJS</span>
+              <span class="bg-slate-100 text-xs px-2 py-1 rounded">Ionic</span>
+              <span class="bg-slate-100 text-xs px-2 py-1 rounded">Laravel</span>
+            </div>
+          </div>
+          <button class="ml-4 text-xl text-blue-600" aria-label="Toggle Details">
+            <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12m6-6H6" /></svg>
+            <svg x-show="open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 12H6" /></svg>
+          </button>
+        </div>
+        <div x-show="open" x-transition class="mt-3">
+          <ul class="list-disc ml-6 text-sm text-[#444] space-y-1">
+            <li>Built SEO marketplace and mobile app, worked on React/TypeScript projects.</li>
+            <li>SEO-optimized marketplace with Next.js & Apollo</li>
+            <li>Cross-platform mobile app with CapacitorJS/Ionic & Laravel</li>
+          </ul>
+        </div>
+      </li>
+      <li class="bg-white rounded-lg shadow p-5 border border-slate-200" x-data="{ open: false }">
+        <div class="flex items-center justify-between cursor-pointer" @click="open = !open">
+          <div>
+            <h3 class="text-lg font-semibold">Co-Founder, CTO @ Legex</h3>
+            <p class="text-sm text-[#444] mt-1">Jan 2019 – Dec 2019, New Delhi</p>
+            <div class="mt-2 flex flex-wrap gap-2">
+              <span class="bg-slate-100 text-xs px-2 py-1 rounded">React</span>
+              <span class="bg-slate-100 text-xs px-2 py-1 rounded">Redux</span>
+              <span class="bg-slate-100 text-xs px-2 py-1 rounded">Laravel</span>
+              <span class="bg-slate-100 text-xs px-2 py-1 rounded">AWS</span>
+            </div>
+          </div>
+          <button class="ml-4 text-xl text-blue-600" aria-label="Toggle Details">
+            <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12m6-6H6" /></svg>
+            <svg x-show="open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 12H6" /></svg>
+          </button>
+        </div>
+        <div x-show="open" x-transition class="mt-3">
+          <ul class="list-disc ml-6 text-sm text-[#444] space-y-1">
+            <li>Built and managed cloud-based legal tech platform.</li>
+            <li>Scaled app on AWS, React/Redux frontend, Laravel backend</li>
+          </ul>
+        </div>
+      </li>
+      <li class="bg-white rounded-lg shadow p-5 border border-slate-200" x-data="{ open: false }">
+        <div class="flex items-center justify-between cursor-pointer" @click="open = !open">
+          <div>
+            <h3 class="text-lg font-semibold">Software Engineering Intern @ Postman</h3>
+            <p class="text-sm text-[#444] mt-1">Jan 2019 – May 2019, Bengaluru</p>
+            <div class="mt-2 flex flex-wrap gap-2">
+              <span class="bg-slate-100 text-xs px-2 py-1 rounded">GraphQL</span>
+              <span class="bg-slate-100 text-xs px-2 py-1 rounded">React</span>
+              <span class="bg-slate-100 text-xs px-2 py-1 rounded">Enzyme</span>
+              <span class="bg-slate-100 text-xs px-2 py-1 rounded">Jest</span>
+            </div>
+          </div>
+          <button class="ml-4 text-xl text-blue-600" aria-label="Toggle Details">
+            <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12m6-6H6" /></svg>
+            <svg x-show="open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 12H6" /></svg>
+          </button>
+        </div>
+        <div x-show="open" x-transition class="mt-3">
+          <ul class="list-disc ml-6 text-sm text-[#444] space-y-1">
+            <li>Added GraphQL support, fixed bugs, and wrote tests in React app.</li>
+            <li>Implemented GraphQL workflow, bugfixes, and React/Enzyme/Jest tests</li>
+          </ul>
+        </div>
+      </li>
+      <li class="bg-white rounded-lg shadow p-5 border border-slate-200" x-data="{ open: false }">
+        <div class="flex items-center justify-between cursor-pointer" @click="open = !open">
+          <div>
+            <h3 class="text-lg font-semibold">Google Summer of Code Student @ Atlassian (Jitsi.org)</h3>
+            <p class="text-sm text-[#444] mt-1">May 2018 – Aug 2018</p>
+            <div class="mt-2 flex flex-wrap gap-2">
+              <span class="bg-slate-100 text-xs px-2 py-1 rounded">React</span>
+              <span class="bg-slate-100 text-xs px-2 py-1 rounded">Redux</span>
+              <span class="bg-slate-100 text-xs px-2 py-1 rounded">Electron</span>
+              <span class="bg-slate-100 text-xs px-2 py-1 rounded">WebRTC</span>
+              <span class="bg-slate-100 text-xs px-2 py-1 rounded">DevOps</span>
+            </div>
+          </div>
+          <button class="ml-4 text-xl text-blue-600" aria-label="Toggle Details">
+            <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12m6-6H6" /></svg>
+            <svg x-show="open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 12H6" /></svg>
+          </button>
+        </div>
+        <div x-show="open" x-transition class="mt-3">
+          <ul class="list-disc ml-6 text-sm text-[#444] space-y-1">
+            <li>Built open source video conferencing desktop app in React/Electron.</li>
+            <li>React (ES6), Redux, Electron, WebRTC, DevOps automation</li>
+          </ul>
+        </div>
+      </li>
+      <li class="bg-white rounded-lg shadow p-5 border border-slate-200" x-data="{ open: false }">
+        <div class="flex items-center justify-between cursor-pointer" @click="open = !open">
+          <div>
+            <h3 class="text-lg font-semibold">Web Development Intern @ One97 Communications Limited</h3>
+            <p class="text-sm text-[#444] mt-1">Jul 2016, Noida</p>
+            <div class="mt-2 flex flex-wrap gap-2">
+              <span class="bg-slate-100 text-xs px-2 py-1 rounded">HTML</span>
+              <span class="bg-slate-100 text-xs px-2 py-1 rounded">CSS</span>
+              <span class="bg-slate-100 text-xs px-2 py-1 rounded">Bootstrap</span>
+              <span class="bg-slate-100 text-xs px-2 py-1 rounded">JavaScript</span>
+              <span class="bg-slate-100 text-xs px-2 py-1 rounded">Java Struts 2</span>
+            </div>
+          </div>
+          <button class="ml-4 text-xl text-blue-600" aria-label="Toggle Details">
+            <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12m6-6H6" /></svg>
+            <svg x-show="open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 12H6" /></svg>
+          </button>
+        </div>
+        <div x-show="open" x-transition class="mt-3">
+          <ul class="list-disc ml-6 text-sm text-[#444] space-y-1">
+            <li>Built a full-stack demo for subscription-manager app.</li>
+            <li>Frontend: HTML, CSS, Bootstrap, Vanilla JS; Backend: Java Struts 2</li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </section>
 </Layout>
