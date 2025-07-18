@@ -9,6 +9,7 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+  // Use the canonical domain for sitemap and other absolute URLs
   site: "https://akshit.io",
   integrations: [sitemap()],
 });
