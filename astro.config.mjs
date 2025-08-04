@@ -11,5 +11,6 @@ export default defineConfig({
   },
   // Use the canonical domain for sitemap and other absolute URLs
   site: "https://akshit.io",
+  trailingSlash: "never",
   integrations: [sitemap()],
 });
