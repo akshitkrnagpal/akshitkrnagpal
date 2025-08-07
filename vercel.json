@@ -1,0 +1,30 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/twitter",
+      "destination": "https://x.com/akshit_io",
+      "permanent": false
+    },
+    {
+      "source": "/github",
+      "destination": "https://github.com/akshitkrnagpal",
+      "permanent": false
+    },
+    {
+      "source": "/linkedin",
+      "destination": "https://www.linkedin.com/in/akshitkrnagpal",
+      "permanent": false
+    },
+    {
+      "source": "/jitsi",
+      "destination": "https://jitsi-gsoc.akshitkrnagpal.com",
+      "permanent": false
+    },
+    {
+      "source": "/jitsi-v1-release",
+      "destination": "https://github.com/jitsi/jitsi-meet-electron/releases/tag/v1.0.0-alpha.1",
+      "permanent": false
+    }
+  ]
+}
