@@ -7,12 +7,12 @@ import "../styles/global.css";
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" href="/favicon.ico" sizes="any">
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-        <link rel="manifest" href="/manifest.json" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+		<link rel="manifest" href="/manifest.json" />
 		<link rel="sitemap" href="/sitemap-index.xml" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+		<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Akshit Kr Nagpal – Software Engineer & Open Source Enthusiast</title>
 		<meta name="description" content="Portfolio of Akshit Kr Nagpal, a self-taught software engineer passionate about full-stack development, open source, and efficient code." />
@@ -23,6 +23,90 @@ import "../styles/global.css";
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content="https://akshit.io/" />
 		<script src="https://analytics.ahrefs.com/analytics.js" data-key="qIzc0UIE/OnCN8g4tBDXNQ" async></script>
+		<style>
+			:root {
+				--color-ink: #1a1a1a;
+				--color-paper: #faf9f7;
+				--color-muted: #6b6b6b;
+				--color-accent: #e85d4c;
+				--color-accent-hover: #d14a39;
+				--font-display: 'Instrument Serif', Georgia, serif;
+				--font-body: 'DM Sans', system-ui, sans-serif;
+			}
+
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			html {
+				scroll-behavior: smooth;
+			}
+
+			body {
+				font-family: var(--font-body);
+				background: var(--color-paper);
+				color: var(--color-ink);
+				line-height: 1.6;
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+			}
+
+			::selection {
+				background: var(--color-accent);
+				color: white;
+			}
+
+			@keyframes fadeUp {
+				from {
+					opacity: 0;
+					transform: translateY(24px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+
+			@keyframes fadeIn {
+				from { opacity: 0; }
+				to { opacity: 1; }
+			}
+
+			@keyframes scaleIn {
+				from {
+					opacity: 0;
+					transform: scale(0.95);
+				}
+				to {
+					opacity: 1;
+					transform: scale(1);
+				}
+			}
+
+			.animate-fade-up {
+				animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+				opacity: 0;
+			}
+
+			.animate-fade-in {
+				animation: fadeIn 0.6s ease-out forwards;
+				opacity: 0;
+			}
+
+			.animate-scale-in {
+				animation: scaleIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+				opacity: 0;
+			}
+
+			.delay-1 { animation-delay: 0.1s; }
+			.delay-2 { animation-delay: 0.2s; }
+			.delay-3 { animation-delay: 0.3s; }
+			.delay-4 { animation-delay: 0.4s; }
+			.delay-5 { animation-delay: 0.5s; }
+			.delay-6 { animation-delay: 0.6s; }
+		</style>
 	</head>
 	<body>
 		<slot />

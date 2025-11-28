@@ -3,221 +3,185 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
-  <main
-    class="min-h-dvh flex flex-col items-center justify-center bg-slate-50 font-sans px-4 py-8"
-    style="font-family: 'Inter', sans-serif;"
-  >
-    <div class="text-center mb-12">
-      <h1 class="text-[2rem] mb-6 font-extrabold text-[#222] tracking-wide">
-        Indie Projects
-      </h1>
-      <p
-        class="max-w-[520px] mb-8 text-center text-[1.1rem] text-[#444] leading-[1.6] px-4 text-balance"
-      >
-        Building products that solve real problems. Here are my indie hacking
-        ventures and side projects.
-      </p>
-    </div>
+  <main class="min-h-dvh relative overflow-hidden">
+    <!-- Subtle texture overlay -->
+    <div class="absolute inset-0 opacity-[0.015] pointer-events-none" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%270 0 256 256%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cfilter id=%27noise%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.8%27 numOctaves=%274%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23noise)%27/%3E%3C/svg%3E');"></div>
 
-    <div class="w-full max-w-2xl space-y-6 mb-12">
-      <!-- PromptLens -->
-      <div
-        class="bg-white rounded-xl shadow-sm p-8 border border-slate-200 hover:shadow-md transition-shadow"
-      >
-        <div class="flex items-start justify-between mb-4">
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0">
-              <img
-                src="https://www.promptlens.io/favicon.ico"
-                alt="PromptLens"
-                class="w-full h-full object-cover"
-              />
-            </div>
-            <div>
-              <h2 class="text-xl font-semibold text-[#222]">PromptLens</h2>
-              <p class="text-sm text-[#666]">
-                Compare and optimize LLM prompts
-              </p>
-            </div>
-          </div>
-          <a
-            href="https://www.promptlens.io"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center text-sm text-[#222] hover:text-[#555] transition font-medium"
-          >
-            Visit
-            <svg
-              class="ml-1 w-3 h-3"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-              ></path>
-            </svg>
-          </a>
-        </div>
-        <p class="text-[#444] leading-relaxed mb-4">
-          Compare system prompts side-by-side across any LLM provider. Run
-          experiments, visualize differences, and ship prompts with confidence.
-          Supports OpenAI, Anthropic, and Google.
-        </p>
-        <div class="flex flex-wrap gap-2">
-          <span class="bg-slate-100 text-slate-700 text-xs px-2 py-1 rounded"
-            >LLM</span
-          >
-          <span class="bg-slate-100 text-slate-700 text-xs px-2 py-1 rounded"
-            >Prompt Engineering</span
-          >
-          <span class="bg-slate-100 text-slate-700 text-xs px-2 py-1 rounded"
-            >A/B Testing</span
-          >
-        </div>
-      </div>
+    <!-- Decorative elements -->
+    <div class="absolute top-1/4 -right-32 w-[50vw] h-[50vw] max-w-[700px] max-h-[700px] rounded-full opacity-[0.02]" style="background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);"></div>
 
-      <!-- ZenSEO -->
-      <div
-        class="bg-white rounded-xl shadow-sm p-8 border border-slate-200 hover:shadow-md transition-shadow"
-      >
-        <div class="flex items-start justify-between mb-4">
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0">
-              <img
-                src="https://zenseo.app/favicon.ico"
-                alt="ZenSEO"
-                class="w-full h-full object-cover"
-              />
-            </div>
-            <div>
-              <h2 class="text-xl font-semibold text-[#222]">ZenSEO</h2>
-              <p class="text-sm text-[#666]">
-                SEO optimization tools and analytics
-              </p>
-            </div>
-          </div>
-          <a
-            href="https://zenseo.app"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center text-sm text-[#222] hover:text-[#555] transition font-medium"
-          >
-            Visit
-            <svg
-              class="ml-1 w-3 h-3"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-              ></path>
-            </svg>
-          </a>
-        </div>
-        <p class="text-[#444] leading-relaxed mb-4">
-          Platform to help websites improve their search engine rankings and
-          performance with comprehensive SEO tools.
-        </p>
-        <div class="flex flex-wrap gap-2">
-          <span class="bg-slate-100 text-slate-700 text-xs px-2 py-1 rounded"
-            >SEO</span
-          >
-          <span class="bg-slate-100 text-slate-700 text-xs px-2 py-1 rounded"
-            >Analytics</span
-          >
-          <span class="bg-slate-100 text-slate-700 text-xs px-2 py-1 rounded"
-            >Web Tools</span
-          >
-        </div>
-      </div>
-
-      <!-- Zoppy -->
-      <div
-        class="bg-white rounded-xl shadow-sm p-8 border border-slate-200 hover:shadow-md transition-shadow"
-      >
-        <div class="flex items-start justify-between mb-4">
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0">
-              <img
-                src="https://zoppy.app/favicon.ico"
-                alt="Zoppy"
-                class="w-full h-full object-cover"
-              />
-            </div>
-            <div>
-              <h2 class="text-xl font-semibold text-[#222]">Zoppy</h2>
-              <p class="text-sm text-[#666]">
-                Productivity and workflow automation
-              </p>
-            </div>
-          </div>
-          <a
-            href="https://zoppy.app"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center text-sm text-[#222] hover:text-[#555] transition font-medium"
-          >
-            Visit
-            <svg
-              class="ml-1 w-3 h-3"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-              ></path>
-            </svg>
-          </a>
-        </div>
-        <p class="text-[#444] leading-relaxed mb-4">
-          Modern platform designed to streamline business processes and improve
-          team efficiency with powerful automation tools.
-        </p>
-        <div class="flex flex-wrap gap-2">
-          <span class="bg-slate-100 text-slate-700 text-xs px-2 py-1 rounded"
-            >Productivity</span
-          >
-          <span class="bg-slate-100 text-slate-700 text-xs px-2 py-1 rounded"
-            >Automation</span
-          >
-          <span class="bg-slate-100 text-slate-700 text-xs px-2 py-1 rounded"
-            >Workflow</span
-          >
-        </div>
-      </div>
-    </div>
-
-    <div class="text-center">
-      <a
-        href="/"
-        class="inline-flex items-center text-[#222] hover:text-[#555] transition font-medium"
-      >
-        <svg
-          class="mr-1 w-3 h-3"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
+    <!-- Content -->
+    <div class="relative z-10 min-h-dvh flex flex-col">
+      <!-- Navigation -->
+      <nav class="w-full px-6 md:px-12 lg:px-20 py-6 flex justify-between items-center animate-fade-in">
+        <a
+          href="/"
+          class="text-sm tracking-wide font-medium transition-colors duration-300 hover:opacity-70 flex items-center gap-2"
+          style="color: var(--color-ink);"
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-        </svg>
-        Back to Home
-      </a>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+          </svg>
+          Back
+        </a>
+        <span class="text-sm tracking-widest uppercase font-medium" style="color: var(--color-muted);">Indie Projects</span>
+      </nav>
+
+      <!-- Main content -->
+      <div class="flex-1 px-6 md:px-12 lg:px-20 py-12 md:py-20">
+        <div class="max-w-4xl mx-auto">
+          <!-- Header -->
+          <header class="mb-16 md:mb-24">
+            <p class="text-xs tracking-[0.3em] uppercase mb-4 animate-fade-up" style="color: var(--color-muted);">
+              Side Ventures
+            </p>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl mb-6 leading-[1.1] animate-fade-up delay-1" style="font-family: var(--font-display);">
+              Indie Projects
+            </h1>
+            <div class="w-16 h-px bg-[var(--color-ink)]/20 mb-6 animate-fade-up delay-2"></div>
+            <p class="text-base md:text-lg leading-relaxed max-w-xl animate-fade-up delay-2" style="color: var(--color-muted);">
+              Building products that solve real problems. Here are my indie hacking ventures and side projects.
+            </p>
+          </header>
+
+          <!-- Projects Grid -->
+          <div class="space-y-8 md:space-y-0 md:grid md:grid-cols-1 md:gap-px md:bg-[var(--color-ink)]/10">
+
+            <!-- PromptLens -->
+            <article class="group md:bg-[var(--color-paper)] animate-fade-up delay-3">
+              <div class="py-8 md:py-12 md:px-8 md:-mx-8 transition-colors duration-500 md:hover:bg-[var(--color-ink)]/[0.02]">
+                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
+                  <div class="flex-1">
+                    <div class="flex items-center gap-4 mb-4">
+                      <div class="w-12 h-12 rounded-sm overflow-hidden border border-[var(--color-ink)]/10 flex-shrink-0">
+                        <img
+                          src="https://www.promptlens.io/favicon.ico"
+                          alt="PromptLens"
+                          class="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div>
+                        <h2 class="text-xl md:text-2xl font-medium" style="font-family: var(--font-display);">PromptLens</h2>
+                        <p class="text-sm" style="color: var(--color-muted);">Compare and optimize LLM prompts</p>
+                      </div>
+                    </div>
+                    <p class="leading-relaxed mb-5" style="color: var(--color-muted);">
+                      Compare system prompts side-by-side across any LLM provider. Run experiments, visualize differences, and ship prompts with confidence. Supports OpenAI, Anthropic, and Google.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                      <span class="text-xs tracking-wide px-3 py-1.5 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">LLM</span>
+                      <span class="text-xs tracking-wide px-3 py-1.5 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">Prompt Engineering</span>
+                      <span class="text-xs tracking-wide px-3 py-1.5 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">A/B Testing</span>
+                    </div>
+                  </div>
+                  <a
+                    href="https://www.promptlens.io"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium border border-[var(--color-ink)] transition-all duration-300 hover:bg-[var(--color-ink)] hover:text-[var(--color-paper)] flex-shrink-0"
+                    style="color: var(--color-ink);"
+                  >
+                    Visit
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- ZenSEO -->
+            <article class="group md:bg-[var(--color-paper)] animate-fade-up delay-4">
+              <div class="py-8 md:py-12 md:px-8 md:-mx-8 transition-colors duration-500 md:hover:bg-[var(--color-ink)]/[0.02] border-t border-[var(--color-ink)]/10 md:border-t-0">
+                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
+                  <div class="flex-1">
+                    <div class="flex items-center gap-4 mb-4">
+                      <div class="w-12 h-12 rounded-sm overflow-hidden border border-[var(--color-ink)]/10 flex-shrink-0">
+                        <img
+                          src="https://zenseo.app/favicon.ico"
+                          alt="ZenSEO"
+                          class="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div>
+                        <h2 class="text-xl md:text-2xl font-medium" style="font-family: var(--font-display);">ZenSEO</h2>
+                        <p class="text-sm" style="color: var(--color-muted);">SEO optimization tools and analytics</p>
+                      </div>
+                    </div>
+                    <p class="leading-relaxed mb-5" style="color: var(--color-muted);">
+                      Platform to help websites improve their search engine rankings and performance with comprehensive SEO tools.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                      <span class="text-xs tracking-wide px-3 py-1.5 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">SEO</span>
+                      <span class="text-xs tracking-wide px-3 py-1.5 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">Analytics</span>
+                      <span class="text-xs tracking-wide px-3 py-1.5 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">Web Tools</span>
+                    </div>
+                  </div>
+                  <a
+                    href="https://zenseo.app"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium border border-[var(--color-ink)] transition-all duration-300 hover:bg-[var(--color-ink)] hover:text-[var(--color-paper)] flex-shrink-0"
+                    style="color: var(--color-ink);"
+                  >
+                    Visit
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Zoppy -->
+            <article class="group md:bg-[var(--color-paper)] animate-fade-up delay-5">
+              <div class="py-8 md:py-12 md:px-8 md:-mx-8 transition-colors duration-500 md:hover:bg-[var(--color-ink)]/[0.02] border-t border-[var(--color-ink)]/10 md:border-t-0">
+                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
+                  <div class="flex-1">
+                    <div class="flex items-center gap-4 mb-4">
+                      <div class="w-12 h-12 rounded-sm overflow-hidden border border-[var(--color-ink)]/10 flex-shrink-0">
+                        <img
+                          src="https://zoppy.app/favicon.ico"
+                          alt="Zoppy"
+                          class="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div>
+                        <h2 class="text-xl md:text-2xl font-medium" style="font-family: var(--font-display);">Zoppy</h2>
+                        <p class="text-sm" style="color: var(--color-muted);">Productivity and workflow automation</p>
+                      </div>
+                    </div>
+                    <p class="leading-relaxed mb-5" style="color: var(--color-muted);">
+                      Modern platform designed to streamline business processes and improve team efficiency with powerful automation tools.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                      <span class="text-xs tracking-wide px-3 py-1.5 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">Productivity</span>
+                      <span class="text-xs tracking-wide px-3 py-1.5 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">Automation</span>
+                      <span class="text-xs tracking-wide px-3 py-1.5 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">Workflow</span>
+                    </div>
+                  </div>
+                  <a
+                    href="https://zoppy.app"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium border border-[var(--color-ink)] transition-all duration-300 hover:bg-[var(--color-ink)] hover:text-[var(--color-paper)] flex-shrink-0"
+                    style="color: var(--color-ink);"
+                  >
+                    Visit
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </article>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer accent line -->
+      <div class="w-full h-1 bg-[var(--color-accent)] animate-fade-in delay-6"></div>
     </div>
   </main>
 </Layout>
