@@ -1,5 +1,43 @@
 ---
 import "../styles/global.css";
+
+interface Props {
+	title?: string;
+	description?: string;
+	canonicalPath?: string;
+}
+
+const {
+	title = "Akshit Kr Nagpal – Software Engineer",
+	description = "Portfolio of Akshit Kr Nagpal, a self-taught software engineer passionate about full-stack development, open source, and efficient code.",
+	canonicalPath = "",
+} = Astro.props;
+
+const siteUrl = "https://akshit.io";
+const canonicalUrl = `${siteUrl}/${canonicalPath}`.replace(/\/+$/, "/");
+const imageUrl = "https://avatars.githubusercontent.com/u/15872348";
+
+const personSchema = {
+	"@context": "https://schema.org",
+	"@type": "Person",
+	name: "Akshit Kr Nagpal",
+	url: siteUrl,
+	image: imageUrl,
+	jobTitle: "Software Engineer",
+	sameAs: [
+		"https://github.com/akshitkrnagpal",
+		"https://linkedin.com/in/akshitkrnagpal",
+		"https://x.com/akshit_io",
+	],
+	knowsAbout: ["Full-Stack Development", "TypeScript", "React", "Node.js", "Open Source", "AI Development", "Large Language Models", "Agentic Workflows"],
+};
+
+const websiteSchema = {
+	"@context": "https://schema.org",
+	"@type": "WebSite",
+	name: "Akshit Kr Nagpal",
+	url: siteUrl,
+};
 ---
 <!doctype html>
 <html lang="en">
@@ -10,18 +48,30 @@ import "../styles/global.css";
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 		<link rel="manifest" href="/manifest.json" />
 		<link rel="sitemap" href="/sitemap-index.xml" />
+		<link rel="canonical" href={canonicalUrl} />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Akshit Kr Nagpal – Software Engineer & Open Source Enthusiast</title>
-		<meta name="description" content="Portfolio of Akshit Kr Nagpal, a self-taught software engineer passionate about full-stack development, open source, and efficient code." />
+		<meta name="author" content="Akshit Kr Nagpal" />
+		<title>{title}</title>
+		<meta name="description" content={description} />
 		<!-- Open Graph Meta Tags -->
-		<meta property="og:title" content="Akshit Kr Nagpal – Software Engineer & Open Source Enthusiast" />
-		<meta property="og:description" content="Portfolio of Akshit Kr Nagpal, a self-taught software engineer passionate about full-stack development, open source, and efficient code." />
-		<meta property="og:image" content="https://avatars.githubusercontent.com/u/15872348" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={imageUrl} />
 		<meta property="og:type" content="website" />
-		<meta property="og:url" content="https://akshit.io/" />
+		<meta property="og:url" content={canonicalUrl} />
+		<!-- Twitter Card Meta Tags -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:site" content="@akshit_io" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={imageUrl} />
+		<!-- Structured Data -->
+		<script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+		<script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+		<slot name="head" />
 		<script src="https://analytics.ahrefs.com/analytics.js" data-key="qIzc0UIE/OnCN8g4tBDXNQ" async></script>
 		<style>
 			:root {
