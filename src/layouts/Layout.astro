@@ -4,17 +4,16 @@ import "../styles/global.css";
 interface Props {
 	title?: string;
 	description?: string;
-	canonicalPath?: string;
 }
 
 const {
 	title = "Akshit Kr Nagpal – Software Engineer",
 	description = "Portfolio of Akshit Kr Nagpal, a self-taught software engineer passionate about full-stack development, open source, and efficient code.",
-	canonicalPath = "",
 } = Astro.props;
 
 const siteUrl = "https://akshit.io";
-const canonicalUrl = `${siteUrl}/${canonicalPath}`.replace(/\/+$/, "/");
+const pathname = Astro.url.pathname.replace(/\/+$/, "") || "/";
+const canonicalUrl = pathname === "/" ? siteUrl : `${siteUrl}${pathname}`;
 const imageUrl = "https://avatars.githubusercontent.com/u/15872348";
 
 const personSchema = {
