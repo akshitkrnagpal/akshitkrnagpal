@@ -44,178 +44,167 @@ import Layout from "../layouts/Layout.astro";
             </p>
           </header>
 
-          <!-- Projects Grid -->
-          <div class="space-y-8 md:space-y-0 md:grid md:grid-cols-1 md:gap-px md:bg-[var(--color-ink)]/10">
+          <!-- Featured Projects -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-6 md:mb-8">
 
             <!-- HookBell -->
-            <article class="group md:bg-[var(--color-paper)] animate-fade-up delay-3">
-              <div class="py-8 md:py-12 md:px-8 md:-mx-8 transition-colors duration-500 md:hover:bg-[var(--color-ink)]/[0.02]">
-                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
-                  <div class="flex-1">
-                    <div class="flex items-center gap-4 mb-4">
-                      <div class="w-12 h-12 rounded-sm overflow-hidden border border-[var(--color-ink)]/10 flex-shrink-0">
-                        <img
-                          src="https://hookbell.com/icon-512.png"
-                          alt="HookBell"
-                          class="w-full h-full object-cover"
-                        />
-                      </div>
-                      <div>
-                        <h2 class="text-xl md:text-2xl font-medium" style="font-family: var(--font-display);">HookBell</h2>
-                        <p class="text-sm" style="color: var(--color-muted);">Instant webhook push notifications</p>
-                      </div>
-                    </div>
-                    <p class="leading-relaxed mb-5" style="color: var(--color-muted);">
-                      Never miss a webhook again. Get human-readable push notifications on your phone when webhooks fire from services like Stripe, Clerk, Supabase, and more. Service-aware parsing delivers rich alerts instead of raw JSON.
-                    </p>
-                    <div class="flex flex-wrap gap-2">
-                      <span class="text-xs tracking-wide px-3 py-1.5 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">Webhooks</span>
-                      <span class="text-xs tracking-wide px-3 py-1.5 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">Developer Tools</span>
-                      <span class="text-xs tracking-wide px-3 py-1.5 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">Mobile</span>
-                    </div>
+            <article class="group animate-fade-up delay-3 border border-[var(--color-ink)]/10 transition-colors duration-500 hover:border-[var(--color-ink)]/25">
+              <div class="p-6 md:p-8 flex flex-col h-full">
+                <div class="flex items-center gap-4 mb-5">
+                  <div class="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0">
+                    <img
+                      src="https://hookbell.com/icon-512.png"
+                      alt="HookBell"
+                      class="w-full h-full object-cover"
+                    />
                   </div>
-                  <a
-                    href="https://hookbell.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium border border-[var(--color-ink)] transition-all duration-300 hover:bg-[var(--color-ink)] hover:text-[var(--color-paper)] flex-shrink-0"
-                    style="color: var(--color-ink);"
-                  >
-                    Visit
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                    </svg>
-                  </a>
+                  <div>
+                    <h2 class="text-2xl md:text-3xl font-medium" style="font-family: var(--font-display);">HookBell</h2>
+                    <p class="text-sm mt-0.5" style="color: var(--color-muted);">Instant webhook push notifications</p>
+                  </div>
                 </div>
+                <p class="text-base md:text-lg leading-relaxed mb-6 flex-1" style="color: var(--color-muted);">
+                  Never miss a webhook again. Get human-readable push notifications on your phone when webhooks fire from services like Stripe, Clerk, Supabase, and more.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-6">
+                  <span class="text-xs tracking-wide px-3 py-1.5 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">Webhooks</span>
+                  <span class="text-xs tracking-wide px-3 py-1.5 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">Developer Tools</span>
+                  <span class="text-xs tracking-wide px-3 py-1.5 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">Mobile</span>
+                </div>
+                <a
+                  href="https://hookbell.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium border border-[var(--color-ink)] transition-all duration-300 hover:bg-[var(--color-ink)] hover:text-[var(--color-paper)] self-start"
+                  style="color: var(--color-ink);"
+                >
+                  Visit
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                  </svg>
+                </a>
               </div>
             </article>
 
             <!-- PromptLens -->
-            <article class="group md:bg-[var(--color-paper)] animate-fade-up delay-4">
-              <div class="py-8 md:py-12 md:px-8 md:-mx-8 transition-colors duration-500 md:hover:bg-[var(--color-ink)]/[0.02]">
-                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
-                  <div class="flex-1">
-                    <div class="flex items-center gap-4 mb-4">
-                      <div class="w-12 h-12 rounded-sm overflow-hidden border border-[var(--color-ink)]/10 flex-shrink-0">
-                        <img
-                          src="https://www.promptlens.io/icon-512.png"
-                          alt="PromptLens"
-                          class="w-full h-full object-cover"
-                        />
-                      </div>
-                      <div>
-                        <h2 class="text-xl md:text-2xl font-medium" style="font-family: var(--font-display);">PromptLens</h2>
-                        <p class="text-sm" style="color: var(--color-muted);">Compare and optimize LLM prompts</p>
-                      </div>
-                    </div>
-                    <p class="leading-relaxed mb-5" style="color: var(--color-muted);">
-                      Compare system prompts side-by-side across any LLM provider. Run experiments, visualize differences, and ship prompts with confidence. Supports OpenAI, Anthropic, and Google.
-                    </p>
-                    <div class="flex flex-wrap gap-2">
-                      <span class="text-xs tracking-wide px-3 py-1.5 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">LLM</span>
-                      <span class="text-xs tracking-wide px-3 py-1.5 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">Prompt Engineering</span>
-                      <span class="text-xs tracking-wide px-3 py-1.5 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">A/B Testing</span>
-                    </div>
+            <article class="group animate-fade-up delay-4 border border-[var(--color-ink)]/10 transition-colors duration-500 hover:border-[var(--color-ink)]/25">
+              <div class="p-6 md:p-8 flex flex-col h-full">
+                <div class="flex items-center gap-4 mb-5">
+                  <div class="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0">
+                    <img
+                      src="https://www.promptlens.io/icon-512.png"
+                      alt="PromptLens"
+                      class="w-full h-full object-cover"
+                    />
                   </div>
-                  <a
-                    href="https://www.promptlens.io"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium border border-[var(--color-ink)] transition-all duration-300 hover:bg-[var(--color-ink)] hover:text-[var(--color-paper)] flex-shrink-0"
-                    style="color: var(--color-ink);"
-                  >
-                    Visit
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                    </svg>
-                  </a>
+                  <div>
+                    <h2 class="text-2xl md:text-3xl font-medium" style="font-family: var(--font-display);">PromptLens</h2>
+                    <p class="text-sm mt-0.5" style="color: var(--color-muted);">Compare and optimize LLM prompts</p>
+                  </div>
                 </div>
+                <p class="text-base md:text-lg leading-relaxed mb-6 flex-1" style="color: var(--color-muted);">
+                  Compare system prompts side-by-side across any LLM provider. Run experiments, visualize differences, and ship prompts with confidence.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-6">
+                  <span class="text-xs tracking-wide px-3 py-1.5 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">LLM</span>
+                  <span class="text-xs tracking-wide px-3 py-1.5 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">Prompt Engineering</span>
+                  <span class="text-xs tracking-wide px-3 py-1.5 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">A/B Testing</span>
+                </div>
+                <a
+                  href="https://www.promptlens.io"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium border border-[var(--color-ink)] transition-all duration-300 hover:bg-[var(--color-ink)] hover:text-[var(--color-paper)] self-start"
+                  style="color: var(--color-ink);"
+                >
+                  Visit
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                  </svg>
+                </a>
               </div>
             </article>
 
+          </div>
+
+          <!-- Other Projects -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+
             <!-- ZenSEO -->
-            <article class="group md:bg-[var(--color-paper)] animate-fade-up delay-5">
-              <div class="py-8 md:py-12 md:px-8 md:-mx-8 transition-colors duration-500 md:hover:bg-[var(--color-ink)]/[0.02] border-t border-[var(--color-ink)]/10 md:border-t-0">
-                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
-                  <div class="flex-1">
-                    <div class="flex items-center gap-4 mb-4">
-                      <div class="w-12 h-12 rounded-sm overflow-hidden border border-[var(--color-ink)]/10 flex-shrink-0">
-                        <img
-                          src="https://zenseo.app/icon-512.png"
-                          alt="ZenSEO"
-                          class="w-full h-full object-cover"
-                        />
-                      </div>
-                      <div>
-                        <h2 class="text-xl md:text-2xl font-medium" style="font-family: var(--font-display);">ZenSEO</h2>
-                        <p class="text-sm" style="color: var(--color-muted);">SEO optimization tools and analytics</p>
-                      </div>
-                    </div>
-                    <p class="leading-relaxed mb-5" style="color: var(--color-muted);">
-                      Platform to help websites improve their search engine rankings and performance with comprehensive SEO tools.
-                    </p>
-                    <div class="flex flex-wrap gap-2">
-                      <span class="text-xs tracking-wide px-3 py-1.5 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">SEO</span>
-                      <span class="text-xs tracking-wide px-3 py-1.5 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">Analytics</span>
-                      <span class="text-xs tracking-wide px-3 py-1.5 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">Web Tools</span>
-                    </div>
+            <article class="group animate-fade-up delay-5 border border-[var(--color-ink)]/[0.06] transition-colors duration-500 hover:border-[var(--color-ink)]/15">
+              <div class="p-5 md:p-6 flex flex-col h-full">
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="w-10 h-10 rounded-[10px] overflow-hidden flex-shrink-0">
+                    <img
+                      src="https://zenseo.app/icon-512.png"
+                      alt="ZenSEO"
+                      class="w-full h-full object-cover"
+                    />
                   </div>
-                  <a
-                    href="https://zenseo.app"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium border border-[var(--color-ink)] transition-all duration-300 hover:bg-[var(--color-ink)] hover:text-[var(--color-paper)] flex-shrink-0"
-                    style="color: var(--color-ink);"
-                  >
-                    Visit
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                    </svg>
-                  </a>
+                  <div>
+                    <h2 class="text-lg md:text-xl font-medium" style="font-family: var(--font-display);">ZenSEO</h2>
+                    <p class="text-xs" style="color: var(--color-muted);">SEO optimization tools and analytics</p>
+                  </div>
                 </div>
+                <p class="text-sm leading-relaxed mb-4 flex-1" style="color: var(--color-muted);">
+                  Platform to help websites improve their search engine rankings and performance with comprehensive SEO tools.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                  <span class="text-xs tracking-wide px-2.5 py-1 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">SEO</span>
+                  <span class="text-xs tracking-wide px-2.5 py-1 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">Analytics</span>
+                  <span class="text-xs tracking-wide px-2.5 py-1 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">Web Tools</span>
+                </div>
+                <a
+                  href="https://zenseo.app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-2 px-4 py-2 text-xs font-medium border border-[var(--color-ink)] transition-all duration-300 hover:bg-[var(--color-ink)] hover:text-[var(--color-paper)] self-start"
+                  style="color: var(--color-ink);"
+                >
+                  Visit
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                  </svg>
+                </a>
               </div>
             </article>
 
             <!-- Zoppy -->
-            <article class="group md:bg-[var(--color-paper)] animate-fade-up delay-6">
-              <div class="py-8 md:py-12 md:px-8 md:-mx-8 transition-colors duration-500 md:hover:bg-[var(--color-ink)]/[0.02] border-t border-[var(--color-ink)]/10 md:border-t-0">
-                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
-                  <div class="flex-1">
-                    <div class="flex items-center gap-4 mb-4">
-                      <div class="w-12 h-12 rounded-sm overflow-hidden border border-[var(--color-ink)]/10 flex-shrink-0">
-                        <img
-                          src="https://zoppy.app/icon-512.png"
-                          alt="Zoppy"
-                          class="w-full h-full object-cover"
-                        />
-                      </div>
-                      <div>
-                        <h2 class="text-xl md:text-2xl font-medium" style="font-family: var(--font-display);">Zoppy</h2>
-                        <p class="text-sm" style="color: var(--color-muted);">AI shopping assistant for e-commerce</p>
-                      </div>
-                    </div>
-                    <p class="leading-relaxed mb-5" style="color: var(--color-muted);">
-                      AI-powered shopping assistant that helps e-commerce customers find products through natural language conversations. Integrates seamlessly with Algolia-powered stores to turn browsers into buyers.
-                    </p>
-                    <div class="flex flex-wrap gap-2">
-                      <span class="text-xs tracking-wide px-3 py-1.5 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">AI</span>
-                      <span class="text-xs tracking-wide px-3 py-1.5 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">E-commerce</span>
-                      <span class="text-xs tracking-wide px-3 py-1.5 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">Algolia</span>
-                    </div>
+            <article class="group animate-fade-up delay-6 border border-[var(--color-ink)]/[0.06] transition-colors duration-500 hover:border-[var(--color-ink)]/15">
+              <div class="p-5 md:p-6 flex flex-col h-full">
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="w-10 h-10 rounded-[10px] overflow-hidden flex-shrink-0">
+                    <img
+                      src="https://zoppy.app/icon-512.png"
+                      alt="Zoppy"
+                      class="w-full h-full object-cover"
+                    />
                   </div>
-                  <a
-                    href="https://zoppy.app"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium border border-[var(--color-ink)] transition-all duration-300 hover:bg-[var(--color-ink)] hover:text-[var(--color-paper)] flex-shrink-0"
-                    style="color: var(--color-ink);"
-                  >
-                    Visit
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                    </svg>
-                  </a>
+                  <div>
+                    <h2 class="text-lg md:text-xl font-medium" style="font-family: var(--font-display);">Zoppy</h2>
+                    <p class="text-xs" style="color: var(--color-muted);">AI shopping assistant for e-commerce</p>
+                  </div>
                 </div>
+                <p class="text-sm leading-relaxed mb-4 flex-1" style="color: var(--color-muted);">
+                  AI-powered shopping assistant that helps e-commerce customers find products through natural language conversations.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                  <span class="text-xs tracking-wide px-2.5 py-1 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">AI</span>
+                  <span class="text-xs tracking-wide px-2.5 py-1 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">E-commerce</span>
+                  <span class="text-xs tracking-wide px-2.5 py-1 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">Algolia</span>
+                </div>
+                <a
+                  href="https://zoppy.app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-2 px-4 py-2 text-xs font-medium border border-[var(--color-ink)] transition-all duration-300 hover:bg-[var(--color-ink)] hover:text-[var(--color-paper)] self-start"
+                  style="color: var(--color-ink);"
+                >
+                  Visit
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                  </svg>
+                </a>
               </div>
             </article>
 
