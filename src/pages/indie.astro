@@ -47,8 +47,51 @@ import Layout from "../layouts/Layout.astro";
           <!-- Projects Grid -->
           <div class="space-y-8 md:space-y-0 md:grid md:grid-cols-1 md:gap-px md:bg-[var(--color-ink)]/10">
 
-            <!-- PromptLens -->
+            <!-- HookBell -->
             <article class="group md:bg-[var(--color-paper)] animate-fade-up delay-3">
+              <div class="py-8 md:py-12 md:px-8 md:-mx-8 transition-colors duration-500 md:hover:bg-[var(--color-ink)]/[0.02]">
+                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
+                  <div class="flex-1">
+                    <div class="flex items-center gap-4 mb-4">
+                      <div class="w-12 h-12 rounded-sm overflow-hidden border border-[var(--color-ink)]/10 flex-shrink-0">
+                        <img
+                          src="https://hookbell.com/icon-512.png"
+                          alt="HookBell"
+                          class="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div>
+                        <h2 class="text-xl md:text-2xl font-medium" style="font-family: var(--font-display);">HookBell</h2>
+                        <p class="text-sm" style="color: var(--color-muted);">Instant webhook push notifications</p>
+                      </div>
+                    </div>
+                    <p class="leading-relaxed mb-5" style="color: var(--color-muted);">
+                      Never miss a webhook again. Get human-readable push notifications on your phone when webhooks fire from services like Stripe, Clerk, Supabase, and more. Service-aware parsing delivers rich alerts instead of raw JSON.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                      <span class="text-xs tracking-wide px-3 py-1.5 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">Webhooks</span>
+                      <span class="text-xs tracking-wide px-3 py-1.5 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">Developer Tools</span>
+                      <span class="text-xs tracking-wide px-3 py-1.5 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">Mobile</span>
+                    </div>
+                  </div>
+                  <a
+                    href="https://hookbell.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium border border-[var(--color-ink)] transition-all duration-300 hover:bg-[var(--color-ink)] hover:text-[var(--color-paper)] flex-shrink-0"
+                    style="color: var(--color-ink);"
+                  >
+                    Visit
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- PromptLens -->
+            <article class="group md:bg-[var(--color-paper)] animate-fade-up delay-4">
               <div class="py-8 md:py-12 md:px-8 md:-mx-8 transition-colors duration-500 md:hover:bg-[var(--color-ink)]/[0.02]">
                 <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
                   <div class="flex-1">
@@ -91,7 +134,7 @@ import Layout from "../layouts/Layout.astro";
             </article>
 
             <!-- ZenSEO -->
-            <article class="group md:bg-[var(--color-paper)] animate-fade-up delay-4">
+            <article class="group md:bg-[var(--color-paper)] animate-fade-up delay-5">
               <div class="py-8 md:py-12 md:px-8 md:-mx-8 transition-colors duration-500 md:hover:bg-[var(--color-ink)]/[0.02] border-t border-[var(--color-ink)]/10 md:border-t-0">
                 <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
                   <div class="flex-1">
@@ -134,7 +177,7 @@ import Layout from "../layouts/Layout.astro";
             </article>
 
             <!-- Zoppy -->
-            <article class="group md:bg-[var(--color-paper)] animate-fade-up delay-5">
+            <article class="group md:bg-[var(--color-paper)] animate-fade-up delay-6">
               <div class="py-8 md:py-12 md:px-8 md:-mx-8 transition-colors duration-500 md:hover:bg-[var(--color-ink)]/[0.02] border-t border-[var(--color-ink)]/10 md:border-t-0">
                 <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
                   <div class="flex-1">
@@ -181,7 +224,7 @@ import Layout from "../layouts/Layout.astro";
       </div>
 
       <!-- Footer accent line -->
-      <div class="w-full h-1 bg-[var(--color-accent)] animate-fade-in delay-6"></div>
+      <div class="w-full h-1 bg-[var(--color-accent)] animate-fade-in delay-7"></div>
     </div>
   </main>
 </Layout>
