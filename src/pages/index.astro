@@ -6,7 +6,7 @@ import X from '../components/simple-icons/x.astro'
 ---
 
 <Layout>
-  <main id="main-content" class="min-h-dvh relative overflow-hidden">
+  <main class="min-h-dvh relative overflow-hidden">
     <!-- Animated gradient background -->
     <div class="absolute inset-0 pointer-events-none">
       <div class="absolute top-[-20%] right-[-10%] w-[60vw] h-[60vw] max-w-[800px] max-h-[800px] rounded-full opacity-[0.07] blur-3xl animate-float" style="background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);"></div>
@@ -113,6 +113,125 @@ import X from '../components/simple-icons/x.astro'
       <div class="w-full h-1 bg-gradient-to-r from-transparent via-[var(--color-accent)] to-transparent animate-fade-in delay-6"></div>
     </div>
   </main>
+
+  <!-- Command Palette Overlay -->
+  <div id="cmd-palette-overlay" class="fixed inset-0 z-50 hidden" role="dialog" aria-modal="true" aria-label="Navigation">
+    <!-- Backdrop -->
+    <div id="cmd-backdrop" class="absolute inset-0 bg-black/60 backdrop-blur-sm opacity-0 transition-opacity duration-200"></div>
+
+    <!-- Panel -->
+    <div class="absolute inset-0 flex items-start justify-center pt-[20vh] sm:pt-[22vh] px-6">
+      <div
+        id="cmd-panel"
+        class="w-full max-w-md border border-[var(--color-ink)]/10 rounded-2xl shadow-2xl opacity-0 scale-95 transition-all duration-200 overflow-hidden"
+        style="background: rgba(18, 18, 20, 0.92); backdrop-filter: blur(32px) saturate(1.4);"
+      >
+        <!-- Header -->
+        <div class="px-5 pt-5 pb-3 border-b border-[var(--color-ink)]/[0.06]">
+          <p class="text-[11px] tracking-[0.25em] uppercase font-medium" style="color: var(--color-muted);">Navigate</p>
+        </div>
+
+        <!-- Items -->
+        <nav class="p-2" id="cmd-nav">
+          <a href="/blog" class="cmd-item group flex items-center gap-4 px-4 py-3.5 rounded-xl transition-all duration-150 outline-none" data-index="0">
+            <div class="w-9 h-9 rounded-lg border border-[var(--color-ink)]/[0.08] flex items-center justify-center transition-colors duration-150 group-hover:border-[var(--color-ink)]/20 group-focus:border-[var(--color-ink)]/20" style="background: rgba(255,255,255,0.02);">
+              <svg class="w-4 h-4" style="color: var(--color-muted);" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+              </svg>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium" style="color: var(--color-ink);">Writing</p>
+              <p class="text-xs mt-0.5" style="color: var(--color-muted);">Blog posts, notes, thoughts</p>
+            </div>
+            <svg class="w-4 h-4 opacity-0 -translate-x-1 transition-all duration-150 group-hover:opacity-100 group-hover:translate-x-0 group-focus:opacity-100 group-focus:translate-x-0" style="color: var(--color-muted);" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+            </svg>
+          </a>
+
+          <a href="/indie" class="cmd-item group flex items-center gap-4 px-4 py-3.5 rounded-xl transition-all duration-150 outline-none" data-index="1">
+            <div class="w-9 h-9 rounded-lg border border-[var(--color-ink)]/[0.08] flex items-center justify-center transition-colors duration-150 group-hover:border-[var(--color-ink)]/20 group-focus:border-[var(--color-ink)]/20" style="background: rgba(255,255,255,0.02);">
+              <svg class="w-4 h-4" style="color: var(--color-muted);" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+              </svg>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium" style="color: var(--color-ink);">Indie Projects</p>
+              <p class="text-xs mt-0.5" style="color: var(--color-muted);">Products, experiments, side projects</p>
+            </div>
+            <svg class="w-4 h-4 opacity-0 -translate-x-1 transition-all duration-150 group-hover:opacity-100 group-hover:translate-x-0 group-focus:opacity-100 group-focus:translate-x-0" style="color: var(--color-muted);" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+            </svg>
+          </a>
+
+          <a href="/open-source" class="cmd-item group flex items-center gap-4 px-4 py-3.5 rounded-xl transition-all duration-150 outline-none" data-index="2">
+            <div class="w-9 h-9 rounded-lg border border-[var(--color-ink)]/[0.08] flex items-center justify-center transition-colors duration-150 group-hover:border-[var(--color-ink)]/20 group-focus:border-[var(--color-ink)]/20" style="background: rgba(255,255,255,0.02);">
+              <svg class="w-4 h-4" style="color: var(--color-muted);" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+              </svg>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium" style="color: var(--color-ink);">Open Source</p>
+              <p class="text-xs mt-0.5" style="color: var(--color-muted);">Code, packages, public work</p>
+            </div>
+            <svg class="w-4 h-4 opacity-0 -translate-x-1 transition-all duration-150 group-hover:opacity-100 group-hover:translate-x-0 group-focus:opacity-100 group-focus:translate-x-0" style="color: var(--color-muted);" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+            </svg>
+          </a>
+
+          <div class="cmd-item group flex items-center gap-4 px-4 py-3.5 rounded-xl transition-all duration-150 outline-none cursor-pointer" data-index="3" id="cmd-contact" tabindex="0" role="button">
+            <div class="w-9 h-9 rounded-lg border border-[var(--color-ink)]/[0.08] flex items-center justify-center transition-colors duration-150 group-hover:border-[var(--color-ink)]/20 group-focus:border-[var(--color-ink)]/20" style="background: rgba(255,255,255,0.02);">
+              <svg class="w-4 h-4" style="color: var(--color-muted);" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+              </svg>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium" style="color: var(--color-ink);">Contact</p>
+              <p class="text-xs mt-0.5" style="color: var(--color-muted);">Social links and reach out</p>
+            </div>
+            <svg class="w-4 h-4 opacity-0 -translate-x-1 transition-all duration-150 group-hover:opacity-100 group-hover:translate-x-0 group-focus:opacity-100 group-focus:translate-x-0" style="color: var(--color-muted);" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+            </svg>
+          </div>
+        </nav>
+
+        <!-- Contact sub-panel (hidden by default) -->
+        <div id="cmd-contact-panel" class="hidden border-t border-[var(--color-ink)]/[0.06]">
+          <div class="p-3 flex items-center justify-center gap-6">
+            <a href="mailto:hello@akshit.io" class="flex flex-col items-center gap-1.5 px-4 py-3 rounded-xl transition-all duration-150 hover:bg-[var(--color-ink)]/[0.04]" style="color: var(--color-muted);">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg>
+              <span class="text-[11px]">Email</span>
+            </a>
+            <a href="https://linkedin.com/in/akshitkrnagpal" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center gap-1.5 px-4 py-3 rounded-xl transition-all duration-150 hover:bg-[var(--color-ink)]/[0.04]" style="color: var(--color-muted);">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              <span class="text-[11px]">LinkedIn</span>
+            </a>
+            <a href="https://x.com/akshit_io" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center gap-1.5 px-4 py-3 rounded-xl transition-all duration-150 hover:bg-[var(--color-ink)]/[0.04]" style="color: var(--color-muted);">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              <span class="text-[11px]">X</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Footer hint -->
+        <div class="px-5 py-3 border-t border-[var(--color-ink)]/[0.06] flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="flex items-center gap-1">
+              <kbd class="text-[10px] px-1.5 py-0.5 border border-[var(--color-ink)]/10 rounded" style="color: var(--color-muted);">&#8593;&#8595;</kbd>
+              <span class="text-[10px]" style="color: var(--color-muted);">navigate</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <kbd class="text-[10px] px-1.5 py-0.5 border border-[var(--color-ink)]/10 rounded" style="color: var(--color-muted);">&#9166;</kbd>
+              <span class="text-[10px]" style="color: var(--color-muted);">open</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-1">
+            <kbd class="text-[10px] px-1.5 py-0.5 border border-[var(--color-ink)]/10 rounded" style="color: var(--color-muted);">esc</kbd>
+            <span class="text-[10px]" style="color: var(--color-muted);">close</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </Layout>
 
 <style>
@@ -133,10 +252,136 @@ import X from '../components/simple-icons/x.astro'
   .animate-float-delayed {
     animation: float-delayed 15s ease-in-out infinite;
   }
+
+  .cmd-item:hover,
+  .cmd-item:focus,
+  .cmd-item.active {
+    background: rgba(255, 255, 255, 0.03);
+  }
 </style>
 
-<script is:inline>
-  document.getElementById('explore-trigger').addEventListener('click', function() {
-    if (window.__cmdPalette) window.__cmdPalette.open();
+<script>
+  const overlay = document.getElementById('cmd-palette-overlay')!;
+  const backdrop = document.getElementById('cmd-backdrop')!;
+  const panel = document.getElementById('cmd-panel')!;
+  const trigger = document.getElementById('explore-trigger')!;
+  const items = document.querySelectorAll<HTMLElement>('.cmd-item');
+  const contactItem = document.getElementById('cmd-contact')!;
+  const contactPanel = document.getElementById('cmd-contact-panel')!;
+  let activeIndex = 0;
+  let isOpen = false;
+
+  function open() {
+    if (isOpen) return;
+    isOpen = true;
+    overlay.classList.remove('hidden');
+    // Trigger reflow then animate
+    void panel.offsetHeight;
+    requestAnimationFrame(() => {
+      backdrop.style.opacity = '1';
+      panel.style.opacity = '1';
+      panel.style.transform = 'scale(1)';
+    });
+    activeIndex = 0;
+    updateActive();
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close() {
+    if (!isOpen) return;
+    isOpen = false;
+    backdrop.style.opacity = '0';
+    panel.style.opacity = '0';
+    panel.style.transform = 'scale(0.95)';
+    contactPanel.classList.add('hidden');
+    setTimeout(() => {
+      overlay.classList.add('hidden');
+    }, 200);
+    document.body.style.overflow = '';
+  }
+
+  function updateActive() {
+    items.forEach((item, i) => {
+      item.classList.toggle('active', i === activeIndex);
+    });
+  }
+
+  function activateItem() {
+    const item = items[activeIndex];
+    if (!item) return;
+
+    if (item === contactItem) {
+      contactPanel.classList.toggle('hidden');
+      return;
+    }
+
+    const href = item.getAttribute('href');
+    if (href) {
+      window.location.href = href;
+    }
+  }
+
+  // Trigger button
+  trigger.addEventListener('click', open);
+
+  // Click outside panel to close
+  overlay.addEventListener('click', (e) => {
+    if (!panel.contains(e.target as Node)) {
+      close();
+    }
+  });
+
+  // Contact item click
+  contactItem.addEventListener('click', () => {
+    contactPanel.classList.toggle('hidden');
+  });
+
+  contactItem.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      contactPanel.classList.toggle('hidden');
+    }
+  });
+
+  // Keyboard
+  document.addEventListener('keydown', (e) => {
+    // Cmd+K or Ctrl+K or /
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      e.preventDefault();
+      isOpen ? close() : open();
+      return;
+    }
+
+    if (e.key === '/' && !isOpen && !(e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement)) {
+      e.preventDefault();
+      open();
+      return;
+    }
+
+    if (!isOpen) return;
+
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      close();
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      activeIndex = (activeIndex + 1) % items.length;
+      updateActive();
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      activeIndex = (activeIndex - 1 + items.length) % items.length;
+      updateActive();
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      activateItem();
+    }
+  });
+
+  // Hover updates active index
+  items.forEach((item, i) => {
+    item.addEventListener('mouseenter', () => {
+      activeIndex = i;
+      updateActive();
+    });
   });
 </script>
