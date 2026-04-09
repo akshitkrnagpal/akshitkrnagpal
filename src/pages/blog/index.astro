@@ -1,0 +1,135 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+---
+
+<Layout
+  title="Blog – Akshit Kr Nagpal"
+  description="Thoughts on building developer tools, open source, and indie hacking."
+>
+  <main class="min-h-dvh relative overflow-hidden">
+    <div
+      class="absolute inset-0 opacity-[0.015] pointer-events-none"
+      style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%270 0 256 256%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cfilter id=%27noise%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.8%27 numOctaves=%274%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23noise)%27/%3E%3C/svg%3E');"
+    >
+    </div>
+    <div
+      class="absolute top-1/4 -right-32 w-[50vw] h-[50vw] max-w-[700px] max-h-[700px] rounded-full opacity-[0.02]"
+      style="background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);"
+    >
+    </div>
+
+    <div class="relative z-10 min-h-dvh flex flex-col">
+      <nav
+        class="w-full px-6 md:px-12 lg:px-20 py-6 flex justify-between items-center animate-fade-in"
+      >
+        <a
+          href="/"
+          class="text-sm tracking-wide font-medium transition-colors duration-300 hover:opacity-70 flex items-center gap-2"
+          style="color: var(--color-ink);"
+        >
+          <svg
+            class="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+          </svg>
+          Back
+        </a>
+        <span
+          class="text-sm tracking-widest uppercase font-medium"
+          style="color: var(--color-muted);">Blog</span
+        >
+      </nav>
+
+      <div class="flex-1 px-6 md:px-12 lg:px-20 py-12 md:py-20">
+        <div class="max-w-3xl mx-auto">
+          <header class="mb-16 md:mb-24">
+            <p
+              class="text-xs tracking-[0.3em] uppercase mb-4 animate-fade-up"
+              style="color: var(--color-muted);"
+            >
+              Writing
+            </p>
+            <h1
+              class="text-4xl md:text-5xl lg:text-6xl mb-6 leading-[1.1] animate-fade-up delay-1"
+              style="font-family: var(--font-display);"
+            >
+              Blog
+            </h1>
+            <div
+              class="w-16 h-px bg-[var(--color-ink)]/20 mb-6 animate-fade-up delay-2"
+            >
+            </div>
+            <p
+              class="text-base md:text-lg leading-relaxed max-w-xl animate-fade-up delay-2"
+              style="color: var(--color-muted);"
+            >
+              Thoughts on building developer tools, open source, and indie
+              hacking.
+            </p>
+          </header>
+
+          <div class="space-y-8">
+            {
+              posts.map((post, i) => (
+                <article
+                  class={`group animate-fade-up delay-${i + 3} border-b border-[var(--color-ink)]/10 pb-8`}
+                >
+                  <a href={`/blog/${post.id}`} class="block">
+                    <time
+                      class="text-xs tracking-wide uppercase mb-2 block"
+                      style="color: var(--color-muted);"
+                      datetime={post.data.date.toISOString()}
+                    >
+                      {post.data.date.toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
+                    </time>
+                    <h2
+                      class="text-2xl md:text-3xl mb-3 group-hover:opacity-70 transition-opacity duration-300"
+                      style="font-family: var(--font-display);"
+                    >
+                      {post.data.title}
+                    </h2>
+                    <p
+                      class="text-base leading-relaxed"
+                      style="color: var(--color-muted);"
+                    >
+                      {post.data.description}
+                    </p>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                      {post.data.tags.map((tag) => (
+                        <span
+                          class="text-xs tracking-wide px-2.5 py-1 border border-[var(--color-ink)]/10"
+                          style="color: var(--color-muted);"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </a>
+                </article>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+
+      <div class="w-full h-1 bg-[var(--color-accent)] animate-fade-in delay-6">
+      </div>
+    </div>
+  </main>
+</Layout>
