@@ -12,5 +12,11 @@ export default defineConfig({
   // Use the canonical domain for sitemap and other absolute URLs
   site: "https://akshit.io",
   trailingSlash: "never",
+  // /indie and /open-source were merged into /projects. 301 old
+  // paths so any existing backlinks keep working.
+  redirects: {
+    "/indie": "/projects",
+    "/open-source": "/projects",
+  },
   integrations: [sitemap()],
 });

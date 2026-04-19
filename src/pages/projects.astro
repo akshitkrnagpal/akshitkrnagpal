@@ -24,7 +24,7 @@ import Layout from "../layouts/Layout.astro";
           </svg>
           Back
         </a>
-        <span class="text-sm tracking-widest uppercase font-medium" style="color: var(--color-muted);">Open Source</span>
+        <span class="text-sm tracking-widest uppercase font-medium" style="color: var(--color-muted);">Projects</span>
       </nav>
 
       <!-- Main content -->
@@ -33,49 +33,143 @@ import Layout from "../layouts/Layout.astro";
           <!-- Header -->
           <header class="mb-16 md:mb-24">
             <p class="text-xs tracking-[0.3em] uppercase mb-4 animate-fade-up" style="color: var(--color-muted);">
-              Community
+              Shipped
             </p>
             <h1 class="text-4xl md:text-5xl lg:text-6xl mb-6 leading-[1.1] animate-fade-up delay-1" style="font-family: var(--font-display);">
-              Open Source
+              Projects
             </h1>
             <div class="w-16 h-px bg-[var(--color-ink)]/20 mb-6 animate-fade-up delay-2"></div>
             <p class="text-base md:text-lg leading-relaxed max-w-xl animate-fade-up delay-2" style="color: var(--color-muted);">
-              Tools and libraries I've built and open-sourced. All available on GitHub.
+              Indie products, open-source tools, and smaller experiments. The featured few below get real maintenance; the rest are focused single-purpose utilities.
             </p>
           </header>
 
-          <!-- Featured Projects -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-6 md:mb-8">
+          <!-- Featured section label -->
+          <div class="mb-6 flex items-center gap-4 animate-fade-up delay-2">
+            <span class="text-[11px] tracking-[0.25em] uppercase font-medium" style="color: var(--color-muted);">Featured</span>
+            <div class="flex-1 h-px bg-[var(--color-ink)]/10"></div>
+          </div>
 
-            <!-- edgepush -->
+          <!-- Featured Projects -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-16">
+
+            <!-- EdgePush -->
             <article class="group animate-fade-up delay-3 border border-[var(--color-ink)]/10 transition-colors duration-500 hover:border-[var(--color-ink)]/25">
               <div class="p-6 md:p-8 flex flex-col h-full">
-                <div class="mb-5">
-                  <div class="flex items-center justify-between mb-1">
-                    <h2 class="text-2xl md:text-3xl font-medium" style="font-family: var(--font-display);">edgepush</h2>
-                    <span class="inline-flex items-center gap-1 text-xs" style="color: var(--color-muted);">
-                      <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 16 16"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25z"/></svg>
-                      1
-                    </span>
+                <div class="flex items-center gap-4 mb-5">
+                  <div class="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 flex items-center justify-center border border-[var(--color-ink)]/10" style="background: #0a0a0a;">
+                    <span style="color: #FF6B1A; font-family: monospace; font-size: 20px; font-weight: 800;">ep</span>
                   </div>
-                  <p class="text-sm" style="color: var(--color-muted);">Open source push notifications for iOS and Android</p>
+                  <div>
+                    <h2 class="text-2xl md:text-3xl font-medium" style="font-family: var(--font-display);">EdgePush</h2>
+                    <p class="text-sm mt-0.5" style="color: var(--color-muted);">Open-source push notifications</p>
+                  </div>
                 </div>
                 <p class="text-base md:text-lg leading-relaxed mb-6 flex-1" style="color: var(--color-muted);">
-                  Self-hostable alternative to Expo Push Service. One API on Cloudflare Workers with BYO APNs/FCM credentials, encrypted at rest. Credential health probes, retry queues, webhooks.
+                  Push notifications for iOS and Android on Cloudflare Workers. BYO APNs and FCM credentials, encrypted at rest. Free hosted tier or self-host on your own account.
                 </p>
                 <div class="flex flex-wrap gap-2 mb-6">
-                  <span class="text-xs tracking-wide px-3 py-1.5 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">TypeScript</span>
+                  <span class="text-xs tracking-wide px-3 py-1.5 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">Push Notifications</span>
                   <span class="text-xs tracking-wide px-3 py-1.5 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">Cloudflare Workers</span>
                   <span class="text-xs tracking-wide px-3 py-1.5 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">AGPL-3.0</span>
                 </div>
+                <div class="flex flex-wrap gap-2">
+                  <a
+                    href="https://edgepush.dev"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium border border-[var(--color-ink)] transition-all duration-300 hover:bg-[var(--color-ink)] hover:text-[var(--color-paper)]"
+                    style="color: var(--color-ink);"
+                  >
+                    Visit
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                    </svg>
+                  </a>
+                  <a
+                    href="https://github.com/akshitkrnagpal/edgepush"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium border border-[var(--color-ink)]/20 transition-all duration-300 hover:border-[var(--color-ink)]"
+                    style="color: var(--color-muted);"
+                  >
+                    GitHub
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- HookBell -->
+            <article class="group animate-fade-up delay-3 border border-[var(--color-ink)]/10 transition-colors duration-500 hover:border-[var(--color-ink)]/25">
+              <div class="p-6 md:p-8 flex flex-col h-full">
+                <div class="flex items-center gap-4 mb-5">
+                  <div class="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0">
+                    <img
+                      src="https://hookbell.com/icon-512.png"
+                      alt="HookBell"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div>
+                    <h2 class="text-2xl md:text-3xl font-medium" style="font-family: var(--font-display);">HookBell</h2>
+                    <p class="text-sm mt-0.5" style="color: var(--color-muted);">Instant webhook push notifications</p>
+                  </div>
+                </div>
+                <p class="text-base md:text-lg leading-relaxed mb-6 flex-1" style="color: var(--color-muted);">
+                  Never miss a webhook again. Get human-readable push notifications on your phone when webhooks fire from services like Stripe, Clerk, Supabase, and more.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-6">
+                  <span class="text-xs tracking-wide px-3 py-1.5 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">Webhooks</span>
+                  <span class="text-xs tracking-wide px-3 py-1.5 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">Developer Tools</span>
+                  <span class="text-xs tracking-wide px-3 py-1.5 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">Mobile</span>
+                </div>
                 <a
-                  href="https://github.com/akshitkrnagpal/edgepush"
+                  href="https://hookbell.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium border border-[var(--color-ink)] transition-all duration-300 hover:bg-[var(--color-ink)] hover:text-[var(--color-paper)] self-start"
                   style="color: var(--color-ink);"
                 >
-                  GitHub
+                  Visit
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                  </svg>
+                </a>
+              </div>
+            </article>
+
+            <!-- PromptLens -->
+            <article class="group animate-fade-up delay-4 border border-[var(--color-ink)]/10 transition-colors duration-500 hover:border-[var(--color-ink)]/25">
+              <div class="p-6 md:p-8 flex flex-col h-full">
+                <div class="flex items-center gap-4 mb-5">
+                  <div class="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0">
+                    <img
+                      src="https://www.promptlens.io/icon-512.png"
+                      alt="PromptLens"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div>
+                    <h2 class="text-2xl md:text-3xl font-medium" style="font-family: var(--font-display);">PromptLens</h2>
+                    <p class="text-sm mt-0.5" style="color: var(--color-muted);">Compare and optimize LLM prompts</p>
+                  </div>
+                </div>
+                <p class="text-base md:text-lg leading-relaxed mb-6 flex-1" style="color: var(--color-muted);">
+                  Compare system prompts side-by-side across any LLM provider. Run experiments, visualize differences, and ship prompts with confidence.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-6">
+                  <span class="text-xs tracking-wide px-3 py-1.5 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">LLM</span>
+                  <span class="text-xs tracking-wide px-3 py-1.5 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">Prompt Engineering</span>
+                  <span class="text-xs tracking-wide px-3 py-1.5 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">A/B Testing</span>
+                </div>
+                <a
+                  href="https://www.promptlens.io"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium border border-[var(--color-ink)] transition-all duration-300 hover:bg-[var(--color-ink)] hover:text-[var(--color-paper)] self-start"
+                  style="color: var(--color-ink);"
+                >
+                  Visit
                   <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
                   </svg>
@@ -84,7 +178,7 @@ import Layout from "../layouts/Layout.astro";
             </article>
 
             <!-- tsproxy -->
-            <article class="group animate-fade-up delay-3 border border-[var(--color-ink)]/10 transition-colors duration-500 hover:border-[var(--color-ink)]/25">
+            <article class="group animate-fade-up delay-4 border border-[var(--color-ink)]/10 transition-colors duration-500 hover:border-[var(--color-ink)]/25">
               <div class="p-6 md:p-8 flex flex-col h-full">
                 <div class="mb-5">
                   <div class="flex items-center justify-between mb-1">
@@ -120,7 +214,7 @@ import Layout from "../layouts/Layout.astro";
             </article>
 
             <!-- tsctl -->
-            <article class="group animate-fade-up delay-4 border border-[var(--color-ink)]/10 transition-colors duration-500 hover:border-[var(--color-ink)]/25">
+            <article class="group animate-fade-up delay-5 border border-[var(--color-ink)]/10 transition-colors duration-500 hover:border-[var(--color-ink)]/25">
               <div class="p-6 md:p-8 flex flex-col h-full">
                 <div class="mb-5">
                   <div class="flex items-center justify-between mb-1">
@@ -157,8 +251,14 @@ import Layout from "../layouts/Layout.astro";
 
           </div>
 
-          <!-- Other Projects -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-6 md:mb-8">
+          <!-- Smaller projects section label -->
+          <div class="mb-6 flex items-center gap-4 animate-fade-up delay-5">
+            <span class="text-[11px] tracking-[0.25em] uppercase font-medium" style="color: var(--color-muted);">Smaller &amp; Quick</span>
+            <div class="flex-1 h-px bg-[var(--color-ink)]/10"></div>
+          </div>
+
+          <!-- Smaller projects -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 mb-10">
 
             <!-- open-placeholder -->
             <article class="group animate-fade-up delay-5 border border-[var(--color-ink)]/[0.06] transition-colors duration-500 hover:border-[var(--color-ink)]/15">
@@ -193,7 +293,7 @@ import Layout from "../layouts/Layout.astro";
             </article>
 
             <!-- secret-desk -->
-            <article class="group animate-fade-up delay-5 border border-[var(--color-ink)]/[0.06] transition-colors duration-500 hover:border-[var(--color-ink)]/15">
+            <article class="group animate-fade-up delay-6 border border-[var(--color-ink)]/[0.06] transition-colors duration-500 hover:border-[var(--color-ink)]/15">
               <div class="p-5 md:p-6 flex flex-col h-full">
                 <div class="flex items-center justify-between mb-3">
                   <h2 class="text-lg md:text-xl font-medium" style="font-family: var(--font-display);">secret-desk</h2>
@@ -257,7 +357,7 @@ import Layout from "../layouts/Layout.astro";
             </article>
 
             <!-- img-finder -->
-            <article class="group animate-fade-up delay-6 border border-[var(--color-ink)]/[0.06] transition-colors duration-500 hover:border-[var(--color-ink)]/15">
+            <article class="group animate-fade-up delay-7 border border-[var(--color-ink)]/[0.06] transition-colors duration-500 hover:border-[var(--color-ink)]/15">
               <div class="p-5 md:p-6 flex flex-col h-full">
                 <div class="flex items-center justify-between mb-3">
                   <h2 class="text-lg md:text-xl font-medium" style="font-family: var(--font-display);">img-finder</h2>
