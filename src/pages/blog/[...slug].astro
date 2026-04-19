@@ -6,12 +6,19 @@ export async function getStaticPaths() {
   const posts = await getCollection("blog");
   return posts.map((post) => ({
     params: { slug: post.id },
-    props: { post },
+    props: { post, allPosts: posts },
   }));
 }
 
-const { post } = Astro.props;
+const { post, allPosts } = Astro.props;
 const { Content } = await render(post);
+
+// Related posts: other entries sorted by date desc, newest first. Cap
+// at three so the rail stays scannable.
+const relatedPosts = allPosts
+  .filter((p) => p.id !== post.id)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
 ---
 
 <Layout title={`${post.data.title} – Akshit Kr Nagpal`} description={post.data.description}>
@@ -76,6 +83,34 @@ const { Content } = await render(post);
           <div class="prose animate-fade-up delay-3">
             <Content />
           </div>
+
+          <aside class="mt-16 md:mt-24 pt-10 border-t border-[var(--color-ink)]/10 animate-fade-up delay-4">
+            <p class="text-xs tracking-[0.3em] uppercase mb-6" style="color: var(--color-muted);">
+              Keep Reading
+            </p>
+            {relatedPosts.length > 0 ? (
+              <ul class="space-y-3 mb-8">
+                {relatedPosts.map((p) => (
+                  <li>
+                    <a
+                      href={`/blog/${p.id}`}
+                      class="group flex items-baseline justify-between gap-4 text-base md:text-lg"
+                      style="color: var(--color-ink);"
+                    >
+                      <span class="transition-opacity group-hover:opacity-70" style="font-family: var(--font-display);">{p.data.title}</span>
+                      <time class="text-xs flex-shrink-0" style="color: var(--color-muted);" datetime={p.data.date.toISOString()}>
+                        {p.data.date.toLocaleDateString("en-US", { year: "numeric", month: "short" })}
+                      </time>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+            <div class="flex flex-wrap items-center gap-5 text-sm" style="color: var(--color-muted);">
+              <a href="/blog" class="hover:opacity-60 transition-opacity">All posts →</a>
+              <a href="/projects" class="hover:opacity-60 transition-opacity">View projects →</a>
+            </div>
+          </aside>
         </article>
       </div>
 
