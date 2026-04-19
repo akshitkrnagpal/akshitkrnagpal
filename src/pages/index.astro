@@ -3,22 +3,6 @@ import Layout from '../layouts/Layout.astro';
 import Linkedin from '../components/simple-icons/linkedin.astro'
 import Github from '../components/simple-icons/github.astro'
 import X from '../components/simple-icons/x.astro'
-import { getCollection } from 'astro:content';
-
-// Latest blog post — surface it as a direct link from the home page
-// so crawlers don't have to simulate the command-palette click to
-// reach it. Sorted newest-first.
-const allPosts = await getCollection('blog');
-const latestPost = allPosts
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())[0];
-
-// Featured projects — text links to the same projects listed in
-// /projects. Gives every entry at least one "top-level" inlink.
-const featuredProjects = [
-  { name: 'EdgePush', href: 'https://edgepush.dev' },
-  { name: 'HookBell', href: 'https://hookbell.com' },
-  { name: 'tsproxy', href: '/projects' },
-];
 ---
 
 <Layout>
@@ -119,38 +103,6 @@ const featuredProjects = [
               >
                 <X class="w-5 h-5" />
               </a>
-            </div>
-
-            <!-- Direct project + post links. Exists so crawlers don't
-                 have to simulate the command-palette click to reach
-                 /projects and the latest blog post. -->
-            <div class="mt-12 flex flex-col items-center gap-4 animate-fade-up delay-6">
-              <div class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs tracking-[0.18em] uppercase" style="color: var(--color-muted);">
-                <span class="opacity-70">Featured</span>
-                {featuredProjects.map((p) => (
-                  <a
-                    href={p.href}
-                    {...(p.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                    class="hover:text-[var(--color-ink)] transition-colors"
-                  >
-                    {p.name}
-                  </a>
-                ))}
-              </div>
-              {latestPost ? (
-                <a
-                  href={`/blog/${latestPost.id}`}
-                  class="text-sm hover:opacity-70 transition-opacity"
-                  style="color: var(--color-ink);"
-                >
-                  Latest: <span style="font-family: var(--font-display);">{latestPost.data.title}</span> →
-                </a>
-              ) : null}
-              <div class="flex items-center gap-5 text-xs tracking-[0.15em] uppercase" style="color: var(--color-muted);">
-                <a href="/projects" class="hover:text-[var(--color-ink)] transition-colors">All Projects</a>
-                <span class="opacity-40">·</span>
-                <a href="/blog" class="hover:text-[var(--color-ink)] transition-colors">Blog</a>
-              </div>
             </div>
           </div>
 
