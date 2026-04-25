@@ -13,6 +13,13 @@ const [serifItalic, sansBold, sansMedium] = await Promise.all([
   readFile(join(fontsDir, 'DMSans-Medium.ttf')),
 ])
 
+const avatarUrl = 'https://avatars.githubusercontent.com/u/15872348?size=512'
+const avatarRes = await fetch(avatarUrl)
+if (!avatarRes.ok) throw new Error(`avatar fetch failed: ${avatarRes.status}`)
+const avatarType = avatarRes.headers.get('content-type') ?? 'image/jpeg'
+const avatarBytes = Buffer.from(await avatarRes.arrayBuffer())
+const avatarDataUrl = `data:${avatarType};base64,${avatarBytes.toString('base64')}`
+
 const PAPER = '#0a0a0b'
 const INK = '#e8e6e3'
 const MUTED = '#8a8a8a'
@@ -83,52 +90,88 @@ const tree = el('div', {
       style: {
         flex: 1,
         display: 'flex',
-        flexDirection: 'column',
+        flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '0 80px',
-        textAlign: 'center',
+        gap: '64px',
+        padding: '0 96px',
       },
       children: [
         el('div', {
           style: {
-            fontFamily: 'Instrument Serif',
-            fontStyle: 'italic',
-            fontSize: '156px',
-            lineHeight: 1.02,
-            letterSpacing: '-2px',
-            color: INK,
-          },
-          children: 'Akshit Kr Nagpal',
-        }),
-        el('div', {
-          style: {
             display: 'flex',
             alignItems: 'center',
-            gap: '20px',
-            marginTop: '36px',
-            color: ACCENT,
-            fontSize: '22px',
-            fontWeight: 500,
-            letterSpacing: '6px',
-            textTransform: 'uppercase',
+            justifyContent: 'center',
+            width: '300px',
+            height: '300px',
+            borderRadius: '300px',
+            border: `2px solid ${ACCENT}33`,
+            padding: '12px',
+            flexShrink: 0,
           },
           children: [
-            el('div', { style: { width: '56px', height: '2px', background: ACCENT } }),
-            el('span', { children: 'Software Engineer' }),
-            el('div', { style: { width: '56px', height: '2px', background: ACCENT } }),
+            el('img', {
+              src: avatarDataUrl,
+              width: 276,
+              height: 276,
+              style: {
+                width: '276px',
+                height: '276px',
+                borderRadius: '276px',
+                objectFit: 'cover',
+              },
+            }),
           ],
         }),
         el('div', {
           style: {
-            marginTop: '40px',
-            color: MUTED,
-            fontSize: '28px',
-            fontWeight: 500,
-            maxWidth: '900px',
-            lineHeight: 1.4,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-start',
+            justifyContent: 'center',
+            flex: 1,
           },
-          children: 'Indie hacker. Full-stack engineer. Builds developer tools and ships side projects.',
+          children: [
+            el('div', {
+              style: {
+                fontFamily: 'Instrument Serif',
+                fontStyle: 'italic',
+                fontSize: '108px',
+                lineHeight: 0.96,
+                letterSpacing: '-2px',
+                color: INK,
+              },
+              children: 'Akshit Kr Nagpal',
+            }),
+            el('div', {
+              style: {
+                display: 'flex',
+                alignItems: 'center',
+                gap: '16px',
+                marginTop: '28px',
+                color: ACCENT,
+                fontSize: '20px',
+                fontWeight: 500,
+                letterSpacing: '6px',
+                textTransform: 'uppercase',
+              },
+              children: [
+                el('div', { style: { width: '40px', height: '2px', background: ACCENT } }),
+                el('span', { children: 'Software Engineer' }),
+              ],
+            }),
+            el('div', {
+              style: {
+                marginTop: '28px',
+                color: MUTED,
+                fontSize: '24px',
+                fontWeight: 500,
+                lineHeight: 1.4,
+                maxWidth: '600px',
+              },
+              children: 'Full-stack engineer. Building developer tools, open source, and AI products.',
+            }),
+          ],
         }),
       ],
     }),
