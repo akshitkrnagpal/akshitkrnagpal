@@ -1,17 +1,103 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
-const featured = [
+const githubRepositories = [
+  "akshitkrnagpal/typesensekit",
+  "offerkit/offerkit",
+  "akshitkrnagpal/edgepush",
+  "akshitkrnagpal/revcat",
+  "open-placeholder/open-placeholder",
+  "akshitkrnagpal/secret-desk",
+  "akshitkrnagpal/env-doctor",
+] as const;
+
+const githubHeaders: Record<string, string> = {
+  Accept: "application/vnd.github+json",
+  "X-GitHub-Api-Version": "2022-11-28",
+};
+
+if (import.meta.env.GITHUB_TOKEN) {
+  githubHeaders.Authorization = `Bearer ${import.meta.env.GITHUB_TOKEN}`;
+}
+
+const githubStars = Object.fromEntries(
+  await Promise.all(
+    githubRepositories.map(async (repository) => {
+      try {
+        const response = await fetch(`https://api.github.com/repos/${repository}`, {
+          headers: githubHeaders,
+        });
+
+        if (!response.ok) {
+          console.warn(`Could not fetch GitHub stars for ${repository}: ${response.status}`);
+          return [repository, null] as const;
+        }
+
+        const data = (await response.json()) as { stargazers_count: number };
+        return [repository, data.stargazers_count] as const;
+      } catch (error) {
+        console.warn(`Could not fetch GitHub stars for ${repository}`, error);
+        return [repository, null] as const;
+      }
+    }),
+  ),
+) as Record<string, number | null>;
+
+const featuredProjects = [
+  {
+    name: "TypesenseKit",
+    eyebrow: "Typesense CLI & MCP server",
+    description:
+      "95 typed Typesense operations for humans and AI agents—one CLI and MCP server, read-only by default.",
+    tags: ["Typesense", "CLI", "MCP", "95 Operations"],
+    labels: ["Active", "Open Source"],
+    icon: "text",
+    iconBg: "#101820",
+    iconText: "TS",
+    iconColor: "#61DAFB",
+    repo: "akshitkrnagpal/typesensekit",
+    links: [
+      { label: "Docs", href: "https://typesensekit.vercel.app", primary: true },
+      { label: "GitHub", href: "https://github.com/akshitkrnagpal/typesensekit" },
+    ],
+  },
+  {
+    name: "PromptLens",
+    eyebrow: "Autonomous AI reliability",
+    description:
+      "An autonomous reliability engineer for production LLM systems. Continuously evaluate behavior, catch regressions, investigate failures, and make confident release decisions.",
+    tags: ["AI Reliability", "Continuous Evals", "Release Decisions"],
+    labels: ["Active", "Early access"],
+    image: "https://www.promptlens.io/icon-512.png",
+    repo: null,
+    links: [{ label: "Visit", href: "https://www.promptlens.io", primary: true }],
+  },
+  {
+    name: "OfferKit",
+    eyebrow: "Self-hostable promotion engine",
+    description:
+      "Agent-first promotion engine for coupons, loyalty, gift cards, referrals, and customer segments. Built for teams that need pricing and promo logic they can own.",
+    tags: ["Commerce", "Promotions", "MCP"],
+    labels: ["Active", "Open Source", "Self-hostable"],
+    icon: "text",
+    iconBg: "#111111",
+    iconText: "%",
+    iconColor: "#F5F0E8",
+    repo: "offerkit/offerkit",
+    links: [{ label: "GitHub", href: "https://github.com/offerkit/offerkit", primary: true }],
+  },
   {
     name: "EdgePush",
     eyebrow: "Open-source push notifications",
     description:
       "Push notifications for iOS and Android on Cloudflare Workers. BYO APNs and FCM credentials, encrypted at rest. Free hosted tier or self-host on your own account.",
     tags: ["Push Notifications", "Cloudflare Workers", "AGPL-3.0"],
+    labels: ["Open Source", "Self-hostable"],
     icon: "dot",
     iconBg: "#000000",
     iconText: "",
     iconColor: "#FF6B1A",
+    repo: "akshitkrnagpal/edgepush",
     links: [
       { label: "Visit", href: "https://edgepush.dev", primary: true },
       { label: "GitHub", href: "https://github.com/akshitkrnagpal/edgepush" },
@@ -23,97 +109,59 @@ const featured = [
     description:
       "Never miss a webhook again. Get human-readable push notifications on your phone when webhooks fire from services like Stripe, Clerk, Supabase, and more.",
     tags: ["Webhooks", "Developer Tools", "Mobile"],
+    labels: ["Production"],
     image: "https://hookbell.com/icon-512.png",
+    repo: null,
     links: [{ label: "Visit", href: "https://hookbell.com", primary: true }],
-  },
-  {
-    name: "Fast36",
-    eyebrow: "Extended fasting tracker",
-    description:
-      "Fasting tracker for longer fasts. Follow metabolic stages, Live Activities, widgets, Apple Watch, Siri shortcuts, and HealthKit export without streak pressure.",
-    tags: ["iOS", "Fasting", "SwiftUI"],
-    icon: "text",
-    iconBg: "#090B0C",
-    iconText: "36",
-    iconColor: "#00FFFF",
-    links: [
-      { label: "Visit", href: "https://fast36.app", primary: true },
-      { label: "App Store", href: "https://apps.apple.com/us/app/fast36/id6758402027" },
-    ],
-  },
-  {
-    name: "PromptLens",
-    eyebrow: "AI regression detection",
-    description:
-      "Release confidence for production LLM features. Run evals, catch regressions, compare behavior changes, and decide whether to ship or roll back.",
-    tags: ["LLM Evals", "Regression Testing", "Release Confidence"],
-    image: "https://www.promptlens.io/icon-512.png",
-    links: [{ label: "Visit", href: "https://www.promptlens.io", primary: true }],
-  },
-  {
-    name: "OfferKit",
-    eyebrow: "Self-hostable promotion engine",
-    description:
-      "Agent-first promotion engine for coupons, loyalty, gift cards, referrals, and customer segments. Built for teams that need pricing and promo logic they can own.",
-    tags: ["Commerce", "Promotions", "TypeScript"],
-    icon: "text",
-    iconBg: "#111111",
-    iconText: "%",
-    iconColor: "#F5F0E8",
-    links: [{ label: "GitHub", href: "https://github.com/offerkit/offerkit", primary: true }],
-    stars: 29,
-  },
-  {
-    name: "TypesenseKit",
-    eyebrow: "Typesense automation toolkit",
-    description:
-      "CLI and MCP server for Typesense search automation. Manage search infrastructure from scripts, agents, and repeatable workflows instead of dashboards.",
-    tags: ["Typesense", "CLI", "MCP"],
-    icon: "text",
-    iconBg: "#101820",
-    iconText: "TS",
-    iconColor: "#61DAFB",
-    links: [{ label: "GitHub", href: "https://github.com/akshitkrnagpal/typesensekit", primary: true }],
-    stars: 2,
   },
 ];
 
-const smaller = [
+const featured = featuredProjects.map((project) => ({
+  ...project,
+  stars: project.repo ? githubStars[project.repo] : null,
+}));
+
+const smallerProjects = [
   {
     name: "revcat",
     description:
       "RevenueCat CLI with full v2 API coverage, OAuth login, and per-repo project context for agents and sandboxes.",
     tags: ["Go", "CLI", "RevenueCat"],
+    repo: "akshitkrnagpal/revcat",
     href: "https://github.com/akshitkrnagpal/revcat",
     secondaryHref: "https://revcat.vercel.app",
     secondaryLabel: "Docs",
-    stars: 3,
   },
   {
     name: "open-placeholder",
     description:
       "Self-hosted placeholder image generator. Generate custom placeholder images on the fly.",
     tags: ["Images", "Self-hosted"],
+    repo: "open-placeholder/open-placeholder",
     href: "https://github.com/open-placeholder/open-placeholder",
-    stars: 11,
   },
   {
     name: "secret-desk",
     description:
       "Vercel-like editing experience for Kubernetes secrets. Manage secrets with a clean, intuitive interface.",
     tags: ["Kubernetes", "DevOps"],
+    repo: "akshitkrnagpal/secret-desk",
     href: "https://github.com/akshitkrnagpal/secret-desk",
-    stars: 2,
   },
   {
     name: "env-doctor",
     description:
       "The .env file auditor every developer needs. Validate, lint, and catch issues in your environment files.",
     tags: ["CLI", "Developer Tools"],
+    repo: "akshitkrnagpal/env-doctor",
     href: "https://github.com/akshitkrnagpal/env-doctor",
-    stars: 1,
   },
 ];
+
+const smaller = smallerProjects.map((project) => ({
+  ...project,
+  stars: githubStars[project.repo],
+}));
 ---
 
 <Layout>
@@ -175,6 +223,13 @@ const smaller = [
                         ) : null}
                       </div>
                       <p class="text-sm mt-0.5" style="color: var(--color-muted);">{project.eyebrow}</p>
+                      <div class="flex flex-wrap gap-1.5 mt-2">
+                        {project.labels.map((label) => (
+                          <span class="text-[10px] tracking-[0.12em] uppercase px-2 py-1 border border-[var(--color-ink)]/15" style="color: var(--color-muted);">
+                            {label}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
                   <p class="text-base md:text-lg leading-relaxed mb-6 flex-1" style="color: var(--color-muted);">{project.description}</p>
@@ -201,7 +256,7 @@ const smaller = [
           </div>
 
           <div class="mb-6 flex items-center gap-4 animate-fade-up delay-5">
-            <span class="text-[11px] tracking-[0.25em] uppercase font-medium" style="color: var(--color-muted);">Smaller &amp; Quick</span>
+            <span class="text-[11px] tracking-[0.25em] uppercase font-medium" style="color: var(--color-muted);">Tools &amp; Experiments</span>
             <div class="flex-1 h-px bg-[var(--color-ink)]/10"></div>
           </div>
 
