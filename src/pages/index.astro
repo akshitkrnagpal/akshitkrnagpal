@@ -1,132 +1,438 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Linkedin from '../components/simple-icons/linkedin.astro'
-import Github from '../components/simple-icons/github.astro'
-import X from '../components/simple-icons/x.astro'
+import Layout from "../layouts/Layout.astro";
+import Linkedin from "../components/simple-icons/linkedin.astro";
+import Github from "../components/simple-icons/github.astro";
+import X from "../components/simple-icons/x.astro";
 ---
 
 <Layout>
-  <main class="min-h-dvh relative overflow-hidden">
-    <!-- Animated gradient background -->
-    <div class="absolute inset-0 pointer-events-none">
-      <div class="absolute top-[-20%] right-[-10%] w-[60vw] h-[60vw] max-w-[800px] max-h-[800px] rounded-full opacity-[0.07] blur-3xl animate-float" style="background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);"></div>
-      <div class="absolute bottom-[-10%] left-[-5%] w-[40vw] h-[40vw] max-w-[500px] max-h-[500px] rounded-full opacity-[0.04] blur-3xl animate-float-delayed" style="background: radial-gradient(circle, #4a90d9 0%, transparent 70%);"></div>
-    </div>
+  <div class="studio-shell">
+    <div class="shape shape-sun" aria-hidden="true"></div>
+    <svg class="shape shape-squiggle" viewBox="0 0 200 120" aria-hidden="true">
+      <path d="M8 75c32-76 48 39 80-11s49 60 103-30" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round"></path>
+    </svg>
 
-    <!-- Content -->
-    <div class="relative z-10 min-h-dvh flex flex-col">
-      <!-- Navigation -->
-      <nav class="w-full px-6 md:px-12 lg:px-20 py-6 flex justify-between items-center animate-fade-in">
-        <span class="text-sm tracking-widest uppercase font-medium" style="color: var(--color-muted);">Portfolio</span>
-        <a
-          href="/projects"
-          class="text-sm tracking-wide font-medium px-4 py-2 border border-[var(--color-ink)]/10 transition-all duration-300 hover:border-[var(--color-ink)]/30 hover:bg-[var(--color-ink)]/[0.03]"
-          style="color: var(--color-ink);"
-        >
-          Projects
-        </a>
+    <header>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a class="site-mark" href="/" aria-label="Akshit Kr Nagpal, home">Akshit / Portfolio</a>
+        <a class="nav-link" href="/projects">Selected work <span aria-hidden="true">↗</span></a>
       </nav>
+    </header>
 
-      <!-- Hero -->
-      <div class="flex-1 flex items-center justify-center px-6 md:px-12 lg:px-20 py-12">
-        <div class="w-full max-w-6xl">
-
-          <!-- Top section: Photo + Name -->
-          <div class="flex flex-col items-center text-center mb-16">
-            <!-- Photo with ring -->
-            <div class="relative mb-8 animate-scale-in delay-1">
-              <div class="absolute -inset-2 rounded-full border border-[var(--color-accent)]/20"></div>
-              <div class="absolute -inset-5 rounded-full border border-[var(--color-ink)]/5"></div>
-              <div class="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden ring-4 ring-[var(--color-paper)] shadow-xl">
-                <img
-                  src="https://avatars.githubusercontent.com/u/15872348"
-                  alt="Akshit Kr Nagpal"
-                  class="w-full h-full object-cover grayscale-[30%] hover:grayscale-0 transition-all duration-700"
-                />
-              </div>
-              <!-- Status dot -->
-              <div class="absolute bottom-2 right-2 w-4 h-4 rounded-full bg-emerald-500 ring-3 ring-[var(--color-paper)]"></div>
-            </div>
-
-            <!-- Name -->
-            <h1 class="text-5xl md:text-6xl lg:text-7xl mb-3 leading-[1.05] animate-fade-up delay-2" style="font-family: var(--font-display);">
-              Akshit Kr Nagpal
-            </h1>
-
-            <!-- Title with accent -->
-            <div class="flex items-center gap-3 mb-6 animate-fade-up delay-3">
-              <div class="w-8 h-px bg-[var(--color-accent)]"></div>
-              <p class="text-sm md:text-base tracking-[0.2em] uppercase font-medium" style="color: var(--color-accent);">
-                Software Engineer
-              </p>
-              <div class="w-8 h-px bg-[var(--color-accent)]"></div>
-            </div>
-
-            <!-- Bio -->
-            <p class="text-lg md:text-xl leading-relaxed max-w-lg mx-auto mb-10 animate-fade-up delay-4" style="color: var(--color-muted);">
-              Indie hacker and full-stack engineer. I build developer tools, ship side projects, and care deeply about clean code and great UX.
-            </p>
-
-            <!-- Social Links -->
-            <div class="flex gap-5 animate-fade-up delay-5">
-              <a
-                href="https://github.com/akshitkrnagpal"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub"
-                class="transition-opacity duration-300 hover:opacity-60"
-                style="color: var(--color-muted);"
-              >
-                <Github class="w-5 h-5" />
+    <main id="main-content">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow reveal">Independent builder · Software engineer</p>
+          <h1 id="hero-title" class="display-type hero-title reveal">
+            <span>Akshit</span>
+            <span><em>Kr</em> Nagpal</span>
+          </h1>
+          <p class="hero-intro body-copy reveal">
+            Indie hacker and full-stack engineer. I build developer tools, ship side projects, and care deeply about clean code and great UX.
+          </p>
+          <div class="hero-actions reveal">
+            <a class="button-link" href="/projects">Explore projects <span aria-hidden="true">→</span></a>
+            <div class="socials" aria-label="Social profiles">
+              <a href="https://github.com/akshitkrnagpal" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <Github class="icon" />
               </a>
-              <a
-                href="https://linkedin.com/in/akshitkrnagpal"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                class="transition-opacity duration-300 hover:opacity-60"
-                style="color: var(--color-muted);"
-              >
-                <Linkedin class="w-5 h-5" />
+              <a href="https://linkedin.com/in/akshitkrnagpal" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <Linkedin class="icon" />
               </a>
-              <a
-                href="https://x.com/akshit_io"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="X (Twitter)"
-                class="transition-opacity duration-300 hover:opacity-60"
-                style="color: var(--color-muted);"
-              >
-                <X class="w-5 h-5" />
+              <a href="https://x.com/akshit_io" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+                <X class="icon" />
               </a>
             </div>
           </div>
-
         </div>
-      </div>
 
-      <!-- Footer accent line -->
-      <div class="w-full h-1 bg-gradient-to-r from-transparent via-[var(--color-accent)] to-transparent animate-fade-in delay-6"></div>
-    </div>
-  </main>
+        <div class="portrait-stage reveal">
+          <div class="portrait-shadow" aria-hidden="true"></div>
+          <figure class="portrait-card">
+            <img
+              src="https://avatars.githubusercontent.com/u/15872348"
+              alt="Portrait of Akshit Kr Nagpal"
+              width="460"
+              height="460"
+            />
+            <figcaption>Software Engineer</figcaption>
+          </figure>
+          <div class="note-card">
+            <span class="note-star" aria-hidden="true">✦</span>
+            <p>Building useful things for the internet.</p>
+          </div>
+          <div class="mini-stamp" aria-hidden="true">AKN<br />/26</div>
+        </div>
+      </section>
+
+      <section class="practice" aria-labelledby="practice-title">
+        <p class="eyebrow">The practice</p>
+        <h2 id="practice-title" class="display-type practice-title">Code with<br /><em>character.</em></h2>
+        <div class="practice-copy">
+          <p>
+            I work across full-stack development, open source, AI development, large language models, and agentic workflows.
+          </p>
+          <a href="/projects">See what I’ve shipped <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="loop-mark" aria-hidden="true">
+          <svg viewBox="0 0 180 110">
+            <path d="M11 66C36 8 114 1 147 34c28 27-10 65-52 58-47-8-43-63 1-72 37-8 68 18 73 42" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"></path>
+          </svg>
+        </div>
+      </section>
+    </main>
+
+    <footer class="studio-footer">
+      <span>Akshit Kr Nagpal</span>
+      <span>Full-stack · Open source · Great UX</span>
+    </footer>
+  </div>
 </Layout>
 
 <style>
-  @keyframes float {
-    0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(-20px, 20px); }
+  .shape {
+    position: absolute;
+    z-index: -1;
+    pointer-events: none;
   }
 
-  @keyframes float-delayed {
-    0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(15px, -15px); }
+  .shape-sun {
+    top: 7rem;
+    right: -8rem;
+    width: 22rem;
+    aspect-ratio: 1;
+    border: 2px solid var(--ink);
+    border-radius: 46% 54% 62% 38% / 55% 39% 61% 45%;
+    background: var(--butter);
+    transform: rotate(12deg);
   }
 
-  .animate-float {
-    animation: float 12s ease-in-out infinite;
+  .shape-squiggle {
+    top: 42rem;
+    left: -1.75rem;
+    width: 13rem;
+    color: var(--lilac);
+    transform: rotate(-13deg);
   }
 
-  .animate-float-delayed {
-    animation: float-delayed 15s ease-in-out infinite;
+  .hero {
+    display: grid;
+    width: min(100% - 2rem, 86rem);
+    min-height: calc(100dvh - 5.5rem);
+    margin-inline: auto;
+    padding: clamp(3.5rem, 9vw, 8rem) 0 clamp(5rem, 9vw, 8rem);
+    align-items: center;
+    grid-template-columns: minmax(0, 1.35fr) minmax(18rem, 0.65fr);
+    gap: clamp(3rem, 7vw, 8rem);
+  }
+
+  .hero-copy {
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-title {
+    margin-top: 1rem;
+    font-size: clamp(5.2rem, 12.4vw, 11.5rem);
+  }
+
+  .hero-title span {
+    display: block;
+    white-space: nowrap;
+  }
+
+  .hero-title span:last-child {
+    margin-left: clamp(0rem, 6vw, 5.5rem);
+  }
+
+  .hero-title em {
+    color: var(--tomato);
+    font-weight: 400;
+  }
+
+  .practice-title em {
+    color: var(--butter);
+    font-weight: 400;
+  }
+
+  .hero-intro {
+    max-width: 37rem;
+    color: var(--ink);
+    margin: 2rem 0 0 clamp(0rem, 6vw, 5.5rem);
+  }
+
+  .hero-actions {
+    display: flex;
+    margin: 2rem 0 0 clamp(0rem, 6vw, 5.5rem);
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .socials {
+    display: flex;
+    gap: 0.6rem;
+  }
+
+  .socials a {
+    display: grid;
+    width: 2.75rem;
+    aspect-ratio: 1;
+    place-items: center;
+    border: 2px solid var(--ink);
+    border-radius: 50%;
+    background: var(--white);
+    transition: transform 180ms ease, background-color 180ms ease;
+  }
+
+  .socials a:hover {
+    background: var(--butter);
+    transform: rotate(-8deg) scale(1.08);
+  }
+
+  .socials :global(.icon) {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .portrait-stage {
+    position: relative;
+    width: min(100%, 24rem);
+    margin: 1rem auto 0;
+  }
+
+  .portrait-shadow {
+    position: absolute;
+    inset: 1.4rem -1rem -1rem 1.5rem;
+    border: 2px solid var(--ink);
+    border-radius: 42% 58% 44% 56% / 52% 39% 61% 48%;
+    background: var(--leaf);
+    transform: rotate(7deg);
+  }
+
+  .portrait-card {
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+    border: 2px solid var(--ink);
+    border-radius: 48% 52% 39% 61% / 39% 44% 56% 61%;
+    background: var(--white);
+    transform: rotate(-3deg);
+  }
+
+  .portrait-card img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 0.92;
+    object-fit: cover;
+    filter: saturate(0.78) contrast(1.03);
+  }
+
+  .portrait-card figcaption {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    padding: 0.48rem 0.8rem;
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    background: var(--butter);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .note-card {
+    position: absolute;
+    right: -1rem;
+    bottom: -2.75rem;
+    width: 10.5rem;
+    padding: 1rem;
+    border: 2px solid var(--ink);
+    background: var(--white);
+    box-shadow: 5px 5px 0 var(--ink);
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    line-height: 1.05;
+    transform: rotate(5deg);
+  }
+
+  .note-card p {
+    margin: 0;
+  }
+
+  .note-star {
+    display: block;
+    margin-bottom: 0.35rem;
+    color: var(--tomato);
+    font-family: var(--font-body);
+  }
+
+  .mini-stamp {
+    position: absolute;
+    top: 1.25rem;
+    left: -2.25rem;
+    display: grid;
+    width: 4rem;
+    aspect-ratio: 1;
+    place-items: center;
+    border: 2px solid var(--ink);
+    border-radius: 50%;
+    background: var(--lilac);
+    font-size: 0.7rem;
+    font-weight: 600;
+    line-height: 1.1;
+    text-align: center;
+    transform: rotate(-14deg);
+  }
+
+  .practice {
+    position: relative;
+    display: grid;
+    width: min(100% - 2rem, 76rem);
+    margin: 0 auto 8rem;
+    padding: clamp(2rem, 5vw, 4.5rem);
+    overflow: hidden;
+    align-items: end;
+    grid-template-columns: 0.85fr 1.15fr;
+    border: 2px solid var(--ink);
+    border-radius: 2.25rem 7rem 2.25rem 2.25rem;
+    background: var(--leaf);
+    box-shadow: 8px 8px 0 var(--ink);
+    color: var(--white);
+  }
+
+  .practice > .eyebrow {
+    position: absolute;
+    top: 2rem;
+    left: clamp(2rem, 5vw, 4.5rem);
+    color: var(--butter);
+  }
+
+  .practice-title {
+    padding-top: 3rem;
+    font-size: clamp(4rem, 8vw, 7.5rem);
+  }
+
+  .practice-copy {
+    max-width: 29rem;
+    padding: 0 0 0.75rem clamp(0rem, 5vw, 4rem);
+  }
+
+  .practice-copy p {
+    margin: 0 0 1.5rem;
+    color: #efe5d7;
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+  }
+
+  .practice-copy a {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    color: var(--butter);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-underline-offset: 0.3rem;
+    text-transform: uppercase;
+  }
+
+  .loop-mark {
+    position: absolute;
+    top: -1.4rem;
+    right: 2rem;
+    width: 11rem;
+    color: var(--tomato);
+    transform: rotate(10deg);
+  }
+
+  @media (max-width: 64rem) {
+    .hero {
+      min-height: auto;
+      grid-template-columns: 1fr;
+    }
+
+    .hero-title {
+      font-size: clamp(5.4rem, 17vw, 9rem);
+    }
+
+    .portrait-stage {
+      width: min(78vw, 24rem);
+      margin-top: 0;
+      margin-right: 12%;
+    }
+  }
+
+  @media (max-width: 44rem) {
+    .shape-sun {
+      top: 14rem;
+      right: -10rem;
+      width: 18rem;
+    }
+
+    .hero {
+      width: min(100% - 1.25rem, 86rem);
+      padding-top: 3.25rem;
+      gap: 5rem;
+    }
+
+    .hero-title {
+      font-size: clamp(4.65rem, 22vw, 7.3rem);
+      line-height: 0.88;
+    }
+
+    .hero-title span:last-child,
+    .hero-intro,
+    .hero-actions {
+      margin-left: 0;
+    }
+
+    .hero-title span:last-child {
+      white-space: normal;
+    }
+
+    .hero-actions {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .portrait-stage {
+      margin-inline: auto;
+    }
+
+    .note-card {
+      right: -0.6rem;
+      bottom: -3.5rem;
+    }
+
+    .mini-stamp {
+      left: -0.5rem;
+    }
+
+    .practice {
+      width: min(100% - 1.25rem, 76rem);
+      margin-bottom: 5rem;
+      padding: 2rem;
+      grid-template-columns: 1fr;
+      border-radius: 1.5rem 4rem 1.5rem 1.5rem;
+    }
+
+    .practice > .eyebrow {
+      top: 2rem;
+      left: 2rem;
+    }
+
+    .practice-title {
+      font-size: clamp(3.7rem, 18vw, 6rem);
+    }
+
+    .practice-copy {
+      padding: 2rem 0 0;
+    }
+
+    .loop-mark {
+      top: 1rem;
+      right: -3rem;
+      width: 9rem;
+    }
   }
 </style>
