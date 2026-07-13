@@ -1,0 +1,23 @@
+---
+interface Props {
+  current: "home" | "projects";
+}
+
+const { current } = Astro.props;
+---
+
+<header class="site-header">
+  <a class="wordmark" href="/" aria-label="Akshit Kr Nagpal, home">
+    <span class="wordmark__monogram" aria-hidden="true">AKN</span>
+    <span class="wordmark__name">Akshit Kr Nagpal</span>
+  </a>
+
+  <nav class="site-nav" aria-label="Primary navigation">
+    <a href="/" aria-current={current === "home" ? "page" : undefined}>
+      <span aria-hidden="true">01</span> Home
+    </a>
+    <a href="/projects" aria-current={current === "projects" ? "page" : undefined}>
+      <span aria-hidden="true">02</span> Projects
+    </a>
+  </nav>
+</header>
