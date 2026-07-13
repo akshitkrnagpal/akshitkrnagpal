@@ -1,132 +1,510 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Linkedin from '../components/simple-icons/linkedin.astro'
-import Github from '../components/simple-icons/github.astro'
-import X from '../components/simple-icons/x.astro'
+import Layout from "../layouts/Layout.astro";
+import Linkedin from "../components/simple-icons/linkedin.astro";
+import Github from "../components/simple-icons/github.astro";
+import X from "../components/simple-icons/x.astro";
 ---
 
 <Layout>
-  <main class="min-h-dvh relative overflow-hidden">
-    <!-- Animated gradient background -->
-    <div class="absolute inset-0 pointer-events-none">
-      <div class="absolute top-[-20%] right-[-10%] w-[60vw] h-[60vw] max-w-[800px] max-h-[800px] rounded-full opacity-[0.07] blur-3xl animate-float" style="background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);"></div>
-      <div class="absolute bottom-[-10%] left-[-5%] w-[40vw] h-[40vw] max-w-[500px] max-h-[500px] rounded-full opacity-[0.04] blur-3xl animate-float-delayed" style="background: radial-gradient(circle, #4a90d9 0%, transparent 70%);"></div>
+  <div class="shell">
+    <header class="site-header">
+      <a class="site-id" href="/" aria-label="Akshit Kr Nagpal, home">
+        akshit.io <span>/ portfolio</span>
+      </a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="/" aria-current="page">Index</a>
+        <a href="/projects">Projects</a>
+      </nav>
+    </header>
+
+    <div class="status-strip" aria-label="Page status">
+      <span>route <strong>/index</strong></span>
+      <span>render <strong>static</strong></span>
+      <span>mode <strong>independent</strong></span>
+      <span class="ok">● system online</span>
     </div>
 
-    <!-- Content -->
-    <div class="relative z-10 min-h-dvh flex flex-col">
-      <!-- Navigation -->
-      <nav class="w-full px-6 md:px-12 lg:px-20 py-6 flex justify-between items-center animate-fade-in">
-        <span class="text-sm tracking-widest uppercase font-medium" style="color: var(--color-muted);">Portfolio</span>
-        <a
-          href="/projects"
-          class="text-sm tracking-wide font-medium px-4 py-2 border border-[var(--color-ink)]/10 transition-all duration-300 hover:border-[var(--color-ink)]/30 hover:bg-[var(--color-ink)]/[0.03]"
-          style="color: var(--color-ink);"
-        >
-          Projects
-        </a>
-      </nav>
+    <main id="main-content" class="home-main">
+      <section class="home-grid" aria-labelledby="intro-title">
+        <div class="intro-block reveal">
+          <p class="section-kicker">Identity / 001</p>
+          <h1 id="intro-title">
+            <span>Akshit Kr</span>
+            Nagpal
+          </h1>
+          <p class="role-line"><span>const role =</span> “Software Engineer”;</p>
+          <p class="intro-copy">
+            Indie hacker and full-stack engineer. I build developer tools, ship side projects, and care deeply about clean code and great UX.
+          </p>
+          <div class="intro-actions">
+            <a class="action-link primary internal" href="/projects">Inspect projects</a>
+            <a class="action-link" href="https://github.com/akshitkrnagpal" target="_blank" rel="noopener noreferrer">
+              GitHub
+              <span class="sr-only"> (opens in a new tab)</span>
+            </a>
+          </div>
+        </div>
 
-      <!-- Hero -->
-      <div class="flex-1 flex items-center justify-center px-6 md:px-12 lg:px-20 py-12">
-        <div class="w-full max-w-6xl">
-
-          <!-- Top section: Photo + Name -->
-          <div class="flex flex-col items-center text-center mb-16">
-            <!-- Photo with ring -->
-            <div class="relative mb-8 animate-scale-in delay-1">
-              <div class="absolute -inset-2 rounded-full border border-[var(--color-accent)]/20"></div>
-              <div class="absolute -inset-5 rounded-full border border-[var(--color-ink)]/5"></div>
-              <div class="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden ring-4 ring-[var(--color-paper)] shadow-xl">
-                <img
-                  src="https://avatars.githubusercontent.com/u/15872348"
-                  alt="Akshit Kr Nagpal"
-                  class="w-full h-full object-cover grayscale-[30%] hover:grayscale-0 transition-all duration-700"
-                />
-              </div>
-              <!-- Status dot -->
-              <div class="absolute bottom-2 right-2 w-4 h-4 rounded-full bg-emerald-500 ring-3 ring-[var(--color-paper)]"></div>
+        <aside class="identity-panel panel reveal reveal-delay-1" aria-label="Profile summary">
+          <div class="panel-heading">
+            <span>profile.sys</span>
+          </div>
+          <div class="portrait-wrap">
+            <div class="portrait-rulers" aria-hidden="true">
+              <span>00</span><span>16</span><span>32</span><span>48</span>
             </div>
-
-            <!-- Name -->
-            <h1 class="text-5xl md:text-6xl lg:text-7xl mb-3 leading-[1.05] animate-fade-up delay-2" style="font-family: var(--font-display);">
-              Akshit Kr Nagpal
-            </h1>
-
-            <!-- Title with accent -->
-            <div class="flex items-center gap-3 mb-6 animate-fade-up delay-3">
-              <div class="w-8 h-px bg-[var(--color-accent)]"></div>
-              <p class="text-sm md:text-base tracking-[0.2em] uppercase font-medium" style="color: var(--color-accent);">
-                Software Engineer
-              </p>
-              <div class="w-8 h-px bg-[var(--color-accent)]"></div>
-            </div>
-
-            <!-- Bio -->
-            <p class="text-lg md:text-xl leading-relaxed max-w-lg mx-auto mb-10 animate-fade-up delay-4" style="color: var(--color-muted);">
-              Indie hacker and full-stack engineer. I build developer tools, ship side projects, and care deeply about clean code and great UX.
-            </p>
-
-            <!-- Social Links -->
-            <div class="flex gap-5 animate-fade-up delay-5">
-              <a
-                href="https://github.com/akshitkrnagpal"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub"
-                class="transition-opacity duration-300 hover:opacity-60"
-                style="color: var(--color-muted);"
-              >
-                <Github class="w-5 h-5" />
-              </a>
-              <a
-                href="https://linkedin.com/in/akshitkrnagpal"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                class="transition-opacity duration-300 hover:opacity-60"
-                style="color: var(--color-muted);"
-              >
-                <Linkedin class="w-5 h-5" />
-              </a>
-              <a
-                href="https://x.com/akshit_io"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="X (Twitter)"
-                class="transition-opacity duration-300 hover:opacity-60"
-                style="color: var(--color-muted);"
-              >
-                <X class="w-5 h-5" />
-              </a>
+            <div class="portrait-frame">
+              <img
+                src="https://avatars.githubusercontent.com/u/15872348"
+                alt="Akshit Kr Nagpal"
+                width="320"
+                height="320"
+                decoding="async"
+              />
+              <span class="portrait-corner corner-a" aria-hidden="true"></span>
+              <span class="portrait-corner corner-b" aria-hidden="true"></span>
             </div>
           </div>
+          <dl class="identity-data">
+            <div>
+              <dt>ID</dt>
+              <dd>AKSHIT.KR.NAGPAL</dd>
+            </div>
+            <div>
+              <dt>ROLE</dt>
+              <dd>SOFTWARE ENGINEER</dd>
+            </div>
+            <div>
+              <dt>MODE</dt>
+              <dd>INDIE HACKER / FULL-STACK</dd>
+            </div>
+          </dl>
+        </aside>
+      </section>
 
+      <section class="signal-grid reveal reveal-delay-2" aria-labelledby="signals-title">
+        <div class="signal-intro">
+          <p class="section-kicker">Operating signals / 002</p>
+          <h2 id="signals-title">Build discipline</h2>
         </div>
-      </div>
+        <ul class="signal-list" role="list">
+          <li><span>01</span><strong>Developer tools</strong><small>Products for builders</small></li>
+          <li><span>02</span><strong>Side projects</strong><small>Ideas shipped to production</small></li>
+          <li><span>03</span><strong>Clean code</strong><small>Systems made maintainable</small></li>
+          <li><span>04</span><strong>Great UX</strong><small>Details that remove friction</small></li>
+        </ul>
+      </section>
 
-      <!-- Footer accent line -->
-      <div class="w-full h-1 bg-gradient-to-r from-transparent via-[var(--color-accent)] to-transparent animate-fade-in delay-6"></div>
-    </div>
-  </main>
+      <section class="contact-grid reveal reveal-delay-3" aria-labelledby="contact-title">
+        <div>
+          <p class="section-kicker">External links / 003</p>
+          <h2 id="contact-title">Connect</h2>
+        </div>
+        <div class="social-links">
+          <a href="https://github.com/akshitkrnagpal" target="_blank" rel="noopener noreferrer">
+            <Github class="social-icon" fill="currentColor" aria-hidden="true" />
+            <span><strong>GitHub</strong><small>@akshitkrnagpal</small></span>
+            <i aria-hidden="true">↗</i>
+            <span class="sr-only"> (opens in a new tab)</span>
+          </a>
+          <a href="https://linkedin.com/in/akshitkrnagpal" target="_blank" rel="noopener noreferrer">
+            <Linkedin class="social-icon" fill="currentColor" aria-hidden="true" />
+            <span><strong>LinkedIn</strong><small>/in/akshitkrnagpal</small></span>
+            <i aria-hidden="true">↗</i>
+            <span class="sr-only"> (opens in a new tab)</span>
+          </a>
+          <a href="https://x.com/akshit_io" target="_blank" rel="noopener noreferrer">
+            <X class="social-icon" fill="currentColor" aria-hidden="true" />
+            <span><strong>X</strong><small>@akshit_io</small></span>
+            <i aria-hidden="true">↗</i>
+            <span class="sr-only"> (opens in a new tab)</span>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>akshit.io <strong>— software engineer</strong></span>
+      <span>EOF / INDEX</span>
+    </footer>
+  </div>
 </Layout>
 
 <style>
-  @keyframes float {
-    0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(-20px, 20px); }
+  .home-main {
+    padding: clamp(1rem, 3vw, 2.5rem);
   }
 
-  @keyframes float-delayed {
-    0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(15px, -15px); }
+  .home-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.45fr) minmax(20rem, 0.72fr);
+    min-height: min(45rem, calc(100dvh - 13rem));
+    border: 1px solid var(--line);
   }
 
-  .animate-float {
-    animation: float 12s ease-in-out infinite;
+  .intro-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(2rem, 6vw, 5.75rem);
+    background:
+      linear-gradient(90deg, transparent 49.8%, rgba(149, 163, 165, 0.05) 50%, transparent 50.2%),
+      linear-gradient(transparent 49.8%, rgba(149, 163, 165, 0.05) 50%, transparent 50.2%);
   }
 
-  .animate-float-delayed {
-    animation: float-delayed 15s ease-in-out infinite;
+  h1 {
+    max-width: 11ch;
+    margin: 1.3rem 0 1.5rem;
+    font-family: var(--font-mono);
+    font-size: clamp(3.1rem, 7vw, 6.9rem);
+    font-weight: 700;
+    letter-spacing: -0.075em;
+    line-height: 0.88;
+  }
+
+  h1 span {
+    display: block;
+    color: var(--muted);
+    font-size: 0.45em;
+    font-weight: 500;
+    letter-spacing: -0.045em;
+    line-height: 1.5;
+  }
+
+  .role-line {
+    margin: 0 0 1.4rem;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: clamp(0.76rem, 1.4vw, 0.95rem);
+  }
+
+  .role-line span {
+    color: var(--dim);
+  }
+
+  .intro-copy {
+    max-width: 40rem;
+    margin: 0;
+    color: var(--muted);
+    font-size: clamp(1rem, 1.6vw, 1.2rem);
+    line-height: 1.75;
+  }
+
+  .intro-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2.2rem;
+  }
+
+  .identity-panel {
+    margin: -1px -1px -1px 0;
+  }
+
+  .portrait-wrap {
+    position: relative;
+    padding: clamp(1.2rem, 3vw, 2rem);
+  }
+
+  .portrait-rulers {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.55rem;
+    color: var(--dim);
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+  }
+
+  .portrait-frame {
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border: 1px solid var(--line-strong);
+    background: var(--surface-raised);
+  }
+
+  .portrait-frame::after {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 55%, rgba(9, 13, 15, 0.45));
+    content: "";
+  }
+
+  .portrait-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(0.75) contrast(1.08);
+  }
+
+  .portrait-corner {
+    position: absolute;
+    z-index: 1;
+    width: 1.1rem;
+    height: 1.1rem;
+    border-color: var(--accent);
+  }
+
+  .corner-a {
+    top: 0.55rem;
+    left: 0.55rem;
+    border-top: 1px solid;
+    border-left: 1px solid;
+  }
+
+  .corner-b {
+    right: 0.55rem;
+    bottom: 0.55rem;
+    border-right: 1px solid;
+    border-bottom: 1px solid;
+  }
+
+  .identity-data {
+    margin: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .identity-data div {
+    display: grid;
+    grid-template-columns: 4.2rem 1fr;
+    border-bottom: 1px solid var(--line);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+  }
+
+  .identity-data div:last-child {
+    border-bottom: 0;
+  }
+
+  .identity-data dt,
+  .identity-data dd {
+    margin: 0;
+    padding: 0.75rem 0.85rem;
+  }
+
+  .identity-data dt {
+    border-right: 1px solid var(--line);
+    color: var(--dim);
+  }
+
+  .identity-data dd {
+    color: var(--muted);
+  }
+
+  .signal-grid,
+  .contact-grid {
+    display: grid;
+    grid-template-columns: minmax(13rem, 0.38fr) minmax(0, 1fr);
+    border: 1px solid var(--line);
+    border-top: 0;
+  }
+
+  .signal-intro,
+  .contact-grid > div:first-child {
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  h2 {
+    margin: 0.65rem 0 0;
+    font-family: var(--font-mono);
+    font-size: clamp(1.35rem, 2vw, 2rem);
+    letter-spacing: -0.04em;
+  }
+
+  .signal-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin: 0;
+    padding: 0;
+    border-left: 1px solid var(--line);
+    list-style: none;
+  }
+
+  .signal-list li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.25rem 0.8rem;
+    min-height: 8rem;
+    align-content: center;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 1.25rem;
+  }
+
+  .signal-list li:nth-child(2n) {
+    border-right: 0;
+  }
+
+  .signal-list li:nth-last-child(-n + 2) {
+    border-bottom: 0;
+  }
+
+  .signal-list span {
+    grid-row: span 2;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+  }
+
+  .signal-list strong {
+    font-family: var(--font-mono);
+    font-size: 0.83rem;
+    font-weight: 650;
+    text-transform: uppercase;
+  }
+
+  .signal-list small {
+    color: var(--dim);
+    font-size: 0.78rem;
+  }
+
+  .social-links {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-left: 1px solid var(--line);
+  }
+
+  .social-links a {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 0.8rem;
+    min-height: 8.5rem;
+    border-right: 1px solid var(--line);
+    padding: 1.25rem;
+    transition: background-color 160ms ease, color 160ms ease;
+  }
+
+  .social-links a:last-child {
+    border-right: 0;
+  }
+
+  .social-links a:hover {
+    background: rgba(125, 249, 194, 0.06);
+    color: var(--accent);
+  }
+
+  .social-links :global(.social-icon) {
+    width: 1.15rem;
+    height: 1.15rem;
+  }
+
+  .social-links strong,
+  .social-links small {
+    display: block;
+  }
+
+  .social-links strong {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+  }
+
+  .social-links small {
+    margin-top: 0.25rem;
+    overflow: hidden;
+    color: var(--dim);
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .social-links i {
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-style: normal;
+  }
+
+  @media (max-width: 900px) {
+    .home-grid {
+      grid-template-columns: minmax(0, 1fr) minmax(17rem, 0.65fr);
+      min-height: auto;
+    }
+
+    .intro-block {
+      padding: clamp(2rem, 5vw, 4rem);
+    }
+
+    .social-links {
+      grid-template-columns: 1fr;
+    }
+
+    .social-links a {
+      min-height: 5.5rem;
+      border-right: 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .social-links a:last-child {
+      border-bottom: 0;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .home-main {
+      padding: 1rem;
+    }
+
+    .home-grid,
+    .signal-grid,
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .intro-block {
+      min-height: 31rem;
+      padding: 2rem 1.35rem;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 16vw, 5.2rem);
+    }
+
+    .identity-panel {
+      margin: -1px;
+    }
+
+    .portrait-wrap {
+      display: grid;
+      grid-template-columns: minmax(0, 18rem);
+      justify-content: center;
+    }
+
+    .portrait-rulers {
+      grid-column: 1;
+    }
+
+    .signal-list,
+    .social-links {
+      border-top: 1px solid var(--line);
+      border-left: 0;
+    }
+
+    .signal-list li {
+      min-height: 7rem;
+    }
+  }
+
+  @media (max-width: 430px) {
+    .signal-list {
+      grid-template-columns: 1fr;
+    }
+
+    .signal-list li,
+    .signal-list li:nth-child(2n),
+    .signal-list li:nth-last-child(-n + 2) {
+      border-right: 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .signal-list li:last-child {
+      border-bottom: 0;
+    }
+
+    .intro-actions .action-link {
+      width: 100%;
+    }
   }
 </style>
