@@ -1,132 +1,343 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Linkedin from '../components/simple-icons/linkedin.astro'
-import Github from '../components/simple-icons/github.astro'
-import X from '../components/simple-icons/x.astro'
+import Layout from "../layouts/Layout.astro";
+import Linkedin from "../components/simple-icons/linkedin.astro";
+import Github from "../components/simple-icons/github.astro";
+import X from "../components/simple-icons/x.astro";
 ---
 
 <Layout>
-  <main class="min-h-dvh relative overflow-hidden">
-    <!-- Animated gradient background -->
-    <div class="absolute inset-0 pointer-events-none">
-      <div class="absolute top-[-20%] right-[-10%] w-[60vw] h-[60vw] max-w-[800px] max-h-[800px] rounded-full opacity-[0.07] blur-3xl animate-float" style="background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);"></div>
-      <div class="absolute bottom-[-10%] left-[-5%] w-[40vw] h-[40vw] max-w-[500px] max-h-[500px] rounded-full opacity-[0.04] blur-3xl animate-float-delayed" style="background: radial-gradient(circle, #4a90d9 0%, transparent 70%);"></div>
-    </div>
+  <a class="skip-link" href="#main-content">Skip to content</a>
 
-    <!-- Content -->
-    <div class="relative z-10 min-h-dvh flex flex-col">
-      <!-- Navigation -->
-      <nav class="w-full px-6 md:px-12 lg:px-20 py-6 flex justify-between items-center animate-fade-in">
-        <span class="text-sm tracking-widest uppercase font-medium" style="color: var(--color-muted);">Portfolio</span>
-        <a
-          href="/projects"
-          class="text-sm tracking-wide font-medium px-4 py-2 border border-[var(--color-ink)]/10 transition-all duration-300 hover:border-[var(--color-ink)]/30 hover:bg-[var(--color-ink)]/[0.03]"
-          style="color: var(--color-ink);"
-        >
-          Projects
-        </a>
+  <div class="page-shell">
+    <header class="site-header reveal">
+      <a class="site-brand" href="/" aria-label="Akshit Kr Nagpal, home">
+        <span class="site-brand-mark" aria-hidden="true">AKN</span>
+        <span class="site-brand-label">Independent software engineer</span>
+      </a>
+      <p class="masthead-note">Portfolio / Selected practice</p>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a class="nav-link" href="/" aria-current="page">Index</a>
+        <a class="nav-link" href="/projects">Projects</a>
       </nav>
+    </header>
 
-      <!-- Hero -->
-      <div class="flex-1 flex items-center justify-center px-6 md:px-12 lg:px-20 py-12">
-        <div class="w-full max-w-6xl">
+    <main id="main-content">
+      <section class="hero" aria-labelledby="page-title">
+        <p class="eyebrow reveal" style="--delay: 100ms">Software engineer · Indie hacker</p>
+        <h1 id="page-title" class="display-title reveal" style="--delay: 160ms" aria-label="Akshit Kr Nagpal">
+          Akshit Kr<br /><em>Nagpal</em>
+        </h1>
 
-          <!-- Top section: Photo + Name -->
-          <div class="flex flex-col items-center text-center mb-16">
-            <!-- Photo with ring -->
-            <div class="relative mb-8 animate-scale-in delay-1">
-              <div class="absolute -inset-2 rounded-full border border-[var(--color-accent)]/20"></div>
-              <div class="absolute -inset-5 rounded-full border border-[var(--color-ink)]/5"></div>
-              <div class="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden ring-4 ring-[var(--color-paper)] shadow-xl">
-                <img
-                  src="https://avatars.githubusercontent.com/u/15872348"
-                  alt="Akshit Kr Nagpal"
-                  class="w-full h-full object-cover grayscale-[30%] hover:grayscale-0 transition-all duration-700"
-                />
-              </div>
-              <!-- Status dot -->
-              <div class="absolute bottom-2 right-2 w-4 h-4 rounded-full bg-emerald-500 ring-3 ring-[var(--color-paper)]"></div>
-            </div>
-
-            <!-- Name -->
-            <h1 class="text-5xl md:text-6xl lg:text-7xl mb-3 leading-[1.05] animate-fade-up delay-2" style="font-family: var(--font-display);">
-              Akshit Kr Nagpal
-            </h1>
-
-            <!-- Title with accent -->
-            <div class="flex items-center gap-3 mb-6 animate-fade-up delay-3">
-              <div class="w-8 h-px bg-[var(--color-accent)]"></div>
-              <p class="text-sm md:text-base tracking-[0.2em] uppercase font-medium" style="color: var(--color-accent);">
-                Software Engineer
-              </p>
-              <div class="w-8 h-px bg-[var(--color-accent)]"></div>
-            </div>
-
-            <!-- Bio -->
-            <p class="text-lg md:text-xl leading-relaxed max-w-lg mx-auto mb-10 animate-fade-up delay-4" style="color: var(--color-muted);">
+        <div class="hero-grid">
+          <div class="hero-statement reveal" style="--delay: 240ms">
+            <p class="statement-lead">Building useful software with a sharp eye for systems, details, and the people using them.</p>
+            <p class="statement-body">
               Indie hacker and full-stack engineer. I build developer tools, ship side projects, and care deeply about clean code and great UX.
             </p>
-
-            <!-- Social Links -->
-            <div class="flex gap-5 animate-fade-up delay-5">
-              <a
-                href="https://github.com/akshitkrnagpal"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub"
-                class="transition-opacity duration-300 hover:opacity-60"
-                style="color: var(--color-muted);"
-              >
-                <Github class="w-5 h-5" />
-              </a>
-              <a
-                href="https://linkedin.com/in/akshitkrnagpal"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                class="transition-opacity duration-300 hover:opacity-60"
-                style="color: var(--color-muted);"
-              >
-                <Linkedin class="w-5 h-5" />
-              </a>
-              <a
-                href="https://x.com/akshit_io"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="X (Twitter)"
-                class="transition-opacity duration-300 hover:opacity-60"
-                style="color: var(--color-muted);"
-              >
-                <X class="w-5 h-5" />
-              </a>
-            </div>
+            <a class="rule-link" href="/projects">
+              Explore selected projects
+              <svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M5 19 19 5m0 0H8m11 0v11"></path>
+              </svg>
+            </a>
           </div>
 
-        </div>
-      </div>
+          <dl class="practice-list reveal" style="--delay: 300ms">
+            <div>
+              <dt class="meta-label">Role</dt>
+              <dd>Software Engineer</dd>
+            </div>
+            <div>
+              <dt class="meta-label">Practice</dt>
+              <dd>Full-stack development</dd>
+            </div>
+            <div>
+              <dt class="meta-label">Focus</dt>
+              <dd>Developer tools, open source, AI</dd>
+            </div>
+          </dl>
 
-      <!-- Footer accent line -->
-      <div class="w-full h-1 bg-gradient-to-r from-transparent via-[var(--color-accent)] to-transparent animate-fade-in delay-6"></div>
-    </div>
-  </main>
+          <figure class="portrait reveal" style="--delay: 360ms">
+            <div class="portrait-frame">
+              <img
+                src="https://avatars.githubusercontent.com/u/15872348"
+                alt="Portrait of Akshit Kr Nagpal"
+                width="460"
+                height="460"
+                loading="eager"
+                fetchpriority="high"
+              />
+            </div>
+            <figcaption class="figure-caption">Akshit Kr Nagpal / Software Engineer</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="project-prompt reveal" style="--delay: 100ms" aria-labelledby="project-prompt-title">
+        <div>
+          <p class="section-label">Selected work</p>
+          <h2 id="project-prompt-title" class="section-heading">Products, tools, and open-source experiments.</h2>
+        </div>
+        <div class="project-prompt-copy">
+          <p>Explore the projects I maintain, from production products to focused utilities for developers.</p>
+          <a class="rule-link" href="/projects">
+            View project index
+            <svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M5 12h14m-5-5 5 5-5 5"></path>
+            </svg>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p class="footer-copy">Akshit Kr Nagpal / Software Engineer</p>
+      <nav class="footer-links" aria-label="Social links">
+        <a href="https://github.com/akshitkrnagpal" target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in a new tab)">
+          <Github size={15} aria-hidden="true" />
+          <span>GitHub</span>
+        </a>
+        <a href="https://linkedin.com/in/akshitkrnagpal" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (opens in a new tab)">
+          <Linkedin size={15} aria-hidden="true" />
+          <span>LinkedIn</span>
+        </a>
+        <a href="https://x.com/akshit_io" target="_blank" rel="noopener noreferrer" aria-label="X (opens in a new tab)">
+          <X size={14} aria-hidden="true" />
+          <span>X</span>
+        </a>
+      </nav>
+    </footer>
+  </div>
 </Layout>
 
 <style>
-  @keyframes float {
-    0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(-20px, 20px); }
+  .hero {
+    padding-top: clamp(3.5rem, 8vw, 8rem);
   }
 
-  @keyframes float-delayed {
-    0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(15px, -15px); }
+  .hero .eyebrow {
+    margin: 0 0 clamp(2.25rem, 5vw, 4.5rem);
   }
 
-  .animate-float {
-    animation: float 12s ease-in-out infinite;
+  .hero-grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 1rem;
+    align-items: start;
+    margin-top: clamp(3rem, 7vw, 7rem);
+    border-top: 1px solid var(--line-strong);
+    padding-top: 1.15rem;
   }
 
-  .animate-float-delayed {
-    animation: float-delayed 15s ease-in-out infinite;
+  .hero-statement {
+    grid-column: 1 / span 5;
+    max-width: 35rem;
+  }
+
+  .statement-lead {
+    max-width: 30rem;
+    margin: 0 0 1.5rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.9rem, 3.4vw, 3.3rem);
+    letter-spacing: -0.025em;
+    line-height: 1.02;
+  }
+
+  .statement-body {
+    max-width: 28rem;
+    margin: 0 0 2.25rem;
+    color: var(--muted);
+    font-size: clamp(1rem, 1.35vw, 1.17rem);
+    line-height: 1.7;
+  }
+
+  .practice-list {
+    grid-column: 7 / span 2;
+    margin: 0;
+  }
+
+  .practice-list div {
+    border-top: 1px solid var(--line);
+    padding: 0.75rem 0 1.6rem;
+  }
+
+  .practice-list div:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
+
+  .practice-list dt,
+  .practice-list dd {
+    margin: 0;
+  }
+
+  .practice-list dd {
+    margin-top: 0.38rem;
+    font-size: 0.88rem;
+    line-height: 1.45;
+  }
+
+  .portrait {
+    grid-column: 9 / -1;
+    margin: 0;
+  }
+
+  .portrait-frame {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+    background: var(--paper-deep);
+  }
+
+  .portrait-frame::after {
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(17, 19, 16, 0.2);
+    content: "";
+    pointer-events: none;
+  }
+
+  .portrait-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%) contrast(1.05);
+    transform: scale(1.015);
+    transition: filter 500ms ease, transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .portrait-frame:hover img {
+    filter: grayscale(15%) contrast(1.02);
+    transform: scale(1.045);
+  }
+
+  .figure-caption {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.7rem;
+  }
+
+  .project-prompt {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 1rem;
+    align-items: end;
+    margin-top: clamp(7rem, 14vw, 14rem);
+    border-top: 1px solid var(--line-strong);
+    padding-top: 1rem;
+  }
+
+  .project-prompt > div:first-child {
+    grid-column: span 8;
+  }
+
+  .project-prompt .section-label {
+    margin: 0 0 clamp(2.5rem, 7vw, 7rem);
+  }
+
+  .project-prompt-copy {
+    grid-column: 10 / -1;
+    padding-bottom: 0.3rem;
+  }
+
+  .project-prompt-copy p {
+    margin: 0 0 2rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .footer-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  @media (max-width: 62rem) {
+    .hero-statement {
+      grid-column: 1 / span 6;
+    }
+
+    .practice-list {
+      grid-column: 7 / -1;
+    }
+
+    .portrait {
+      grid-column: 7 / -1;
+      margin-top: 3rem;
+    }
+
+    .project-prompt > div:first-child {
+      grid-column: span 8;
+    }
+
+    .project-prompt-copy {
+      grid-column: 9 / -1;
+    }
+  }
+
+  @media (max-width: 48rem) {
+    .hero {
+      padding-top: 3.25rem;
+    }
+
+    .hero-grid {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      margin-top: 3.5rem;
+    }
+
+    .hero-statement,
+    .practice-list,
+    .portrait {
+      grid-column: 1 / -1;
+    }
+
+    .practice-list {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.75rem;
+      margin-top: 3rem;
+      border-top: 1px solid var(--line);
+      padding-top: 0.8rem;
+    }
+
+    .practice-list div,
+    .practice-list div:first-child {
+      border: 0;
+      padding: 0;
+    }
+
+    .portrait {
+      margin-top: 3.5rem;
+    }
+
+    .portrait-frame {
+      aspect-ratio: 5 / 4;
+    }
+
+    .project-prompt {
+      grid-template-columns: 1fr;
+      align-items: start;
+      margin-top: 7rem;
+    }
+
+    .project-prompt > div:first-child,
+    .project-prompt-copy {
+      grid-column: 1;
+    }
+
+    .project-prompt .section-label {
+      margin-bottom: 3rem;
+    }
+
+    .project-prompt-copy {
+      margin-top: 2.5rem;
+    }
+  }
+
+  @media (max-width: 30rem) {
+    .practice-list {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
   }
 </style>
