@@ -1,132 +1,534 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Linkedin from '../components/simple-icons/linkedin.astro'
-import Github from '../components/simple-icons/github.astro'
-import X from '../components/simple-icons/x.astro'
+import Layout from "../layouts/Layout.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import Linkedin from "../components/simple-icons/linkedin.astro";
+import Github from "../components/simple-icons/github.astro";
+import X from "../components/simple-icons/x.astro";
+
+const selectedProjects = [
+  { index: "01", name: "TypesenseKit", type: "CLI / MCP" },
+  { index: "02", name: "PromptLens", type: "AI reliability" },
+  { index: "03", name: "OfferKit", type: "Commerce infra" },
+];
 ---
 
 <Layout>
-  <main class="min-h-dvh relative overflow-hidden">
-    <!-- Animated gradient background -->
-    <div class="absolute inset-0 pointer-events-none">
-      <div class="absolute top-[-20%] right-[-10%] w-[60vw] h-[60vw] max-w-[800px] max-h-[800px] rounded-full opacity-[0.07] blur-3xl animate-float" style="background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);"></div>
-      <div class="absolute bottom-[-10%] left-[-5%] w-[40vw] h-[40vw] max-w-[500px] max-h-[500px] rounded-full opacity-[0.04] blur-3xl animate-float-delayed" style="background: radial-gradient(circle, #4a90d9 0%, transparent 70%);"></div>
-    </div>
+  <div class="home-shell">
+    <SiteHeader current="home" />
 
-    <!-- Content -->
-    <div class="relative z-10 min-h-dvh flex flex-col">
-      <!-- Navigation -->
-      <nav class="w-full px-6 md:px-12 lg:px-20 py-6 flex justify-between items-center animate-fade-in">
-        <span class="text-sm tracking-widest uppercase font-medium" style="color: var(--color-muted);">Portfolio</span>
-        <a
-          href="/projects"
-          class="text-sm tracking-wide font-medium px-4 py-2 border border-[var(--color-ink)]/10 transition-all duration-300 hover:border-[var(--color-ink)]/30 hover:bg-[var(--color-ink)]/[0.03]"
-          style="color: var(--color-ink);"
-        >
-          Projects
-        </a>
-      </nav>
-
-      <!-- Hero -->
-      <div class="flex-1 flex items-center justify-center px-6 md:px-12 lg:px-20 py-12">
-        <div class="w-full max-w-6xl">
-
-          <!-- Top section: Photo + Name -->
-          <div class="flex flex-col items-center text-center mb-16">
-            <!-- Photo with ring -->
-            <div class="relative mb-8 animate-scale-in delay-1">
-              <div class="absolute -inset-2 rounded-full border border-[var(--color-accent)]/20"></div>
-              <div class="absolute -inset-5 rounded-full border border-[var(--color-ink)]/5"></div>
-              <div class="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden ring-4 ring-[var(--color-paper)] shadow-xl">
-                <img
-                  src="https://avatars.githubusercontent.com/u/15872348"
-                  alt="Akshit Kr Nagpal"
-                  class="w-full h-full object-cover grayscale-[30%] hover:grayscale-0 transition-all duration-700"
-                />
-              </div>
-              <!-- Status dot -->
-              <div class="absolute bottom-2 right-2 w-4 h-4 rounded-full bg-emerald-500 ring-3 ring-[var(--color-paper)]"></div>
+    <main class="frame home-main">
+      <aside class="home-rail enter" aria-label="Profile summary">
+        <div>
+          <p class="eyebrow">Profile</p>
+          <dl class="profile-spec">
+            <div>
+              <dt>Role</dt>
+              <dd>Software Engineer</dd>
             </div>
-
-            <!-- Name -->
-            <h1 class="text-5xl md:text-6xl lg:text-7xl mb-3 leading-[1.05] animate-fade-up delay-2" style="font-family: var(--font-display);">
-              Akshit Kr Nagpal
-            </h1>
-
-            <!-- Title with accent -->
-            <div class="flex items-center gap-3 mb-6 animate-fade-up delay-3">
-              <div class="w-8 h-px bg-[var(--color-accent)]"></div>
-              <p class="text-sm md:text-base tracking-[0.2em] uppercase font-medium" style="color: var(--color-accent);">
-                Software Engineer
-              </p>
-              <div class="w-8 h-px bg-[var(--color-accent)]"></div>
+            <div>
+              <dt>Focus</dt>
+              <dd>Developer tools</dd>
             </div>
-
-            <!-- Bio -->
-            <p class="text-lg md:text-xl leading-relaxed max-w-lg mx-auto mb-10 animate-fade-up delay-4" style="color: var(--color-muted);">
-              Indie hacker and full-stack engineer. I build developer tools, ship side projects, and care deeply about clean code and great UX.
-            </p>
-
-            <!-- Social Links -->
-            <div class="flex gap-5 animate-fade-up delay-5">
-              <a
-                href="https://github.com/akshitkrnagpal"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub"
-                class="transition-opacity duration-300 hover:opacity-60"
-                style="color: var(--color-muted);"
-              >
-                <Github class="w-5 h-5" />
-              </a>
-              <a
-                href="https://linkedin.com/in/akshitkrnagpal"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                class="transition-opacity duration-300 hover:opacity-60"
-                style="color: var(--color-muted);"
-              >
-                <Linkedin class="w-5 h-5" />
-              </a>
-              <a
-                href="https://x.com/akshit_io"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="X (Twitter)"
-                class="transition-opacity duration-300 hover:opacity-60"
-                style="color: var(--color-muted);"
-              >
-                <X class="w-5 h-5" />
-              </a>
+            <div>
+              <dt>Mode</dt>
+              <dd><span class="status-dot"></span> Building</dd>
             </div>
-          </div>
-
+          </dl>
         </div>
-      </div>
 
-      <!-- Footer accent line -->
-      <div class="w-full h-1 bg-gradient-to-r from-transparent via-[var(--color-accent)] to-transparent animate-fade-in delay-6"></div>
-    </div>
-  </main>
+        <div class="rail-index" aria-hidden="true">
+          <span>01</span>
+          <span class="rail-index__line"></span>
+          <span>24</span>
+        </div>
+      </aside>
+
+      <section class="hero enter enter--1">
+        <div class="hero__topline">
+          <p class="eyebrow">Independent engineer</p>
+          <span class="mono hero__edition">PORTFOLIO / 2026</span>
+        </div>
+
+        <h1>
+          Akshit Kr
+          <span>Nagpal<span class="hero__cursor" aria-hidden="true"></span></span>
+        </h1>
+
+        <div class="hero__brief">
+          <p>Indie hacker and full-stack engineer. I build developer tools, ship side projects, and care deeply about clean code and great UX.</p>
+          <a class="primary-link" href="/projects">
+            Inspect projects
+            <span class="link-arrow" aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </section>
+
+      <aside class="portrait-panel enter enter--2">
+        <div class="portrait-panel__meta mono">
+          <span>IDENT / 001</span>
+          <span>AKN</span>
+        </div>
+        <div class="portrait-panel__image">
+          <img
+            src="https://avatars.githubusercontent.com/u/15872348"
+            alt="Akshit Kr Nagpal"
+            width="460"
+            height="460"
+          />
+          <span class="portrait-panel__corner portrait-panel__corner--tl"></span>
+          <span class="portrait-panel__corner portrait-panel__corner--br"></span>
+        </div>
+        <div class="portrait-panel__footer mono">
+          <span class="status-dot"></span>
+          <span>SOFTWARE ENGINEER</span>
+        </div>
+      </aside>
+
+      <section class="output enter enter--3" aria-labelledby="output-heading">
+        <div class="output__heading">
+          <p class="eyebrow" id="output-heading">Selected output</p>
+          <a href="/projects" class="output__all">VIEW ALL <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="output__list">
+          {selectedProjects.map((project) => (
+            <a href="/projects" class="output-row">
+              <span class="output-row__index mono">{project.index}</span>
+              <span class="output-row__name">{project.name}</span>
+              <span class="output-row__type mono">{project.type}</span>
+              <span class="output-row__arrow" aria-hidden="true">↗</span>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section class="connect enter enter--3" aria-labelledby="connect-heading">
+        <p class="eyebrow" id="connect-heading">Connect</p>
+        <div class="connect__links">
+          <a href="https://github.com/akshitkrnagpal" target="_blank" rel="noopener noreferrer">
+            <Github fill="currentColor" aria-hidden="true" />
+            <span>GitHub</span>
+            <span class="link-arrow" aria-hidden="true">↗</span>
+          </a>
+          <a href="https://linkedin.com/in/akshitkrnagpal" target="_blank" rel="noopener noreferrer">
+            <Linkedin fill="currentColor" aria-hidden="true" />
+            <span>LinkedIn</span>
+            <span class="link-arrow" aria-hidden="true">↗</span>
+          </a>
+          <a href="https://x.com/akshit_io" target="_blank" rel="noopener noreferrer">
+            <X fill="currentColor" aria-hidden="true" />
+            <span>X / Twitter</span>
+            <span class="link-arrow" aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <SiteFooter />
+  </div>
 </Layout>
 
 <style>
-  @keyframes float {
-    0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(-20px, 20px); }
+  .home-shell {
+    min-height: 100dvh;
   }
 
-  @keyframes float-delayed {
-    0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(15px, -15px); }
+  .home-main {
+    display: grid;
+    grid-template-columns: 176px minmax(0, 1fr) 340px;
+    grid-template-rows: auto auto;
+    min-height: calc(100dvh - 131px);
   }
 
-  .animate-float {
-    animation: float 12s ease-in-out infinite;
+  .home-rail {
+    border-left: 1px solid var(--line);
+    border-right: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    grid-row: 1 / 3;
+    justify-content: space-between;
+    padding: 4rem 1.2rem 1.5rem;
   }
 
-  .animate-float-delayed {
-    animation: float-delayed 15s ease-in-out infinite;
+  .profile-spec {
+    display: grid;
+    gap: 1.4rem;
+    margin-top: 3rem;
+  }
+
+  .profile-spec dt {
+    color: var(--quiet);
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.11em;
+    margin-bottom: 0.32rem;
+    text-transform: uppercase;
+  }
+
+  .profile-spec dd {
+    align-items: center;
+    display: flex;
+    gap: 0.55rem;
+    font-size: 0.78rem;
+    line-height: 1.3;
+  }
+
+  .rail-index {
+    align-items: center;
+    color: var(--quiet);
+    display: flex;
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    gap: 0.75rem;
+    writing-mode: vertical-rl;
+  }
+
+  .rail-index__line {
+    background: var(--line-strong);
+    height: 72px;
+    width: 1px;
+  }
+
+  .hero {
+    border-bottom: 1px solid var(--line);
+    padding: clamp(3.5rem, 8vw, 8rem) clamp(2rem, 5vw, 5.5rem) 4rem;
+  }
+
+  .hero__topline {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: clamp(4rem, 9vw, 8.5rem);
+  }
+
+  .hero__edition {
+    color: var(--quiet);
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+  }
+
+  .hero h1 {
+    font-size: clamp(3.8rem, 7.3vw, 7.25rem);
+    font-weight: 500;
+    letter-spacing: -0.065em;
+    line-height: 0.84;
+    max-width: 860px;
+  }
+
+  .hero h1 > span {
+    align-items: baseline;
+    display: flex;
+    color: var(--ink);
+    margin-left: clamp(1.5rem, 8vw, 8rem);
+  }
+
+  .hero__cursor {
+    background: var(--accent);
+    display: inline-block;
+    height: 0.13em;
+    margin-left: 0.1em;
+    width: 0.66em;
+  }
+
+  .hero__brief {
+    align-items: flex-end;
+    display: flex;
+    gap: 3rem;
+    justify-content: space-between;
+    margin-left: clamp(1.5rem, 8vw, 8rem);
+    margin-top: clamp(3rem, 6vw, 6rem);
+  }
+
+  .hero__brief p {
+    color: var(--muted);
+    font-size: clamp(1rem, 1.25vw, 1.15rem);
+    line-height: 1.65;
+    max-width: 540px;
+  }
+
+  .primary-link {
+    align-items: center;
+    background: var(--accent);
+    color: #121212;
+    display: inline-flex;
+    flex: none;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    gap: 1.5rem;
+    letter-spacing: 0.06em;
+    padding: 1rem 1.1rem;
+    text-transform: uppercase;
+    transition: background-color 160ms ease, transform 160ms ease;
+  }
+
+  .primary-link:hover {
+    background: #ff8150;
+    transform: translateY(-2px);
+  }
+
+  .portrait-panel {
+    align-self: stretch;
+    background: var(--surface);
+    border-bottom: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: 1.2rem;
+  }
+
+  .portrait-panel__meta,
+  .portrait-panel__footer {
+    align-items: center;
+    color: var(--quiet);
+    display: flex;
+    font-size: 0.57rem;
+    justify-content: space-between;
+    letter-spacing: 0.1em;
+  }
+
+  .portrait-panel__meta {
+    margin-bottom: 1rem;
+  }
+
+  .portrait-panel__image {
+    background: #202425;
+    margin-block: auto;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .portrait-panel__image::after {
+    background: linear-gradient(180deg, transparent 70%, rgba(12, 14, 15, 0.32));
+    content: "";
+    inset: 0;
+    position: absolute;
+  }
+
+  .portrait-panel__image img {
+    filter: grayscale(1) contrast(1.06);
+    height: 100%;
+    min-height: 300px;
+    object-fit: cover;
+    transition: filter 300ms ease;
+    width: 100%;
+  }
+
+  .portrait-panel:hover img {
+    filter: grayscale(0.25) contrast(1.04);
+  }
+
+  .portrait-panel__corner {
+    border-color: var(--accent);
+    height: 18px;
+    position: absolute;
+    width: 18px;
+    z-index: 1;
+  }
+
+  .portrait-panel__corner--tl {
+    border-left: 1px solid;
+    border-top: 1px solid;
+    left: 10px;
+    top: 10px;
+  }
+
+  .portrait-panel__corner--br {
+    border-bottom: 1px solid;
+    border-right: 1px solid;
+    bottom: 10px;
+    right: 10px;
+  }
+
+  .portrait-panel__footer {
+    justify-content: flex-start;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .output {
+    border-bottom: 1px solid var(--line);
+    padding: 2.75rem clamp(2rem, 5vw, 5.5rem) 3.5rem;
+  }
+
+  .output__heading {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+  }
+
+  .output__all {
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+  }
+
+  .output__list {
+    border-top: 1px solid var(--line);
+  }
+
+  .output-row {
+    align-items: center;
+    border-bottom: 1px solid var(--line);
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 32px minmax(0, 1fr) 132px 16px;
+    min-height: 66px;
+    transition: background-color 160ms ease, padding 160ms ease;
+  }
+
+  .output-row:hover {
+    background: var(--surface);
+    padding-inline: 0.75rem;
+  }
+
+  .output-row__index,
+  .output-row__type {
+    color: var(--quiet);
+    font-size: 0.62rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .output-row__name {
+    font-size: 1.05rem;
+    font-weight: 500;
+  }
+
+  .output-row__arrow {
+    color: var(--accent);
+  }
+
+  .connect {
+    border-bottom: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+    padding: 2.75rem 1.2rem 3.5rem;
+  }
+
+  .connect__links {
+    border-top: 1px solid var(--line);
+    margin-top: 1.5rem;
+  }
+
+  .connect__links a {
+    align-items: center;
+    border-bottom: 1px solid var(--line);
+    color: var(--muted);
+    display: grid;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    gap: 0.8rem;
+    grid-template-columns: 16px 1fr auto;
+    min-height: 54px;
+    transition: color 160ms ease, padding 160ms ease;
+  }
+
+  .connect__links a:hover {
+    color: var(--ink);
+    padding-left: 0.45rem;
+  }
+
+  .connect__links svg {
+    height: 15px;
+    width: 15px;
+  }
+
+  .connect__links .link-arrow {
+    color: var(--accent);
+  }
+
+  @media (max-width: 1080px) {
+    .home-main {
+      grid-template-columns: 140px minmax(0, 1fr);
+    }
+
+    .home-rail {
+      grid-row: 1 / 4;
+    }
+
+    .portrait-panel {
+      display: none;
+    }
+
+    .connect {
+      border-left: 0;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .home-main {
+      display: block;
+    }
+
+    .home-rail {
+      border-left: 1px solid var(--line);
+      display: block;
+      padding: 1.5rem 1rem;
+    }
+
+    .home-rail .eyebrow,
+    .rail-index {
+      display: none;
+    }
+
+    .profile-spec {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(3, 1fr);
+      margin: 0;
+    }
+
+    .hero {
+      padding: 3.5rem 1rem 3rem;
+    }
+
+    .hero__topline {
+      margin-bottom: 4.5rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(3.2rem, 16vw, 5rem);
+    }
+
+    .hero h1 > span {
+      margin-left: 0;
+    }
+
+    .hero__brief {
+      align-items: stretch;
+      flex-direction: column;
+      margin-left: 0;
+      margin-top: 3.5rem;
+    }
+
+    .primary-link {
+      align-self: flex-start;
+    }
+
+    .output,
+    .connect {
+      padding: 2.5rem 1rem;
+    }
+
+    .output-row {
+      grid-template-columns: 26px minmax(0, 1fr) 16px;
+    }
+
+    .output-row__type {
+      display: none;
+    }
+  }
+
+  @media (max-width: 460px) {
+    .profile-spec dd {
+      font-size: 0.68rem;
+    }
+
+    .hero__edition {
+      display: none;
+    }
   }
 </style>
