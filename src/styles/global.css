@@ -28,7 +28,7 @@ html {
 
 body {
   margin: 0;
-  min-width: 320px;
+  min-width: 0;
   background:
     radial-gradient(circle at 12% 8%, rgb(244 201 93 / 18%), transparent 24rem),
     var(--paper);
