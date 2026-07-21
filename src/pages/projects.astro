@@ -1,5 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteHeader from "../components/SiteHeader.astro";
 
 const githubRepositories = [
   "akshitkrnagpal/typesensekit",
@@ -158,149 +160,112 @@ const smaller = smallerProjects.map((project) => ({
 }));
 ---
 
-<Layout>
-  <main class="min-h-dvh relative overflow-hidden">
-    <div class="absolute inset-0 opacity-[0.015] pointer-events-none" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%270 0 256 256%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cfilter id=%27noise%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.8%27 numOctaves=%274%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23noise)%27/%3E%3C/svg%3E');"></div>
-    <div class="absolute top-1/4 -right-32 w-[50vw] h-[50vw] max-w-[700px] max-h-[700px] rounded-full opacity-[0.02]" style="background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);"></div>
+<Layout
+  title="Projects – Akshit Kr Nagpal"
+  description="Indie products, open-source tools, and smaller experiments by software engineer Akshit Kr Nagpal."
+>
+  <div class="site-shell">
+    <SiteHeader current="projects" />
 
-    <div class="relative z-10 min-h-dvh flex flex-col">
-      <nav class="w-full px-6 md:px-12 lg:px-20 py-6 flex justify-between items-center animate-fade-in">
-        <a href="/" class="text-sm tracking-wide font-medium transition-colors duration-300 hover:opacity-70 flex items-center gap-2" style="color: var(--color-ink);">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-          </svg>
-          Back
-        </a>
-        <span class="text-sm tracking-widest uppercase font-medium" style="color: var(--color-muted);">Projects</span>
-      </nav>
-
-      <div class="flex-1 px-6 md:px-12 lg:px-20 py-12 md:py-20">
-        <div class="max-w-4xl mx-auto">
-          <header class="mb-16 md:mb-24">
-            <p class="text-xs tracking-[0.3em] uppercase mb-4 animate-fade-up" style="color: var(--color-muted);">Shipped</p>
-            <h1 class="text-4xl md:text-5xl lg:text-6xl mb-6 leading-[1.1] animate-fade-up delay-1" style="font-family: var(--font-display);">Projects</h1>
-            <div class="w-16 h-px bg-[var(--color-ink)]/20 mb-6 animate-fade-up delay-2"></div>
-            <p class="text-base md:text-lg leading-relaxed max-w-xl animate-fade-up delay-2" style="color: var(--color-muted);">
-              Indie products, open-source tools, and smaller experiments. The featured few below get real maintenance; the rest are focused single-purpose utilities.
-            </p>
-          </header>
-
-          <div class="mb-6 flex items-center gap-4 animate-fade-up delay-2">
-            <span class="text-[11px] tracking-[0.25em] uppercase font-medium" style="color: var(--color-muted);">Featured</span>
-            <div class="flex-1 h-px bg-[var(--color-ink)]/10"></div>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-16">
-            {featured.map((project, index) => (
-              <article class={`group animate-fade-up delay-${Math.min(index + 3, 8)} border border-[var(--color-ink)]/10 transition-colors duration-500 hover:border-[var(--color-ink)]/25`}>
-                <div class="p-6 md:p-8 flex flex-col h-full">
-                  <div class="flex items-center gap-4 mb-5">
-                    <div class="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 flex items-center justify-center border border-[var(--color-ink)]/10" style={`background: ${project.iconBg || "transparent"};`}>
-                      {project.image ? (
-                        <img src={project.image} alt={project.name} class="w-full h-full object-cover" />
-                      ) : project.icon === "dot" ? (
-                        <svg width="64" height="64" viewBox="0 0 64 64" aria-label={project.name}>
-                          <circle cx="32" cy="32" r="14" fill={project.iconColor} />
-                        </svg>
-                      ) : (
-                        <span class="text-2xl font-semibold tracking-tight" style={`color: ${project.iconColor}; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;`}>{project.iconText}</span>
-                      )}
-                    </div>
-                    <div class="min-w-0">
-                      <div class="flex items-center gap-2">
-                        <h2 class="text-2xl md:text-3xl font-medium" style="font-family: var(--font-display);">{project.name}</h2>
-                        {project.stars ? (
-                          <span class="inline-flex items-center gap-1 text-xs" style="color: var(--color-muted);">
-                            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 16 16"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25z"/></svg>
-                            {project.stars}
-                          </span>
-                        ) : null}
-                      </div>
-                      <p class="text-sm mt-0.5" style="color: var(--color-muted);">{project.eyebrow}</p>
-                      <div class="flex flex-wrap gap-1.5 mt-2">
-                        {project.labels.map((label) => (
-                          <span class="text-[10px] tracking-[0.12em] uppercase px-2 py-1 border border-[var(--color-ink)]/15" style="color: var(--color-muted);">
-                            {label}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                  <p class="text-base md:text-lg leading-relaxed mb-6 flex-1" style="color: var(--color-muted);">{project.description}</p>
-                  <div class="flex flex-wrap gap-2 mb-6">
-                    {project.tags.map((tag) => (
-                      <span class="text-xs tracking-wide px-3 py-1.5 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">{tag}</span>
-                    ))}
-                  </div>
-                  <div class="flex flex-wrap gap-2">
-                    {project.links.map((link) => (
-                      <a href={link.href} target="_blank" rel="noopener noreferrer" class={`inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium border transition-all duration-300 ${link.primary ? "border-[var(--color-ink)] hover:bg-[var(--color-ink)] hover:text-[var(--color-paper)]" : "border-[var(--color-ink)]/20 hover:border-[var(--color-ink)]"}`} style={`color: var(${link.primary ? "--color-ink" : "--color-muted"});`}>
-                        {link.label}
-                        {link.primary ? (
-                          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                          </svg>
-                        ) : null}
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-
-          <div class="mb-6 flex items-center gap-4 animate-fade-up delay-5">
-            <span class="text-[11px] tracking-[0.25em] uppercase font-medium" style="color: var(--color-muted);">Tools &amp; Experiments</span>
-            <div class="flex-1 h-px bg-[var(--color-ink)]/10"></div>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 mb-10">
-            {smaller.map((project, index) => (
-              <article class={`group animate-fade-up delay-${Math.min(index + 5, 8)} border border-[var(--color-ink)]/[0.06] transition-colors duration-500 hover:border-[var(--color-ink)]/15`}>
-                <div class="p-5 md:p-6 flex flex-col h-full">
-                  <div class="flex items-center justify-between gap-3 mb-3">
-                    <h2 class="text-lg md:text-xl font-medium" style="font-family: var(--font-display);">{project.name}</h2>
-                    {project.stars ? (
-                      <span class="inline-flex items-center gap-1 text-xs" style="color: var(--color-muted);">
-                        <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 16 16"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25z"/></svg>
-                        {project.stars}
-                      </span>
-                    ) : null}
-                  </div>
-                  <p class="text-sm leading-relaxed mb-4 flex-1" style="color: var(--color-muted);">{project.description}</p>
-                  <div class="flex flex-wrap gap-2 mb-4">
-                    {project.tags.map((tag) => (
-                      <span class="text-xs tracking-wide px-2.5 py-1 border border-[var(--color-ink)]/10" style="color: var(--color-muted);">{tag}</span>
-                    ))}
-                  </div>
-                  <div class="flex flex-wrap gap-2">
-                    <a href={project.href} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 text-xs font-medium border border-[var(--color-ink)] transition-all duration-300 hover:bg-[var(--color-ink)] hover:text-[var(--color-paper)] self-start" style="color: var(--color-ink);">
-                      GitHub
-                      <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                      </svg>
-                    </a>
-                    {project.secondaryHref ? (
-                      <a href={project.secondaryHref} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 text-xs font-medium border border-[var(--color-ink)]/20 transition-all duration-300 hover:border-[var(--color-ink)] self-start" style="color: var(--color-muted);">
-                        {project.secondaryLabel}
-                      </a>
-                    ) : null}
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-
-          <div class="flex justify-center animate-fade-up delay-8">
-            <a href="https://github.com/akshitkrnagpal" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 px-6 py-3 text-sm font-medium border border-[var(--color-ink)] transition-all duration-300 hover:bg-[var(--color-ink)] hover:text-[var(--color-paper)]" style="color: var(--color-ink);">
-              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
-              View more on GitHub
-            </a>
-          </div>
+    <main id="main-content">
+      <header class="projects-intro">
+        <h1 class="reveal" id="page-title">Project <em>index</em></h1>
+        <div class="projects-intro__copy reveal reveal--2">
+          <p class="kicker">Shipped / Maintained / Open</p>
+          <p>
+            Indie products, open-source tools, and smaller experiments. The featured few below get real maintenance; the rest are focused single-purpose utilities.
+          </p>
         </div>
-      </div>
+      </header>
 
-      <div class="w-full h-1 bg-[var(--color-accent)] animate-fade-in delay-9"></div>
-    </div>
-  </main>
+      <section aria-labelledby="featured-heading">
+        <h2 class="section-heading" id="featured-heading">
+          <span>01—05</span>
+          Featured projects
+          <span>Selected work</span>
+        </h2>
+
+        {featured.map((project, index) => (
+          <article class="featured-project">
+            <p class="featured-project__number" aria-hidden="true">{String(index + 1).padStart(2, "0")}</p>
+
+            <div class="featured-project__main">
+              <p class="featured-project__eyebrow">{project.eyebrow}</p>
+              <h2>{project.name}</h2>
+              <p class="featured-project__description">{project.description}</p>
+              <div class="project-links" aria-label={`${project.name} links`}>
+                {project.links.map((link) => (
+                  <a href={link.href} target="_blank" rel="noopener noreferrer">
+                    {link.label} <span aria-hidden="true">↗</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            <aside class="featured-project__aside" aria-label={`${project.name} details`}>
+              {project.image ? (
+                <figure class="project-image">
+                  <img src={project.image} alt={`${project.name} product mark`} width="192" height="192" loading="lazy" />
+                </figure>
+              ) : null}
+
+              <dl class="project-meta">
+                <div class="project-meta__row">
+                  <dt>Status</dt>
+                  <dd>{project.labels.join(" · ")}</dd>
+                </div>
+                <div class="project-meta__row">
+                  <dt>Focus</dt>
+                  <dd>{project.tags.join(" · ")}</dd>
+                </div>
+                {project.stars ? (
+                  <div class="project-meta__row">
+                    <dt>GitHub</dt>
+                    <dd>{project.stars.toLocaleString()} stars</dd>
+                  </div>
+                ) : null}
+              </dl>
+            </aside>
+          </article>
+        ))}
+      </section>
+
+      <section class="project-directory" aria-labelledby="directory-heading">
+        <h2 class="section-heading" id="directory-heading">
+          <span>06—09</span>
+          Tools &amp; experiments
+          <span>Directory</span>
+        </h2>
+
+        {smaller.map((project, index) => (
+          <article class="directory-project">
+            <p class="directory-project__number" aria-hidden="true">{String(index + 6).padStart(2, "0")}</p>
+            <h3>{project.name}</h3>
+            <div class="directory-project__body">
+              <p>{project.description}</p>
+              <p class="directory-project__tags">{project.tags.join(" / ")}</p>
+            </div>
+            <div class="directory-project__links" aria-label={`${project.name} links`}>
+              <a href={project.href} target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+              {project.secondaryHref ? (
+                <a href={project.secondaryHref} target="_blank" rel="noopener noreferrer">
+                  {project.secondaryLabel} <span aria-hidden="true">↗</span>
+                </a>
+              ) : null}
+              {project.stars ? <span class="directory-project__stars">{project.stars.toLocaleString()} stars</span> : null}
+            </div>
+          </article>
+        ))}
+      </section>
+
+      <div class="github-cta">
+        <p>The rest of the workshop lives on GitHub.</p>
+        <a href="https://github.com/akshitkrnagpal" target="_blank" rel="noopener noreferrer">
+          View more on GitHub <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </main>
+
+    <SiteFooter />
+  </div>
 </Layout>
