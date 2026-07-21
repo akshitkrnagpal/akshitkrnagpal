@@ -1,8 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import typesensekitImage from "../assets/site/typesensekit.png";
+import promptlensImage from "../assets/site/promptlens.png";
+import hookbellImage from "../assets/site/hookbell.png";
 
 const githubRepositories = [
-  "akshitkrnagpal/typesensekit",
+  "typesensekit/typesensekit",
   "offerkit/offerkit",
   "akshitkrnagpal/edgepush",
   "akshitkrnagpal/revcat",
@@ -15,6 +19,19 @@ const githubHeaders: Record<string, string> = {
   Accept: "application/vnd.github+json",
   "X-GitHub-Api-Version": "2022-11-28",
 };
+
+// Keep static builds deterministic when GitHub's unauthenticated API limit is
+// exhausted. Live values replace these whenever the API is available.
+const githubStarFallbacks: Record<(typeof githubRepositories)[number], number> = {
+  "typesensekit/typesensekit": 2,
+  "offerkit/offerkit": 30,
+  "akshitkrnagpal/edgepush": 5,
+  "akshitkrnagpal/revcat": 3,
+  "open-placeholder/open-placeholder": 13,
+  "akshitkrnagpal/secret-desk": 2,
+  "akshitkrnagpal/env-doctor": 1,
+};
+let githubFallbackWarningShown = false;
 
 if (import.meta.env.GITHUB_TOKEN) {
   githubHeaders.Authorization = `Bearer ${import.meta.env.GITHUB_TOKEN}`;
@@ -29,15 +46,21 @@ const githubStars = Object.fromEntries(
         });
 
         if (!response.ok) {
-          console.warn(`Could not fetch GitHub stars for ${repository}: ${response.status}`);
-          return [repository, null] as const;
+          if (!githubFallbackWarningShown) {
+            console.warn(`GitHub stars are unavailable (${response.status}); using cached values for this build.`);
+            githubFallbackWarningShown = true;
+          }
+          return [repository, githubStarFallbacks[repository]] as const;
         }
 
         const data = (await response.json()) as { stargazers_count: number };
         return [repository, data.stargazers_count] as const;
       } catch (error) {
-        console.warn(`Could not fetch GitHub stars for ${repository}`, error);
-        return [repository, null] as const;
+        if (!githubFallbackWarningShown) {
+          console.warn("GitHub stars are unavailable; using cached values for this build.", error);
+          githubFallbackWarningShown = true;
+        }
+        return [repository, githubStarFallbacks[repository]] as const;
       }
     }),
   ),
@@ -45,31 +68,38 @@ const githubStars = Object.fromEntries(
 
 const featuredProjects = [
   {
+    slug: "typesensekit",
     name: "TypesenseKit",
     eyebrow: "Typesense CLI & MCP server",
     description:
       "95 typed Typesense operations for humans and AI agents—one CLI and MCP server, read-only by default.",
     tags: ["Typesense", "CLI", "MCP", "95 Operations"],
     labels: ["Active", "Open Source"],
-    image: "https://typesensekit.vercel.app/images/typesensekit-robot-favicon-180.png",
-    repo: "akshitkrnagpal/typesensekit",
+    image: typesensekitImage,
+    scene: "terminal",
+    proof: "95 typed operations",
+    repo: "typesensekit/typesensekit",
     links: [
       { label: "Docs", href: "https://typesensekit.vercel.app", primary: true },
-      { label: "GitHub", href: "https://github.com/akshitkrnagpal/typesensekit" },
+      { label: "GitHub", href: "https://github.com/typesensekit/typesensekit" },
     ],
   },
   {
+    slug: "promptlens",
     name: "PromptLens",
     eyebrow: "Autonomous AI reliability",
     description:
       "An autonomous reliability engineer for production LLM systems. Continuously evaluate behavior, catch regressions, investigate failures, and make confident release decisions.",
     tags: ["AI Reliability", "Continuous Evals", "Release Decisions"],
     labels: ["Active", "Early access"],
-    image: "https://www.promptlens.io/icon-512.png",
+    image: promptlensImage,
+    scene: "evaluation",
+    proof: "Continuous evaluation",
     repo: null,
     links: [{ label: "Visit", href: "https://www.promptlens.io", primary: true }],
   },
   {
+    slug: "offerkit",
     name: "OfferKit",
     eyebrow: "Self-hostable promotion engine",
     description:
@@ -80,10 +110,13 @@ const featuredProjects = [
     iconBg: "#111111",
     iconText: "%",
     iconColor: "#F5F0E8",
+    scene: "promotion",
+    proof: "Rules you can own",
     repo: "offerkit/offerkit",
     links: [{ label: "GitHub", href: "https://github.com/offerkit/offerkit", primary: true }],
   },
   {
+    slug: "edgepush",
     name: "EdgePush",
     eyebrow: "Open-source push notifications",
     description:
@@ -94,6 +127,8 @@ const featuredProjects = [
     iconBg: "#000000",
     iconText: "",
     iconColor: "#FF6B1A",
+    scene: "delivery",
+    proof: "APNs + FCM at the edge",
     repo: "akshitkrnagpal/edgepush",
     links: [
       { label: "Visit", href: "https://edgepush.dev", primary: true },
@@ -101,13 +136,16 @@ const featuredProjects = [
     ],
   },
   {
+    slug: "hookbell",
     name: "HookBell",
     eyebrow: "Instant webhook push notifications",
     description:
       "Never miss a webhook again. Get human-readable push notifications on your phone when webhooks fire from services like Stripe, Clerk, Supabase, and more.",
     tags: ["Webhooks", "Developer Tools", "Mobile"],
     labels: ["Production"],
-    image: "https://hookbell.com/icon-512.png",
+    image: hookbellImage,
+    scene: "webhook",
+    proof: "Webhook to phone",
     repo: null,
     links: [{ label: "Visit", href: "https://hookbell.com", primary: true }],
   },
@@ -167,6 +205,8 @@ const formatProjectIndex = (index: number) => String(index + 1).padStart(2, "0")
 <Layout
   title="Projects – Akshit Kr Nagpal"
   description="Indie products, open-source tools, and focused experiments built by Akshit Kr Nagpal."
+  ogImage="/og-projects.png"
+  ogImageAlt="Selected products and open-source tools built by Akshit Kr Nagpal"
 >
   <div class="studio-shell">
     <div class="projects-blob" aria-hidden="true"></div>
@@ -177,7 +217,7 @@ const formatProjectIndex = (index: number) => String(index + 1).padStart(2, "0")
       </nav>
     </header>
 
-    <main id="main-content">
+    <main id="main-content" tabindex="-1">
       <header class="projects-hero">
         <div>
           <p class="eyebrow reveal">Selected work / 01—{String(projectCount).padStart(2, "0")}</p>
@@ -200,19 +240,59 @@ const formatProjectIndex = (index: number) => String(index + 1).padStart(2, "0")
 
         <div class="featured-list">
           {featured.map((project, index) => (
-            <article class="project-card">
+            <article class="project-card" id={project.slug}>
               <div class="project-index" aria-hidden="true">{formatProjectIndex(index)}</div>
-              <div class="project-visual">
+              <div class="project-visual" aria-hidden="true">
+                <div class:list={["product-scene", `scene-${project.scene}`]}>
+                  {project.scene === "terminal" ? (
+                    <div class="terminal-window">
+                      <div class="window-bar"><span></span><span></span><span></span></div>
+                      <code><b>$</b> tsk documents.search</code>
+                      <code class="terminal-muted">collection: products · 12 hits</code>
+                      <span class="scene-status">✓ typed · read-only</span>
+                    </div>
+                  ) : project.scene === "evaluation" ? (
+                    <div class="evaluation-window">
+                      <span class="scene-kicker">Release evaluation</span>
+                      <strong>98.7%</strong>
+                      <div class="score-track"><span></span></div>
+                      <div class="signal-row"><span>Behavior</span><b>Passing</b></div>
+                      <div class="signal-row"><span>Regressions</span><b>0 found</b></div>
+                    </div>
+                  ) : project.scene === "promotion" ? (
+                    <div class="promotion-window">
+                      <span class="scene-kicker">Promotion rule</span>
+                      <strong>SAVE20</strong>
+                      <div class="rule-row"><span>Cart over</span><b>€100</b></div>
+                      <div class="rule-row"><span>Discount</span><b>20%</b></div>
+                      <span class="scene-status">Active · 42 redemptions</span>
+                    </div>
+                  ) : project.scene === "delivery" ? (
+                    <div class="delivery-window">
+                      <span class="scene-kicker">Push delivery</span>
+                      <div class="delivery-route"><b>API</b><i>→</i><b>Edge</b><i>→</i><b>Phone</b></div>
+                      <strong>Delivered</strong>
+                      <span class="scene-status">184 ms · APNs</span>
+                    </div>
+                  ) : (
+                    <div class="webhook-window">
+                      <span class="scene-kicker">Live webhooks</span>
+                      <div class="event-row"><i></i><span>payment.succeeded</span><b>now</b></div>
+                      <div class="event-row"><i></i><span>user.created</span><b>2m</b></div>
+                      <div class="event-row"><i></i><span>invoice.paid</span><b>8m</b></div>
+                    </div>
+                  )}
+                </div>
                 <div class="project-icon" style={`background: ${project.iconBg || "var(--white)"};`}>
                   {project.image ? (
-                    <img src={project.image} alt={`${project.name} logo`} width="180" height="180" loading="lazy" />
+                    <Image src={project.image} alt="" width={180} height={180} format="webp" quality={84} loading="lazy" decoding="async" />
                   ) : project.icon === "dot" ? (
                     <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="14" fill={project.iconColor}></circle></svg>
                   ) : (
                     <span style={`color: ${project.iconColor};`}>{project.iconText}</span>
                   )}
                 </div>
-                <div class="project-sticker" aria-hidden="true">Built<br />to last</div>
+                <div class="project-proof">{project.proof}</div>
               </div>
 
               <div class="project-content">
@@ -226,9 +306,9 @@ const formatProjectIndex = (index: number) => String(index + 1).padStart(2, "0")
                   ) : null}
                 </div>
                 <h3>{project.name}</h3>
-                <div class="project-labels" aria-label="Project status">
-                  {project.labels.map((label) => <span>{label}</span>)}
-                </div>
+                <ul class="project-labels" aria-label="Project status">
+                  {project.labels.map((label) => <li>{label}</li>)}
+                </ul>
                 <p class="project-description">{project.description}</p>
                 <ul class="tag-list" aria-label="Technologies and project attributes">
                   {project.tags.map((tag) => <li>{tag}</li>)}
@@ -241,7 +321,7 @@ const formatProjectIndex = (index: number) => String(index + 1).padStart(2, "0")
                       rel="noopener noreferrer"
                       class:list={["button-link", { secondary: !link.primary }]}
                     >
-                      {link.label} <span aria-hidden="true">↗</span>
+                      {link.label} <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span>
                     </a>
                   ))}
                 </div>
@@ -277,9 +357,9 @@ const formatProjectIndex = (index: number) => String(index + 1).padStart(2, "0")
                 </ul>
               </div>
               <div class="small-links">
-                <a href={project.href} target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+                <a href={project.href} target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a>
                 {project.secondaryHref ? (
-                  <a href={project.secondaryHref} target="_blank" rel="noopener noreferrer">{project.secondaryLabel} <span aria-hidden="true">↗</span></a>
+                  <a href={project.secondaryHref} target="_blank" rel="noopener noreferrer">{project.secondaryLabel} <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a>
                 ) : null}
               </div>
             </article>
@@ -290,6 +370,7 @@ const formatProjectIndex = (index: number) => String(index + 1).padStart(2, "0")
           <span>More code lives on</span>
           <strong>GitHub</strong>
           <span class="callout-arrow" aria-hidden="true">↗</span>
+          <span class="sr-only"> (opens in a new tab)</span>
         </a>
       </section>
     </main>
@@ -405,6 +486,7 @@ const formatProjectIndex = (index: number) => String(index + 1).padStart(2, "0")
     border-radius: 1.5rem;
     background: var(--white);
     box-shadow: 9px 9px 0 var(--ink);
+    scroll-margin-top: 2rem;
   }
 
   .project-card:nth-child(even) {
@@ -456,16 +538,206 @@ const formatProjectIndex = (index: number) => String(index + 1).padStart(2, "0")
     border-radius: 5rem 1rem 1rem 1rem;
   }
 
-  .project-icon {
+  .product-scene {
     display: grid;
-    width: clamp(8rem, 13vw, 11rem);
+    width: calc(100% - 3rem);
+    max-width: 21rem;
+    place-items: center;
+  }
+
+  .terminal-window,
+  .evaluation-window,
+  .promotion-window,
+  .delivery-window,
+  .webhook-window {
+    display: flex;
+    width: 100%;
+    min-height: 13.5rem;
+    padding: 1.25rem;
+    justify-content: center;
+    flex-direction: column;
+    border: 2px solid var(--ink);
+    border-radius: 1rem;
+    background: var(--white);
+    box-shadow: 7px 7px 0 var(--ink);
+    transform: rotate(-2deg);
+  }
+
+  .terminal-window {
+    background: var(--ink);
+    color: var(--white);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    transform: rotate(2deg);
+  }
+
+  .window-bar {
+    display: flex;
+    margin-bottom: 1.5rem;
+    gap: 0.4rem;
+  }
+
+  .window-bar span {
+    width: 0.55rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--tomato);
+  }
+
+  .window-bar span:nth-child(2) { background: var(--butter); }
+  .window-bar span:nth-child(3) { background: #6cac83; }
+
+  .terminal-window code {
+    font-size: clamp(0.68rem, 1vw, 0.78rem);
+    white-space: nowrap;
+  }
+
+  .terminal-window code b {
+    color: var(--butter);
+  }
+
+  .terminal-muted {
+    margin-top: 0.65rem;
+    color: #c8bfb4;
+  }
+
+  .scene-kicker {
+    margin-bottom: 0.55rem;
+    color: var(--tomato-dark);
+    font-size: 0.66rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .evaluation-window > strong,
+  .promotion-window > strong,
+  .delivery-window > strong {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+
+  .score-track {
+    height: 0.7rem;
+    margin: 1rem 0;
+    overflow: hidden;
+    border: 1.5px solid var(--ink);
+    border-radius: 999px;
+    background: var(--paper-deep);
+  }
+
+  .score-track span {
+    display: block;
+    width: 89%;
+    height: 100%;
+    background: var(--leaf);
+  }
+
+  .signal-row,
+  .rule-row,
+  .event-row {
+    display: flex;
+    padding: 0.5rem 0;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    border-top: 1px solid rgb(33 27 24 / 22%);
+    font-size: 0.7rem;
+  }
+
+  .signal-row b {
+    color: var(--leaf);
+  }
+
+  .promotion-window {
+    background: #fff3d0;
+    transform: rotate(1.5deg);
+  }
+
+  .promotion-window > strong {
+    margin-bottom: 1rem;
+    color: var(--tomato-dark);
+  }
+
+  .scene-status {
+    display: inline-flex;
+    width: fit-content;
+    margin-top: 1rem;
+    padding: 0.35rem 0.55rem;
+    border: 1.5px solid currentColor;
+    border-radius: 999px;
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .delivery-window {
+    background: #e9f4ee;
+  }
+
+  .delivery-route {
+    display: flex;
+    margin: 1rem 0 1.4rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.4rem;
+  }
+
+  .delivery-route b {
+    padding: 0.45rem;
+    border: 1.5px solid var(--ink);
+    border-radius: 0.5rem;
+    background: var(--white);
+    font-size: 0.65rem;
+  }
+
+  .delivery-route i {
+    font-style: normal;
+  }
+
+  .delivery-window > strong {
+    color: var(--leaf);
+  }
+
+  .webhook-window {
+    gap: 0.2rem;
+    transform: rotate(2deg);
+  }
+
+  .event-row i {
+    width: 0.55rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--leaf);
+  }
+
+  .event-row span {
+    margin-right: auto;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+
+  .event-row b {
+    color: var(--muted);
+    font-size: 0.62rem;
+  }
+
+  .project-icon {
+    position: absolute;
+    z-index: 2;
+    top: 1rem;
+    right: 1rem;
+    display: grid;
+    width: 4.25rem;
     aspect-ratio: 1;
     overflow: hidden;
     place-items: center;
     border: 2px solid var(--ink);
-    border-radius: 2.4rem;
-    box-shadow: 6px 6px 0 var(--ink);
-    transform: rotate(-4deg);
+    border-radius: 1.1rem;
+    box-shadow: 4px 4px 0 var(--ink);
+    transform: rotate(4deg);
   }
 
   .project-icon img,
@@ -478,27 +750,24 @@ const formatProjectIndex = (index: number) => String(index + 1).padStart(2, "0")
 
   .project-icon span {
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-    font-size: 4rem;
+    font-size: 1.8rem;
     font-weight: 600;
   }
 
-  .project-sticker {
+  .project-proof {
     position: absolute;
-    right: 1rem;
+    left: 1rem;
     bottom: 1rem;
-    display: grid;
-    width: 4.5rem;
-    aspect-ratio: 1;
-    place-items: center;
+    max-width: calc(100% - 2rem);
+    padding: 0.5rem 0.7rem;
     border: 2px solid var(--ink);
-    border-radius: 50%;
+    border-radius: 999px;
     background: var(--white);
     font-size: 0.62rem;
     font-weight: 600;
-    line-height: 1.15;
-    text-align: center;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
-    transform: rotate(11deg);
+    transform: rotate(-2deg);
   }
 
   .project-content {
@@ -555,11 +824,14 @@ const formatProjectIndex = (index: number) => String(index + 1).padStart(2, "0")
   .project-labels {
     display: flex;
     margin-top: 1rem;
+    margin-bottom: 0;
+    padding: 0;
     flex-wrap: wrap;
     gap: 0.4rem;
+    list-style: none;
   }
 
-  .project-labels span,
+  .project-labels li,
   .tag-list li {
     border: 1.5px solid var(--ink);
     border-radius: 999px;
@@ -568,7 +840,7 @@ const formatProjectIndex = (index: number) => String(index + 1).padStart(2, "0")
     letter-spacing: 0.06em;
   }
 
-  .project-labels span {
+  .project-labels li {
     padding: 0.25rem 0.6rem;
     background: var(--paper-deep);
     text-transform: uppercase;
@@ -662,6 +934,18 @@ const formatProjectIndex = (index: number) => String(index + 1).padStart(2, "0")
     letter-spacing: 0.07em;
     text-decoration: none;
     text-transform: uppercase;
+    transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+  }
+
+  .small-links a:hover {
+    background: var(--butter);
+    box-shadow: 3px 3px 0 var(--ink);
+    transform: translate(-2px, -2px);
+  }
+
+  .small-links a:active {
+    box-shadow: none;
+    transform: translate(1px, 1px);
   }
 
   .github-callout {
@@ -708,7 +992,9 @@ const formatProjectIndex = (index: number) => String(index + 1).padStart(2, "0")
 
   @media (max-width: 52rem) {
     .projects-hero {
+      padding: 4rem 0 5rem;
       grid-template-columns: 1fr;
+      gap: 1.5rem;
     }
 
     .hero-note {
@@ -717,7 +1003,7 @@ const formatProjectIndex = (index: number) => String(index + 1).padStart(2, "0")
     }
 
     .projects-intro {
-      margin-top: 2rem;
+      margin-top: 0;
     }
 
     .project-card,
@@ -732,7 +1018,7 @@ const formatProjectIndex = (index: number) => String(index + 1).padStart(2, "0")
     }
 
     .project-visual {
-      min-height: 19rem;
+      min-height: 17rem;
     }
   }
 
@@ -749,13 +1035,18 @@ const formatProjectIndex = (index: number) => String(index + 1).padStart(2, "0")
       width: min(100% - 1.25rem, 76rem);
     }
 
+    .projects-hero {
+      padding: 3rem 0 4.5rem;
+    }
+
     .projects-title {
-      font-size: clamp(4.7rem, 22vw, 7rem);
+      font-size: clamp(4.25rem, 20vw, 6rem);
     }
 
     .hero-note {
-      width: 12rem;
-      font-size: 1.35rem;
+      width: 11rem;
+      padding: 1.2rem;
+      font-size: 1.2rem;
     }
 
     .project-card {
@@ -765,7 +1056,20 @@ const formatProjectIndex = (index: number) => String(index + 1).padStart(2, "0")
     }
 
     .project-visual {
-      min-height: 16rem;
+      min-height: 14rem;
+    }
+
+    .terminal-window,
+    .evaluation-window,
+    .promotion-window,
+    .delivery-window,
+    .webhook-window {
+      min-height: 11.5rem;
+      padding: 1rem;
+    }
+
+    .project-icon {
+      width: 3.6rem;
     }
 
     .project-content {

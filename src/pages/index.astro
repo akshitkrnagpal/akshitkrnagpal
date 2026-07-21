@@ -3,6 +3,8 @@ import Layout from "../layouts/Layout.astro";
 import Linkedin from "../components/simple-icons/linkedin.astro";
 import Github from "../components/simple-icons/github.astro";
 import X from "../components/simple-icons/x.astro";
+import { Image } from "astro:assets";
+import avatarImage from "../assets/site/akshit-avatar.jpg";
 ---
 
 <Layout>
@@ -19,7 +21,7 @@ import X from "../components/simple-icons/x.astro";
       </nav>
     </header>
 
-    <main id="main-content">
+    <main id="main-content" tabindex="-1">
       <section class="hero" aria-labelledby="hero-title">
         <div class="hero-copy">
           <p class="eyebrow reveal">Independent builder · Software engineer</p>
@@ -32,28 +34,43 @@ import X from "../components/simple-icons/x.astro";
           </p>
           <div class="hero-actions reveal">
             <a class="button-link" href="/projects">Explore projects <span aria-hidden="true">→</span></a>
-            <div class="socials" aria-label="Social profiles">
-              <a href="https://github.com/akshitkrnagpal" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                <Github class="icon" />
-              </a>
-              <a href="https://linkedin.com/in/akshitkrnagpal" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                <Linkedin class="icon" />
-              </a>
-              <a href="https://x.com/akshit_io" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
-                <X class="icon" />
-              </a>
-            </div>
+            <nav class="socials" aria-label="Social profiles">
+              <ul>
+                <li>
+                  <a href="https://github.com/akshitkrnagpal" target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in a new tab)">
+                    <Github class="icon" />
+                  </a>
+                </li>
+                <li>
+                  <a href="https://linkedin.com/in/akshitkrnagpal" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (opens in a new tab)">
+                    <Linkedin class="icon" />
+                  </a>
+                </li>
+                <li>
+                  <a href="https://x.com/akshit_io" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter, opens in a new tab)">
+                    <X class="icon" />
+                  </a>
+                </li>
+              </ul>
+            </nav>
           </div>
         </div>
 
         <div class="portrait-stage reveal">
           <div class="portrait-shadow" aria-hidden="true"></div>
           <figure class="portrait-card">
-            <img
-              src="https://avatars.githubusercontent.com/u/15872348"
+            <Image
+              src={avatarImage}
               alt="Portrait of Akshit Kr Nagpal"
               width="460"
               height="460"
+              widths={[460, 720]}
+              sizes="(max-width: 64rem) 78vw, 24rem"
+              format="webp"
+              quality={86}
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
             />
             <figcaption>Software Engineer</figcaption>
           </figure>
@@ -65,13 +82,46 @@ import X from "../components/simple-icons/x.astro";
         </div>
       </section>
 
+      <section class="selected-projects" aria-labelledby="selected-projects-title">
+        <div class="selected-heading">
+          <div>
+            <p class="eyebrow">Selected work</p>
+            <h2 id="selected-projects-title" class="display-type">Proof, not promises.</h2>
+          </div>
+          <a href="/projects">View all nine <span aria-hidden="true">↗</span></a>
+        </div>
+
+        <div class="selected-grid">
+          <a class="selected-card" href="/projects#typesensekit">
+            <span class="selected-number" aria-hidden="true">01</span>
+            <strong>TypesenseKit</strong>
+            <p>One typed CLI and MCP surface for 95 Typesense operations.</p>
+            <span class="selected-proof">CLI · MCP · Open source</span>
+          </a>
+          <a class="selected-card" href="/projects#promptlens">
+            <span class="selected-number" aria-hidden="true">02</span>
+            <strong>PromptLens</strong>
+            <p>Continuous evaluation and investigation for production LLM systems.</p>
+            <span class="selected-proof">AI reliability · Early access</span>
+          </a>
+          <a class="selected-card" href="/projects#offerkit">
+            <span class="selected-number" aria-hidden="true">03</span>
+            <strong>OfferKit</strong>
+            <p>An agent-first promotion engine that teams can own and self-host.</p>
+            <span class="selected-proof">Commerce · MCP · Open source</span>
+          </a>
+        </div>
+      </section>
+
       <section class="practice" aria-labelledby="practice-title">
         <p class="eyebrow">The practice</p>
         <h2 id="practice-title" class="display-type practice-title">Code with<br /><em>character.</em></h2>
         <div class="practice-copy">
-          <p>
-            I work across full-stack development, open source, AI development, large language models, and agentic workflows.
-          </p>
+          <ul class="capability-list">
+            <li><strong>Build the whole system.</strong><span>From product interface to backend operations and infrastructure.</span></li>
+            <li><strong>Make AI dependable.</strong><span>Evaluation, observability, and agent workflows that survive production.</span></li>
+            <li><strong>Ship in the open.</strong><span>Useful tools, clear documentation, and maintainable defaults.</span></li>
+          </ul>
           <a href="/projects">See what I’ve shipped <span aria-hidden="true">↗</span></a>
         </div>
         <div class="loop-mark" aria-hidden="true">
@@ -170,7 +220,14 @@ import X from "../components/simple-icons/x.astro";
 
   .socials {
     display: flex;
+  }
+
+  .socials ul {
+    display: flex;
+    margin: 0;
+    padding: 0;
     gap: 0.6rem;
+    list-style: none;
   }
 
   .socials a {
@@ -285,6 +342,110 @@ import X from "../components/simple-icons/x.astro";
     transform: rotate(-14deg);
   }
 
+  .selected-projects {
+    width: min(100% - 2rem, 76rem);
+    margin: 0 auto clamp(6rem, 10vw, 9rem);
+  }
+
+  .selected-heading {
+    display: flex;
+    padding: 1.25rem 0 1.75rem;
+    align-items: end;
+    justify-content: space-between;
+    gap: 2rem;
+    border-top: 2px solid var(--ink);
+  }
+
+  .selected-heading h2 {
+    margin-top: 0.65rem;
+    font-size: clamp(3.4rem, 7vw, 6.2rem);
+  }
+
+  .selected-heading > a,
+  .practice-copy > a {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    color: inherit;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-underline-offset: 0.3rem;
+    text-transform: uppercase;
+  }
+
+  .selected-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .selected-card {
+    position: relative;
+    display: flex;
+    min-height: 17rem;
+    padding: 2rem;
+    justify-content: flex-end;
+    flex-direction: column;
+    overflow: hidden;
+    border: 2px solid var(--ink);
+    border-radius: 1.25rem;
+    background: var(--white);
+    box-shadow: 6px 6px 0 var(--ink);
+    text-decoration: none;
+    transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+  }
+
+  .selected-card:nth-child(2) {
+    background: var(--lilac);
+  }
+
+  .selected-card:nth-child(3) {
+    background: var(--butter);
+  }
+
+  .selected-card:hover {
+    transform: translate(-3px, -3px) rotate(-0.4deg);
+    box-shadow: 10px 10px 0 var(--ink);
+  }
+
+  .selected-card:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 var(--ink);
+  }
+
+  .selected-number {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    color: var(--tomato-dark);
+    font-size: 0.72rem;
+    font-weight: 600;
+  }
+
+  .selected-card strong {
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 4vw, 3.5rem);
+    font-weight: 400;
+    letter-spacing: -0.035em;
+    line-height: 1;
+  }
+
+  .selected-card p {
+    margin: 0.8rem 0 1.25rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .selected-proof {
+    padding-top: 0.8rem;
+    border-top: 1.5px solid rgb(33 27 24 / 35%);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
   .practice {
     position: relative;
     display: grid;
@@ -318,22 +479,34 @@ import X from "../components/simple-icons/x.astro";
     padding: 0 0 0.75rem clamp(0rem, 5vw, 4rem);
   }
 
-  .practice-copy p {
-    margin: 0 0 1.5rem;
-    color: #efe5d7;
-    font-size: clamp(1rem, 1.5vw, 1.2rem);
+  .capability-list {
+    display: grid;
+    margin: 0 0 1.75rem;
+    padding: 0;
+    gap: 1.15rem;
+    list-style: none;
   }
 
-  .practice-copy a {
-    display: inline-flex;
-    min-height: 2.75rem;
-    align-items: center;
+  .capability-list li {
+    display: grid;
+    gap: 0.15rem;
+  }
+
+  .capability-list strong {
     color: var(--butter);
-    font-size: 0.78rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-underline-offset: 0.3rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
+  }
+
+  .capability-list span {
+    color: #efe5d7;
+    font-size: clamp(0.94rem, 1.3vw, 1.08rem);
+    line-height: 1.5;
+  }
+
+  .practice-copy > a {
+    color: var(--butter);
   }
 
   .loop-mark {
@@ -359,6 +532,15 @@ import X from "../components/simple-icons/x.astro";
       width: min(78vw, 24rem);
       margin-top: 0;
       margin-right: 12%;
+    }
+
+    .selected-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .selected-card:last-child {
+      grid-column: 1 / -1;
+      min-height: 14rem;
     }
   }
 
@@ -397,6 +579,27 @@ import X from "../components/simple-icons/x.astro";
 
     .portrait-stage {
       margin-inline: auto;
+    }
+
+    .selected-projects {
+      width: min(100% - 1.25rem, 76rem);
+      margin-bottom: 5rem;
+    }
+
+    .selected-heading {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .selected-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .selected-card,
+    .selected-card:last-child {
+      min-height: 14rem;
+      grid-column: auto;
     }
 
     .note-card {

@@ -4,18 +4,22 @@ import "../styles/global.css";
 interface Props {
 	title?: string;
 	description?: string;
+	ogImage?: string;
+	ogImageAlt?: string;
 }
 
 const {
 	title = "Akshit Kr Nagpal – Software Engineer",
-	description = "Portfolio of Akshit Kr Nagpal, a self-taught software engineer passionate about full-stack development, open source, and efficient code.",
+	description = "Independent builder and full-stack engineer creating developer tools, open-source software, and thoughtful product experiences.",
+	ogImage = "/og.png",
+	ogImageAlt = "Akshit Kr Nagpal, independent builder and software engineer",
 } = Astro.props;
 
 const siteUrl = "https://akshit.io";
 const pathname = Astro.url.pathname.replace(/\/+$/, "") || "/";
 const canonicalUrl = pathname === "/" ? siteUrl : `${siteUrl}${pathname}`;
-const ogImageUrl = `${siteUrl}/og.png`;
-const avatarUrl = "https://avatars.githubusercontent.com/u/15872348";
+const ogImageUrl = ogImage.startsWith("http") ? ogImage : `${siteUrl}${ogImage}`;
+const avatarUrl = `${siteUrl}/og.png`;
 
 const personSchema = {
 	"@context": "https://schema.org",
@@ -43,33 +47,33 @@ const websiteSchema = {
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="theme-color" content="#f3eadb" />
 		<link rel="icon" href="/favicon.ico" sizes="any" />
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 		<link rel="manifest" href="/manifest.json" />
 		<link rel="sitemap" href="/sitemap-index.xml" />
 		<link rel="canonical" href={canonicalUrl} />
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="author" content="Akshit Kr Nagpal" />
 		<title>{title}</title>
 		<meta name="description" content={description} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
+		<meta property="og:site_name" content="Akshit Kr Nagpal" />
 		<meta property="og:image" content={ogImageUrl} />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
-		<meta property="og:image:alt" content="Akshit Kr Nagpal, Software Engineer" />
+		<meta property="og:image:alt" content={ogImageAlt} />
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content={canonicalUrl} />
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:site" content="@akshit_io" />
+		<meta name="twitter:creator" content="@akshit_io" />
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={ogImageUrl} />
-		<meta name="twitter:image:alt" content="Akshit Kr Nagpal, Software Engineer" />
+		<meta name="twitter:image:alt" content={ogImageAlt} />
 		<script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
 		<script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
 		<slot name="head" />

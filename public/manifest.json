@@ -1,12 +1,12 @@
 {
   "name": "Akshit Kr Nagpal",
   "short_name": "Akshit",
-  "description": "Portfolio of Akshit Kr Nagpal, a self-taught software engineer passionate about full-stack development, open source, and efficient code.",
+  "description": "Independent builder and full-stack engineer creating developer tools, open-source software, and thoughtful product experiences.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#ffffff",
+  "background_color": "#f3eadb",
+  "theme_color": "#f3eadb",
   "icons": [
     { "src": "/favicon.ico", "type": "image/x-icon", "sizes": "16x16 32x32" },
     { "src": "/icon-192.png", "type": "image/png", "sizes": "192x192" },

@@ -13,12 +13,8 @@ const [serifItalic, sansBold, sansMedium] = await Promise.all([
   readFile(join(fontsDir, "DMSans-Medium.ttf")),
 ]);
 
-const avatarUrl = "https://avatars.githubusercontent.com/u/15872348?size=512";
-const avatarRes = await fetch(avatarUrl);
-if (!avatarRes.ok) throw new Error(`avatar fetch failed: ${avatarRes.status}`);
-const avatarType = avatarRes.headers.get("content-type") ?? "image/jpeg";
-const avatarBytes = Buffer.from(await avatarRes.arrayBuffer());
-const avatarDataUrl = `data:${avatarType};base64,${avatarBytes.toString("base64")}`;
+const avatarBytes = await readFile(join(here, "..", "src", "assets", "site", "akshit-avatar.jpg"));
+const avatarDataUrl = `data:image/jpeg;base64,${avatarBytes.toString("base64")}`;
 
 const PAPER = "#F3EADB";
 const INK = "#211B18";
@@ -246,20 +242,187 @@ const tree = el("div", {
   ],
 });
 
-const svg = await satori(tree, {
-  width: 1200,
-  height: 630,
-  fonts: [
-    { name: "Instrument Serif", data: serifItalic, weight: 400, style: "italic" },
-    { name: "DM Sans", data: sansBold, weight: 700, style: "normal" },
-    { name: "DM Sans", data: sansMedium, weight: 500, style: "normal" },
+const fonts = [
+  { name: "Instrument Serif", data: serifItalic, weight: 400, style: "italic" },
+  { name: "DM Sans", data: sansBold, weight: 700, style: "normal" },
+  { name: "DM Sans", data: sansMedium, weight: 500, style: "normal" },
+];
+
+const renderPng = async (renderTree) => {
+  const svg = await satori(renderTree, { width: 1200, height: 630, fonts });
+  return new Resvg(svg, { fitTo: { mode: "width", value: 1200 } }).render().asPng();
+};
+
+const writeOg = async (filename, renderTree) => {
+  const png = await renderPng(renderTree);
+  const outPath = join(here, "..", "public", filename);
+  await writeFile(outPath, png);
+  console.log(`wrote ${outPath} (${png.length} bytes)`);
+};
+
+await writeOg("og.png", tree);
+
+const projectsTree = el("div", {
+  style: {
+    width: "1200px",
+    height: "630px",
+    display: "flex",
+    position: "relative",
+    overflow: "hidden",
+    background: PAPER,
+    color: INK,
+    fontFamily: "DM Sans",
+  },
+  children: [
+    el("div", {
+      style: {
+        position: "absolute",
+        top: "-210px",
+        right: "-100px",
+        width: "600px",
+        height: "600px",
+        border: `3px solid ${INK}`,
+        borderRadius: "48% 52% 58% 42%",
+        background: LILAC,
+        transform: "rotate(-8deg)",
+      },
+    }),
+    el("div", {
+      style: {
+        position: "absolute",
+        top: "42px",
+        left: "58px",
+        right: "58px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        fontSize: "17px",
+        fontWeight: 700,
+        letterSpacing: "4px",
+        textTransform: "uppercase",
+      },
+      children: [
+        el("div", {
+          style: { display: "flex", alignItems: "center", gap: "13px" },
+          children: [
+            el("div", {
+              style: {
+                width: "17px",
+                height: "17px",
+                border: `3px solid ${INK}`,
+                borderRadius: "50%",
+                background: TOMATO,
+              },
+            }),
+            el("span", { children: "Akshit / Portfolio" }),
+          ],
+        }),
+        el("span", { children: "akshit.io/projects" }),
+      ],
+    }),
+    el("div", {
+      style: {
+        position: "absolute",
+        top: "145px",
+        left: "58px",
+        width: "700px",
+        display: "flex",
+        flexDirection: "column",
+      },
+      children: [
+        el("span", {
+          style: {
+            color: "#B92F1B",
+            fontSize: "17px",
+            fontWeight: 700,
+            letterSpacing: "4px",
+            textTransform: "uppercase",
+          },
+          children: "Selected work / 01—09",
+        }),
+        el("span", {
+          style: {
+            marginTop: "22px",
+            fontFamily: "Instrument Serif",
+            fontStyle: "italic",
+            fontSize: "126px",
+            lineHeight: 0.82,
+            letterSpacing: "-4px",
+          },
+          children: "Things I’ve",
+        }),
+        el("span", {
+          style: {
+            fontFamily: "Instrument Serif",
+            fontStyle: "italic",
+            fontSize: "126px",
+            lineHeight: 0.82,
+            letterSpacing: "-4px",
+            color: TOMATO,
+          },
+          children: "made happen.",
+        }),
+        el("span", {
+          style: {
+            width: "610px",
+            marginTop: "34px",
+            color: "#685B52",
+            fontSize: "23px",
+            fontWeight: 500,
+            lineHeight: 1.45,
+          },
+          children: "Maintained products, open-source tools, and focused experiments.",
+        }),
+      ],
+    }),
+    el("div", {
+      style: {
+        position: "absolute",
+        right: "60px",
+        top: "205px",
+        width: "330px",
+        display: "flex",
+        flexDirection: "column",
+        gap: "14px",
+        transform: "rotate(3deg)",
+      },
+      children: ["TypesenseKit", "PromptLens", "OfferKit"].map((name, index) =>
+        el("div", {
+          style: {
+            display: "flex",
+            padding: "18px 22px",
+            alignItems: "center",
+            justifyContent: "space-between",
+            border: `3px solid ${INK}`,
+            borderRadius: "18px",
+            background: index === 1 ? BUTTER : WHITE,
+            boxShadow: `7px 7px 0 ${INK}`,
+            fontSize: "22px",
+            fontWeight: 700,
+          },
+          children: [el("span", { children: name }), el("span", { style: { color: "#B92F1B" }, children: `0${index + 1}` })],
+        }),
+      ),
+    }),
+    el("div", {
+      style: {
+        position: "absolute",
+        left: "58px",
+        bottom: "36px",
+        display: "flex",
+        padding: "12px 18px",
+        border: `3px solid ${INK}`,
+        borderRadius: "999px",
+        background: LEAF,
+        color: WHITE,
+        fontSize: "15px",
+        fontWeight: 700,
+        letterSpacing: "2px",
+        textTransform: "uppercase",
+      },
+      children: "Products · Open source · Experiments",
+    }),
   ],
 });
 
-const png = new Resvg(svg, { fitTo: { mode: "width", value: 1200 } })
-  .render()
-  .asPng();
-
-const outPath = join(here, "..", "public", "og.png");
-await writeFile(outPath, png);
-console.log(`wrote ${outPath} (${png.length} bytes)`);
+await writeOg("og-projects.png", projectsTree);
