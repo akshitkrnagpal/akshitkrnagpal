@@ -2,7 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 
 const githubRepositories = [
-  "akshitkrnagpal/typesensekit",
+  "typesensekit/typesensekit",
   "offerkit/offerkit",
   "akshitkrnagpal/edgepush",
   "akshitkrnagpal/revcat",
@@ -45,20 +45,6 @@ const githubStars = Object.fromEntries(
 
 const featuredProjects = [
   {
-    name: "TypesenseKit",
-    eyebrow: "Typesense CLI & MCP server",
-    description:
-      "95 typed Typesense operations for humans and AI agents—one CLI and MCP server, read-only by default.",
-    tags: ["Typesense", "CLI", "MCP", "95 Operations"],
-    labels: ["Active", "Open Source"],
-    image: "https://typesensekit.vercel.app/images/typesensekit-robot-favicon-180.png",
-    repo: "akshitkrnagpal/typesensekit",
-    links: [
-      { label: "Docs", href: "https://typesensekit.vercel.app", primary: true },
-      { label: "GitHub", href: "https://github.com/akshitkrnagpal/typesensekit" },
-    ],
-  },
-  {
     name: "PromptLens",
     eyebrow: "Autonomous AI reliability",
     description:
@@ -78,7 +64,38 @@ const featuredProjects = [
     labels: ["Active", "Open Source", "Self-hostable"],
     image: "https://raw.githubusercontent.com/offerkit/offerkit/main/apps/web/public/icon.png",
     repo: "offerkit/offerkit",
-    links: [{ label: "GitHub", href: "https://github.com/offerkit/offerkit", primary: true }],
+    links: [
+      { label: "Visit", href: "https://offerkit.dev", primary: true },
+      { label: "GitHub", href: "https://github.com/offerkit/offerkit" },
+    ],
+  },
+  {
+    name: "OpenPlaceholder",
+    eyebrow: "Placeholder images on demand",
+    description:
+      "A fast, customizable placeholder image service for mockups, prototypes, docs, and social previews. Use the hosted API or deploy your own.",
+    tags: ["Image API", "Edge Runtime", "Self-hostable"],
+    labels: ["Active", "Open Source", "Self-hostable"],
+    image: "https://www.openplaceholder.com/512/OP",
+    repo: "open-placeholder/open-placeholder",
+    links: [
+      { label: "Visit", href: "https://www.openplaceholder.com", primary: true },
+      { label: "GitHub", href: "https://github.com/open-placeholder/open-placeholder" },
+    ],
+  },
+  {
+    name: "TypesenseKit",
+    eyebrow: "Typesense CLI & MCP server",
+    description:
+      "95 typed Typesense operations for humans and AI agents—one CLI and MCP server, read-only by default.",
+    tags: ["Typesense", "CLI", "MCP", "95 Operations"],
+    labels: ["Active", "Open Source"],
+    image: "https://typesensekit.vercel.app/images/typesensekit-robot-favicon-180.png",
+    repo: "typesensekit/typesensekit",
+    links: [
+      { label: "Docs", href: "https://typesensekit.vercel.app", primary: true },
+      { label: "GitHub", href: "https://github.com/typesensekit/typesensekit" },
+    ],
   },
   {
     name: "EdgePush",
@@ -125,14 +142,6 @@ const smallerProjects = [
     href: "https://github.com/akshitkrnagpal/revcat",
     secondaryHref: "https://revcat.vercel.app",
     secondaryLabel: "Docs",
-  },
-  {
-    name: "open-placeholder",
-    description:
-      "Self-hosted placeholder image generator. Generate custom placeholder images on the fly.",
-    tags: ["Images", "Self-hosted"],
-    repo: "open-placeholder/open-placeholder",
-    href: "https://github.com/open-placeholder/open-placeholder",
   },
   {
     name: "secret-desk",
