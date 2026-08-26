@@ -44,6 +44,21 @@ const websiteSchema = {
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
+		<script is:inline>
+			(() => {
+				let savedTheme = null;
+				try {
+					const value = window.localStorage.getItem("theme");
+					if (value === "light" || value === "dark") savedTheme = value;
+				} catch {
+					// Fall back to the operating system preference when storage is unavailable.
+				}
+
+				const theme = savedTheme ?? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+				document.documentElement.dataset.theme = theme;
+				document.documentElement.style.colorScheme = theme;
+			})();
+		</script>
 		<link rel="icon" href="/favicon.ico" sizes="any">
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 		<link rel="manifest" href="/manifest.json" />
@@ -79,13 +94,43 @@ const websiteSchema = {
 		<script src="https://analytics.ahrefs.com/analytics.js" data-key="qIzc0UIE/OnCN8g4tBDXNQ" async></script>
 		<style>
 			:root {
-				--color-ink: #e8e6e3;
-				--color-paper: #0a0a0b;
-				--color-muted: #8a8a8a;
-				--color-accent: #e85d4c;
-				--color-accent-hover: #f06b5a;
+				--color-ink: #1d1c1a;
+				--color-paper: #f7f5f1;
+				--color-muted: #6d6861;
+				--color-accent: #c94f40;
+				--color-accent-hover: #aa3f33;
+				--color-border: rgba(29, 28, 26, 0.12);
+				--color-border-strong: rgba(29, 28, 26, 0.28);
+				--color-surface: rgba(255, 255, 255, 0.5);
+				--color-surface-hover: rgba(255, 255, 255, 0.82);
 				--font-display: 'Instrument Serif', Georgia, serif;
 				--font-body: 'DM Sans', system-ui, sans-serif;
+			}
+
+			html[data-theme="dark"] {
+				--color-ink: #e8e6e3;
+				--color-paper: #0a0a0b;
+				--color-muted: #96928d;
+				--color-accent: #e85d4c;
+				--color-accent-hover: #f06b5a;
+				--color-border: rgba(232, 230, 227, 0.12);
+				--color-border-strong: rgba(232, 230, 227, 0.28);
+				--color-surface: rgba(255, 255, 255, 0.025);
+				--color-surface-hover: rgba(255, 255, 255, 0.055);
+			}
+
+			@media (prefers-color-scheme: dark) {
+				:root:not([data-theme]) {
+					--color-ink: #e8e6e3;
+					--color-paper: #0a0a0b;
+					--color-muted: #96928d;
+					--color-accent: #e85d4c;
+					--color-accent-hover: #f06b5a;
+					--color-border: rgba(232, 230, 227, 0.12);
+					--color-border-strong: rgba(232, 230, 227, 0.28);
+					--color-surface: rgba(255, 255, 255, 0.025);
+					--color-surface-hover: rgba(255, 255, 255, 0.055);
+				}
 			}
 
 			* {
@@ -96,6 +141,7 @@ const websiteSchema = {
 
 			html {
 				scroll-behavior: smooth;
+				background: var(--color-paper);
 			}
 
 			body {
@@ -105,6 +151,7 @@ const websiteSchema = {
 				line-height: 1.6;
 				-webkit-font-smoothing: antialiased;
 				-moz-osx-font-smoothing: grayscale;
+				transition: background-color 180ms ease, color 180ms ease;
 			}
 
 			::selection {
@@ -160,6 +207,21 @@ const websiteSchema = {
 			.delay-4 { animation-delay: 0.4s; }
 			.delay-5 { animation-delay: 0.5s; }
 			.delay-6 { animation-delay: 0.6s; }
+
+			@media (prefers-reduced-motion: reduce) {
+				html {
+					scroll-behavior: auto;
+				}
+
+				body,
+				.animate-fade-up,
+				.animate-fade-in,
+				.animate-scale-in {
+					animation: none !important;
+					opacity: 1;
+					transition: none;
+				}
+			}
 		</style>
 	</head>
 	<body>
