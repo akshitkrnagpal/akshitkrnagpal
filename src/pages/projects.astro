@@ -4,8 +4,10 @@ import Layout from "../layouts/Layout.astro";
 const githubRepositories = [
   "typesensekit/typesensekit",
   "offerkit/offerkit",
+  "prosewire/prosewire",
   "akshitkrnagpal/edgepush",
   "akshitkrnagpal/revcat",
+  "akshitkrnagpal/namescout",
   "open-placeholder/open-placeholder",
   "akshitkrnagpal/secret-desk",
   "akshitkrnagpal/env-doctor",
@@ -46,10 +48,10 @@ const githubStars = Object.fromEntries(
 const featuredProjects = [
   {
     name: "PromptLens",
-    eyebrow: "Autonomous AI reliability",
+    eyebrow: "AI regression detection",
     description:
-      "An autonomous reliability engineer for production LLM systems. Continuously evaluate behavior, catch regressions, investigate failures, and make confident release decisions.",
-    tags: ["AI Reliability", "Continuous Evals", "Release Decisions"],
+      "Compare prompt and model changes against a known-good baseline, inspect which test cases regressed and why, and share evidence-backed release decisions before production.",
+    tags: ["LLM Evals", "Regression Testing", "Release Decisions"],
     labels: ["Active", "Early access"],
     image: "https://www.promptlens.io/icon-512.png",
     repo: null,
@@ -67,6 +69,21 @@ const featuredProjects = [
     links: [
       { label: "Visit", href: "https://offerkit.dev", primary: true },
       { label: "GitHub", href: "https://github.com/offerkit/offerkit" },
+    ],
+  },
+  {
+    name: "Prosewire",
+    eyebrow: "Publishing for existing websites",
+    description:
+      "Open-source publishing that adds a full blog to an existing website. Use native Next.js or Astro routes, embed it anywhere, self-host the stack, or use Prosewire Cloud.",
+    tags: ["Publishing", "Next.js & Astro", "MCP"],
+    labels: ["Active", "Open Source", "Self-hostable"],
+    image: "https://prosewire.com/icon.png",
+    repo: "prosewire/prosewire",
+    links: [
+      { label: "Visit", href: "https://prosewire.com", primary: true },
+      { label: "Demo", href: "https://demo.prosewire.com" },
+      { label: "GitHub", href: "https://github.com/prosewire/prosewire" },
     ],
   },
   {
@@ -103,7 +120,7 @@ const featuredProjects = [
     description:
       "Push notifications for iOS and Android on Cloudflare Workers. BYO APNs and FCM credentials, encrypted at rest. Free hosted tier or self-host on your own account.",
     tags: ["Push Notifications", "Cloudflare Workers", "AGPL-3.0"],
-    labels: ["Open Source", "Self-hostable"],
+    labels: ["Stable", "Open Source", "Self-hostable"],
     icon: "dot",
     iconBg: "#000000",
     iconText: "",
@@ -118,12 +135,15 @@ const featuredProjects = [
     name: "HookBell",
     eyebrow: "Instant webhook push notifications",
     description:
-      "Never miss a webhook again. Get human-readable push notifications on your phone when webhooks fire from services like Stripe, Clerk, Supabase, and more.",
+      "Know the instant someone signs up, pays, or churns. HookBell turns webhooks from Stripe, Clerk, Supabase, and more into rich, human-readable push notifications.",
     tags: ["Webhooks", "Developer Tools", "Mobile"],
     labels: ["Production"],
     image: "https://hookbell.com/icon-512.png",
     repo: null,
-    links: [{ label: "Visit", href: "https://hookbell.com", primary: true }],
+    links: [
+      { label: "Visit", href: "https://hookbell.com", primary: true },
+      { label: "App Store", href: "https://apps.apple.com/us/app/hookbell/id6760628465" },
+    ],
   },
 ];
 
@@ -133,6 +153,14 @@ const featured = featuredProjects.map((project) => ({
 }));
 
 const smallerProjects = [
+  {
+    name: "namescout",
+    description:
+      "Check product-name availability across domains, npm package and organization namespaces, and GitHub handles from one command.",
+    tags: ["Go", "CLI", "Developer Tools"],
+    repo: "akshitkrnagpal/namescout",
+    href: "https://github.com/akshitkrnagpal/namescout",
+  },
   {
     name: "revcat",
     description:
