@@ -5,8 +5,10 @@ import ThemeToggle from "../components/ThemeToggle.astro";
 const githubRepositories = [
   "typesensekit/typesensekit",
   "offerkit/offerkit",
+  "prosewire/prosewire",
   "akshitkrnagpal/edgepush",
   "akshitkrnagpal/revcat",
+  "akshitkrnagpal/namescout",
   "open-placeholder/open-placeholder",
   "akshitkrnagpal/secret-desk",
   "akshitkrnagpal/env-doctor",
@@ -47,10 +49,10 @@ const githubStars = Object.fromEntries(
 const featuredProjects = [
   {
     name: "PromptLens",
-    eyebrow: "Autonomous AI reliability",
+    eyebrow: "AI regression detection",
     description:
-      "Runs continuous evaluations on production LLMs, flags regressions, investigates failures, and supports release decisions.",
-    tags: ["AI Reliability", "Continuous Evals", "Release Decisions"],
+      "Compares prompt and model changes with a known-good baseline, shows which test cases regressed, and records evidence for release decisions.",
+    tags: ["LLM Evals", "Regression Testing", "Release Decisions"],
     labels: ["Active", "Early access"],
     image: "https://www.promptlens.io/icon-512.png",
     repo: null,
@@ -68,6 +70,21 @@ const featuredProjects = [
     links: [
       { label: "Visit", href: "https://offerkit.dev", primary: true },
       { label: "GitHub", href: "https://github.com/offerkit/offerkit" },
+    ],
+  },
+  {
+    name: "Prosewire",
+    eyebrow: "Publishing for existing websites",
+    description:
+      "Open-source publishing that adds a full blog to an existing website. Use native Next.js or Astro routes, embed it anywhere, self-host the stack, or use Prosewire Cloud.",
+    tags: ["Publishing", "Next.js & Astro", "MCP"],
+    labels: ["Active", "Open Source", "Self-hostable"],
+    image: "https://prosewire.com/icon.png",
+    repo: "prosewire/prosewire",
+    links: [
+      { label: "Visit", href: "https://prosewire.com", primary: true },
+      { label: "Demo", href: "https://demo.prosewire.com" },
+      { label: "GitHub", href: "https://github.com/prosewire/prosewire" },
     ],
   },
   {
@@ -104,7 +121,7 @@ const featuredProjects = [
     description:
       "Mobile push notifications on Cloudflare Workers, with your own APNs and FCM credentials. Use the hosted tier or self-host it.",
     tags: ["Push Notifications", "Cloudflare Workers", "AGPL-3.0"],
-    labels: ["Open Source", "Self-hostable"],
+    labels: ["Stable", "Open Source", "Self-hostable"],
     icon: "dot",
     iconBg: "#000000",
     iconText: "",
@@ -119,12 +136,15 @@ const featuredProjects = [
     name: "HookBell",
     eyebrow: "Instant webhook push notifications",
     description:
-      "Turns incoming webhooks from Stripe, Clerk, Supabase, and other services into readable push notifications on your phone.",
+      "Turns Stripe, Clerk, and Supabase webhooks into readable phone notifications for events such as signups, payments, and churn.",
     tags: ["Webhooks", "Developer Tools", "Mobile"],
     labels: ["Production"],
     image: "https://hookbell.com/icon-512.png",
     repo: null,
-    links: [{ label: "Visit", href: "https://hookbell.com", primary: true }],
+    links: [
+      { label: "Visit", href: "https://hookbell.com", primary: true },
+      { label: "App Store", href: "https://apps.apple.com/us/app/hookbell/id6760628465" },
+    ],
   },
 ];
 
@@ -134,6 +154,14 @@ const featured = featuredProjects.map((project) => ({
 }));
 
 const smallerProjects = [
+  {
+    name: "namescout",
+    description:
+      "Check product-name availability across domains, npm package and organization namespaces, and GitHub handles from one command.",
+    tags: ["Go", "CLI", "Developer Tools"],
+    repo: "akshitkrnagpal/namescout",
+    href: "https://github.com/akshitkrnagpal/namescout",
+  },
   {
     name: "revcat",
     description:
@@ -208,7 +236,7 @@ const smaller = smallerProjects.map((project) => ({
             <span class="text-[11px] tabular-nums" style="color: var(--color-muted);">{featured.length}</span>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 mb-10 md:mb-12">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4 mb-10 md:mb-12">
             {featured.map((project, index) => (
               <article class={`project-card group animate-fade-up delay-${Math.min(index + 3, 8)} border transition-all duration-300`}>
                 <div class="p-4 md:p-5 flex flex-col h-full min-h-[16.5rem]">
@@ -263,7 +291,7 @@ const smaller = smallerProjects.map((project) => ({
             <span class="text-[11px] tabular-nums" style="color: var(--color-muted);">{smaller.length}</span>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 mb-8">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4 mb-8">
             {smaller.map((project, index) => (
               <article class={`project-card group animate-fade-up delay-${Math.min(index + 5, 8)} border transition-all duration-300`}>
                 <div class="p-4 md:p-5 flex flex-col h-full">
