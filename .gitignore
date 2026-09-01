@@ -13,6 +13,9 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+# local browser automation artifacts
+.playwright-cli/
+
 # environment variables
 .env
 .env.production

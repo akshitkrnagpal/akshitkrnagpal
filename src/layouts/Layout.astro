@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import HireFloat from "../components/HireFloat.astro";
 
 interface Props {
 	title?: string;
@@ -7,8 +8,8 @@ interface Props {
 }
 
 const {
-	title = "Akshit Kr Nagpal | AI Engineer, Agents & Evals",
-	description = "AI-native software engineer building AI agents, evals, developer tools, and production full-stack systems.",
+	title = "Akshit Kr Nagpal | AI Engineer · Agents & Evals",
+	description = "Software engineer building AI agents, eval systems, developer tools, and production products.",
 } = Astro.props;
 
 const siteUrl = "https://akshit.io";
@@ -23,7 +24,7 @@ const personSchema = {
 	name: "Akshit Kr Nagpal",
 	url: siteUrl,
 	image: avatarUrl,
-	jobTitle: "AI Engineer, Agents and Evals",
+	jobTitle: "AI Engineer",
 	sameAs: [
 		"https://github.com/akshitkrnagpal",
 		"https://linkedin.com/in/akshitkrnagpal",
@@ -226,5 +227,6 @@ const websiteSchema = {
 	</head>
 	<body>
 		<slot />
+		<HireFloat />
 	</body>
 </html>
