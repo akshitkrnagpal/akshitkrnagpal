@@ -49,10 +49,10 @@ const githubStars = Object.fromEntries(
 const featuredProjects = [
   {
     name: "PromptLens",
-    eyebrow: "AI regression detection",
+    eyebrow: "Evals for AI releases",
     description:
-      "Compares prompt and model changes with a known-good baseline, shows which test cases regressed, and records evidence for release decisions.",
-    tags: ["LLM Evals", "Regression Testing", "Release Decisions"],
+      "Tests prompt and model changes against a known-good baseline, finds behavioral regressions, and gives teams evidence to ship, block, or roll back a release.",
+    tags: ["AI Evals", "Regression Testing", "Release Decisions"],
     labels: ["Active", "Early access"],
     image: "https://www.promptlens.io/icon-512.png",
     repo: null,
@@ -60,9 +60,9 @@ const featuredProjects = [
   },
   {
     name: "OfferKit",
-    eyebrow: "Self-hostable promotion engine",
+    eyebrow: "Agent-ready commerce infrastructure",
     description:
-      "A self-hostable engine for coupons, loyalty, gift cards, referrals, and customer segments, with tools built for AI agents.",
+      "Self-hostable infrastructure for coupons, gift cards, loyalty, referrals, and segments. Its MCP server labels mutating tools by risk so agent hosts can request the right confirmation.",
     tags: ["Commerce", "Promotions", "MCP"],
     labels: ["Active", "Open Source", "Self-hostable"],
     image: "https://offerkit.dev/icon.webp",
@@ -74,9 +74,9 @@ const featuredProjects = [
   },
   {
     name: "Prosewire",
-    eyebrow: "Publishing for existing websites",
+    eyebrow: "Agent-ready publishing infrastructure",
     description:
-      "Open-source publishing that adds a full blog to an existing website. Use native Next.js or Astro routes, embed it anywhere, self-host the stack, or use Prosewire Cloud.",
+      "Open-source publishing for existing Next.js and Astro sites. Its dashboard, API, SDK, CLI, and MCP server share one publishing model, with scoped keys and audited mutations for agents.",
     tags: ["Publishing", "Next.js & Astro", "MCP"],
     labels: ["Active", "Open Source", "Self-hostable"],
     image: "https://prosewire.com/icon.png",
@@ -103,9 +103,9 @@ const featuredProjects = [
   },
   {
     name: "TypesenseKit",
-    eyebrow: "Typesense CLI & MCP server",
+    eyebrow: "Search operations for AI agents",
     description:
-      "95 typed Typesense operations for humans and AI agents—one CLI and MCP server, read-only by default.",
+      "A CLI and MCP server with 95 typed Typesense operations for people and AI agents. It defaults to read-only access, so write operations must be enabled explicitly.",
     tags: ["Typesense", "CLI", "MCP", "95 Operations"],
     labels: ["Active", "Open Source"],
     image: "https://typesensekit.vercel.app/images/typesensekit-robot-favicon-180.png",
@@ -197,8 +197,8 @@ const smaller = smallerProjects.map((project) => ({
 ---
 
 <Layout
-  title="Projects – Akshit Kr Nagpal"
-  description="Products and open-source developer tools built by Akshit Kr Nagpal."
+  title="AI systems and software | Akshit Kr Nagpal"
+  description="AI agents, eval infrastructure, open-source developer tools, and production software built by Akshit Kr Nagpal."
 >
   <main class="min-h-dvh relative overflow-hidden">
     <div class="absolute inset-0 opacity-[0.012] pointer-events-none" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%270 0 256 256%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cfilter id=%27noise%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.8%27 numOctaves=%274%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23noise)%27/%3E%3C/svg%3E');"></div>
@@ -210,10 +210,10 @@ const smaller = smallerProjects.map((project) => ({
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
           </svg>
-          Back
+          Home
         </a>
         <div class="flex items-center gap-4">
-          <span class="hidden sm:inline text-xs tracking-[0.18em] uppercase font-medium" style="color: var(--color-muted);">Projects</span>
+          <span class="hidden sm:inline text-xs tracking-[0.18em] uppercase font-medium" style="color: var(--color-muted);">Selected work</span>
           <ThemeToggle />
         </div>
       </nav>
@@ -222,11 +222,11 @@ const smaller = smallerProjects.map((project) => ({
         <div class="max-w-[86rem] mx-auto">
           <header class="grid lg:grid-cols-[minmax(0,0.72fr)_minmax(24rem,0.9fr)] lg:items-end gap-3 lg:gap-12 mb-7 md:mb-8">
             <div>
-              <p class="text-[11px] tracking-[0.28em] uppercase mb-2 animate-fade-up" style="color: var(--color-muted);">Selected work</p>
-              <h1 class="text-4xl md:text-5xl leading-none animate-fade-up delay-1" style="font-family: var(--font-display);">Things I've shipped</h1>
+              <p class="text-[11px] tracking-[0.28em] uppercase mb-2 animate-fade-up" style="color: var(--color-muted);">AI engineering &amp; product work</p>
+              <h1 class="text-4xl md:text-5xl leading-none animate-fade-up delay-1" style="font-family: var(--font-display);">AI systems and software I've shipped</h1>
             </div>
             <p class="text-sm md:text-base leading-relaxed max-w-2xl animate-fade-up delay-2" style="color: var(--color-muted);">
-              Products I run and open-source tools I maintain. Each solves a narrow problem, including LLM release testing and mobile push notifications.
+              I build eval infrastructure, tools that agents can use, and production software end to end. The work covers both model behavior and the systems around it.
             </p>
           </header>
 
@@ -286,7 +286,7 @@ const smaller = smallerProjects.map((project) => ({
           </div>
 
           <div class="mb-3 flex items-center gap-4 animate-fade-up delay-5">
-            <span class="text-[11px] tracking-[0.25em] uppercase font-medium" style="color: var(--color-muted);">Tools &amp; Experiments</span>
+            <span class="text-[11px] tracking-[0.25em] uppercase font-medium" style="color: var(--color-muted);">Open-source tools</span>
             <div class="flex-1 h-px" style="background: var(--color-border);"></div>
             <span class="text-[11px] tabular-nums" style="color: var(--color-muted);">{smaller.length}</span>
           </div>
@@ -327,7 +327,7 @@ const smaller = smallerProjects.map((project) => ({
           <div class="flex justify-center animate-fade-up delay-8">
             <a href="https://github.com/akshitkrnagpal" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 px-5 py-2.5 text-sm font-medium border rounded-full transition-all duration-300 hover:bg-[var(--color-ink)] hover:text-[var(--color-paper)]" style="color: var(--color-ink); border-color: var(--color-border-strong);">
               <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
-              More on GitHub
+              See all code
             </a>
           </div>
         </div>

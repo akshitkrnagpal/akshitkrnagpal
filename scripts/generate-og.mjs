@@ -82,7 +82,7 @@ const tree = el('div', {
         textTransform: 'uppercase',
       },
       children: [
-        el('span', { children: 'Portfolio' }),
+        el('span', { children: 'AI engineering portfolio' }),
         el('span', { style: { color: INK, letterSpacing: '2px' }, children: 'akshit.io' }),
       ],
     }),
@@ -157,7 +157,7 @@ const tree = el('div', {
               },
               children: [
                 el('div', { style: { width: '40px', height: '2px', background: ACCENT } }),
-                el('span', { children: 'Software Engineer' }),
+                el('span', { children: 'AI Engineer, Agents & Evals' }),
               ],
             }),
             el('div', {
@@ -169,7 +169,7 @@ const tree = el('div', {
                 lineHeight: 1.4,
                 maxWidth: '600px',
               },
-              children: 'Full-stack engineer. Building developer tools, open source, and AI products.',
+              children: 'AI-native software engineer building agents, evals, and production systems.',
             }),
           ],
         }),
