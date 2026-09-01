@@ -7,8 +7,8 @@ interface Props {
 }
 
 const {
-	title = "Akshit Kr Nagpal – Software Engineer",
-	description = "Portfolio of Akshit Kr Nagpal, a self-taught software engineer passionate about full-stack development, open source, and efficient code.",
+	title = "Akshit Kr Nagpal | AI Engineer, Agents & Evals",
+	description = "AI-native software engineer building AI agents, evals, developer tools, and production full-stack systems.",
 } = Astro.props;
 
 const siteUrl = "https://akshit.io";
@@ -23,13 +23,13 @@ const personSchema = {
 	name: "Akshit Kr Nagpal",
 	url: siteUrl,
 	image: avatarUrl,
-	jobTitle: "Software Engineer",
+	jobTitle: "AI Engineer, Agents and Evals",
 	sameAs: [
 		"https://github.com/akshitkrnagpal",
 		"https://linkedin.com/in/akshitkrnagpal",
 		"https://x.com/akshit_io",
 	],
-	knowsAbout: ["Full-Stack Development", "TypeScript", "React", "Node.js", "Open Source", "AI Development", "Large Language Models", "Agentic Workflows"],
+	knowsAbout: ["AI Agent Engineering", "AI Evaluation", "Large Language Models", "Model Context Protocol", "Full-Stack Development", "TypeScript", "Open Source"],
 };
 
 const websiteSchema = {
@@ -77,7 +77,7 @@ const websiteSchema = {
 		<meta property="og:image" content={ogImageUrl} />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
-		<meta property="og:image:alt" content="Akshit Kr Nagpal, Software Engineer" />
+		<meta property="og:image:alt" content="Akshit Kr Nagpal, AI engineer specializing in agents and evals" />
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content={canonicalUrl} />
 		<!-- Twitter Card Meta Tags -->
@@ -86,7 +86,7 @@ const websiteSchema = {
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={ogImageUrl} />
-		<meta name="twitter:image:alt" content="Akshit Kr Nagpal, Software Engineer" />
+		<meta name="twitter:image:alt" content="Akshit Kr Nagpal, AI engineer specializing in agents and evals" />
 		<!-- Structured Data -->
 		<script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
 		<script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
