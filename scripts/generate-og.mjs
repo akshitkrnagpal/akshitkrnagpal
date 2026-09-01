@@ -157,7 +157,7 @@ const tree = el('div', {
               },
               children: [
                 el('div', { style: { width: '40px', height: '2px', background: ACCENT } }),
-                el('span', { children: 'AI Engineer, Agents & Evals' }),
+                el('span', { children: 'AI Engineer · Agents & Evals' }),
               ],
             }),
             el('div', {
@@ -169,7 +169,7 @@ const tree = el('div', {
                 lineHeight: 1.4,
                 maxWidth: '600px',
               },
-              children: 'AI-native software engineer building agents, evals, and production systems.',
+              children: 'Software engineer building agents, eval systems, and production products.',
             }),
           ],
         }),
