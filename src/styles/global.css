@@ -1,1 +1,52 @@
 @import "tailwindcss";
+
+/* Leave room for the floating control without placing it in the navigation. */
+.page-nav {
+  padding-right: calc(max(1.5rem, env(safe-area-inset-right)) + 3.75rem);
+  min-height: 5.75rem;
+}
+
+/* Capture the new palette immediately, then reveal it through a circular mask. */
+html[data-theme-transition] *,
+html[data-theme-transition] *::before,
+html[data-theme-transition] *::after {
+  transition: none !important;
+}
+
+html[data-theme-transition]::view-transition-old(root),
+html[data-theme-transition]::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+html[data-theme-transition]::view-transition-old(root) {
+  z-index: 1;
+}
+
+html[data-theme-transition]::view-transition-new(root) {
+  z-index: 2;
+}
+
+/* Dark mode reveals the new page around a shrinking light snapshot. */
+html[data-theme-transition="dark"]::view-transition-old(root) {
+  z-index: 2;
+}
+
+html[data-theme-transition="dark"]::view-transition-new(root) {
+  z-index: 1;
+}
+
+/* Keep the live control above the radial snapshots so its icons can animate. */
+html[data-theme-transition]::view-transition-group(theme-toggle) {
+  z-index: 3;
+  animation: none;
+}
+
+html[data-theme-transition]::view-transition-old(theme-toggle) {
+  display: none;
+}
+
+html[data-theme-transition]::view-transition-new(theme-toggle) {
+  animation: none;
+  mix-blend-mode: normal;
+}

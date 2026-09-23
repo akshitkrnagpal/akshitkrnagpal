@@ -17,6 +17,8 @@
 <script>
 	const storageKey = "theme";
 	const colorScheme = window.matchMedia("(prefers-color-scheme: dark)");
+	const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+	let isTransitioning = false;
 
 	function savedTheme() {
 		try {
@@ -47,6 +49,86 @@
 		});
 	}
 
+	function animateIcons(button: HTMLButtonElement, theme: "light" | "dark") {
+		if (reducedMotion.matches) return;
+		const direction = theme === "dark" ? 1 : -1;
+		button.querySelectorAll<SVGElement>(".theme-toggle__icon").forEach((icon) => {
+			const entering = icon.classList.contains("theme-toggle__sun") === (theme === "dark");
+			icon.getAnimations().forEach((animation) => animation.cancel());
+			icon.animate(
+				entering
+					? [
+						{ opacity: 0, transform: `rotate(${-90 * direction}deg) scale(0.4)` },
+						{ opacity: 1, transform: "rotate(0deg) scale(1)" },
+					]
+					: [
+						{ opacity: 1, transform: "rotate(0deg) scale(1)" },
+						{ opacity: 0, transform: `rotate(${90 * direction}deg) scale(0.4)` },
+					],
+				{ duration: 500, easing: "cubic-bezier(0.22, 1, 0.36, 1)" },
+			);
+		});
+	}
+
+	async function toggleTheme(button: HTMLButtonElement) {
+		if (isTransitioning) return;
+		const root = document.documentElement;
+		const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
+
+		if (reducedMotion.matches || !document.startViewTransition) {
+			setTheme(nextTheme, true);
+			animateIcons(button, nextTheme);
+			return;
+		}
+
+		const { left, top, width, height } = button.getBoundingClientRect();
+		const x = left + width / 2;
+		const y = top + height / 2;
+		const radius = Math.hypot(
+			Math.max(x, window.innerWidth - x),
+			Math.max(y, window.innerHeight - y),
+		);
+
+		isTransitioning = true;
+		root.dataset.themeTransition = nextTheme;
+		const transition = document.startViewTransition(() => setTheme(nextTheme, true));
+		let reveal: Animation | undefined;
+
+		try {
+			await transition.ready;
+			animateIcons(button, nextTheme);
+			const circle = [
+				`circle(${width / 2}px at ${x}px ${y}px)`,
+				`circle(${radius}px at ${x}px ${y}px)`,
+			];
+			reveal = root.animate(
+				{
+					clipPath: nextTheme === "light" ? circle : circle.reverse(),
+				},
+				{
+					duration: 650,
+					// Keep the final mask until the browser removes the snapshots.
+					fill: "forwards",
+					easing: "cubic-bezier(0.4, 0, 0.2, 1)",
+					pseudoElement: nextTheme === "light"
+						? "::view-transition-new(root)"
+						: "::view-transition-old(root)",
+				},
+			);
+			await reveal.finished;
+		} catch {
+			// A skipped transition still needs to apply the selected theme.
+			transition.skipTransition();
+			setTheme(nextTheme, true);
+		} finally {
+			await transition.finished;
+			// Filled animations survive their snapshots and can affect the next toggle.
+			reveal?.cancel();
+			delete root.dataset.themeTransition;
+			isTransitioning = false;
+		}
+	}
+
 	function setupThemeToggle() {
 		const theme = document.documentElement.dataset.theme === "dark" ? "dark" : "light";
 		setTheme(theme);
@@ -54,10 +136,7 @@
 		document.querySelectorAll<HTMLButtonElement>("[data-theme-toggle]").forEach((button) => {
 			if (button.dataset.themeToggleReady === "true") return;
 			button.dataset.themeToggleReady = "true";
-			button.addEventListener("click", () => {
-				const currentTheme = document.documentElement.dataset.theme === "dark" ? "dark" : "light";
-				setTheme(currentTheme === "dark" ? "light" : "dark", true);
-			});
+			button.addEventListener("click", () => toggleTheme(button));
 		});
 	}
 
@@ -79,14 +158,20 @@
 
 <style>
 	.theme-toggle {
+		position: fixed;
+		top: max(1.5rem, env(safe-area-inset-top));
+		right: max(1.5rem, env(safe-area-inset-right));
+		z-index: 50;
+		view-transition-name: theme-toggle;
 		display: inline-grid;
-		width: 2.25rem;
-		height: 2.25rem;
+		width: 2.75rem;
+		height: 2.75rem;
 		place-items: center;
 		flex: none;
 		border: 1px solid var(--color-border);
 		border-radius: 999px;
-		background: var(--color-surface);
+		background: var(--color-paper);
+		box-shadow: 0 4px 16px rgb(0 0 0 / 0.08);
 		color: var(--color-ink);
 		cursor: pointer;
 		transition: border-color 180ms ease, background-color 180ms ease, transform 180ms ease;
@@ -104,6 +189,7 @@
 	}
 
 	.theme-toggle__icon {
+		grid-area: 1 / 1;
 		width: 1rem;
 		height: 1rem;
 		fill: none;
@@ -111,16 +197,17 @@
 		stroke-linecap: round;
 		stroke-linejoin: round;
 		stroke-width: 1.5;
+		transform-origin: center;
 	}
 
 	.theme-toggle__sun,
 	:global(html[data-theme="dark"]) .theme-toggle__moon {
-		display: none;
+		opacity: 0;
 	}
 
 	.theme-toggle__moon,
 	:global(html[data-theme="dark"]) .theme-toggle__sun {
-		display: block;
+		opacity: 1;
 	}
 
 	@media (prefers-reduced-motion: reduce) {

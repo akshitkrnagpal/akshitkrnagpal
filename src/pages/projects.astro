@@ -1,6 +1,5 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import ThemeToggle from "../components/ThemeToggle.astro";
 
 interface ProjectLink {
   label: string;
@@ -288,7 +287,7 @@ const sections: ProjectSection[] = [
     <div class="absolute top-[-12rem] -right-32 w-[50vw] h-[50vw] max-w-[700px] max-h-[700px] rounded-full opacity-[0.035] blur-3xl" style="background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);"></div>
 
     <div class="relative z-10 min-h-dvh flex flex-col">
-      <nav class="w-full px-5 md:px-10 lg:px-14 py-5 flex justify-between items-center animate-fade-in">
+      <nav class="page-nav w-full px-5 md:px-10 lg:px-14 py-5 flex justify-between items-center animate-fade-in">
         <a href="/" class="text-sm tracking-wide font-medium transition-colors duration-300 hover:opacity-70 flex items-center gap-2" style="color: var(--color-ink);">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
@@ -297,7 +296,6 @@ const sections: ProjectSection[] = [
         </a>
         <div class="flex items-center gap-4">
           <span class="hidden sm:inline text-xs tracking-[0.18em] uppercase font-medium" style="color: var(--color-muted);">Selected work</span>
-          <ThemeToggle />
         </div>
       </nav>
 
