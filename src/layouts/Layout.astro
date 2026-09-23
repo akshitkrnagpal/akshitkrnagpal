@@ -98,8 +98,8 @@ const websiteSchema = {
 				--color-ink: #1d1c1a;
 				--color-paper: #f7f5f1;
 				--color-muted: #6d6861;
-				--color-accent: #c94f40;
-				--color-accent-hover: #aa3f33;
+				--color-accent: var(--color-ink);
+				--color-accent-hover: var(--color-muted);
 				--color-border: rgba(29, 28, 26, 0.12);
 				--color-border-strong: rgba(29, 28, 26, 0.28);
 				--color-surface: rgba(255, 255, 255, 0.5);
@@ -112,8 +112,8 @@ const websiteSchema = {
 				--color-ink: #e8e6e3;
 				--color-paper: #0a0a0b;
 				--color-muted: #96928d;
-				--color-accent: #e85d4c;
-				--color-accent-hover: #f06b5a;
+				--color-accent: var(--color-ink);
+				--color-accent-hover: var(--color-muted);
 				--color-border: rgba(232, 230, 227, 0.12);
 				--color-border-strong: rgba(232, 230, 227, 0.28);
 				--color-surface: rgba(255, 255, 255, 0.025);
@@ -125,8 +125,8 @@ const websiteSchema = {
 					--color-ink: #e8e6e3;
 					--color-paper: #0a0a0b;
 					--color-muted: #96928d;
-					--color-accent: #e85d4c;
-					--color-accent-hover: #f06b5a;
+					--color-accent: var(--color-ink);
+					--color-accent-hover: var(--color-muted);
 					--color-border: rgba(232, 230, 227, 0.12);
 					--color-border-strong: rgba(232, 230, 227, 0.28);
 					--color-surface: rgba(255, 255, 255, 0.025);
@@ -157,7 +157,7 @@ const websiteSchema = {
 
 			::selection {
 				background: var(--color-accent);
-				color: white;
+				color: var(--color-paper);
 			}
 
 			@keyframes fadeUp {
