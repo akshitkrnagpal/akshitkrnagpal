@@ -23,7 +23,7 @@ const avatarDataUrl = `data:${avatarType};base64,${avatarBytes.toString('base64'
 const PAPER = '#0a0a0b'
 const INK = '#e8e6e3'
 const MUTED = '#8a8a8a'
-const ACCENT = '#e85d4c'
+const ACCENT = INK
 const COOL = '#4a90d9'
 
 const el = (type, props) => ({ type, props })
@@ -174,16 +174,6 @@ const tree = el('div', {
           ],
         }),
       ],
-    }),
-    el('div', {
-      style: {
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        height: '4px',
-        background: `linear-gradient(90deg, transparent 0%, ${ACCENT} 50%, transparent 100%)`,
-      },
     }),
   ],
 })
