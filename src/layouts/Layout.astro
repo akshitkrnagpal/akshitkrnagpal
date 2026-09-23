@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import ThemeToggle from "../components/ThemeToggle.astro";
 
 interface Props {
 	title?: string;
@@ -225,6 +226,7 @@ const websiteSchema = {
 		</style>
 	</head>
 	<body>
+		<ThemeToggle />
 		<slot />
 	</body>
 </html>
