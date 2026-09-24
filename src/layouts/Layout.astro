@@ -59,6 +59,11 @@ const websiteSchema = {
 				document.documentElement.dataset.theme = theme;
 				document.documentElement.style.colorScheme = theme;
 			})();
+
+			// Entrance animations would hide morphing elements, so let the page transition animate instead.
+			window.addEventListener("pagereveal", (event) => {
+				if (event.viewTransition) document.documentElement.dataset.navigated = "";
+			});
 		</script>
 		<link rel="icon" href="/favicon.ico" sizes="any">
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -206,6 +211,13 @@ const websiteSchema = {
 			.delay-2 { animation-delay: 0.2s; }
 			.delay-3 { animation-delay: 0.3s; }
 			.delay-4 { animation-delay: 0.4s; }
+
+			html[data-navigated] .animate-fade-up,
+			html[data-navigated] .animate-fade-in,
+			html[data-navigated] .animate-scale-in {
+				animation: none;
+				opacity: 1;
+			}
 
 			@media (prefers-reduced-motion: reduce) {
 				html {
