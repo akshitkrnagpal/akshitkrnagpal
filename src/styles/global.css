@@ -1,11 +1,5 @@
 @import "tailwindcss";
 
-/* Leave room for the floating control without placing it in the navigation. */
-.page-nav {
-  padding-right: calc(max(1.5rem, env(safe-area-inset-right)) + 3.75rem);
-  min-height: 5.75rem;
-}
-
 /* Capture the new palette immediately, then reveal it through a circular mask. */
 html[data-theme-transition] *,
 html[data-theme-transition] *::before,
