@@ -14,41 +14,25 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 This is an Astro-based personal portfolio website with the following key architectural patterns:
 
 ### Tech Stack
-- **Framework**: Astro 5.x with TypeScript (strict mode)
-- **Styling**: Tailwind CSS 4.x with Vite plugin integration
-- **Interactive elements**: Alpine.js (loaded via CDN)
-- **Icons**: simple-icons-astro package for social media icons
-- **Analytics**: Ahrefs Analytics integration
-- **Build**: Astro's built-in build system with sitemap generation
+- **Framework**: Astro with TypeScript (strict mode)
+- **Styling**: Tailwind CSS 4.x via the Vite plugin, plus scoped `<style>` blocks
+- **Images**: `astro:assets` (sharp) for project previews in `src/assets/projects/`
+- **Page transitions**: native cross-document view transitions (`@view-transition` in `global.css`)
+- **Analytics**: Ahrefs Analytics
 
 ### Project Structure
-- `src/layouts/Layout.astro` - Main layout component with meta tags, analytics, and global styles
-- `src/pages/index.astro` - Homepage with personal info and work experience section
-- `src/components/simple-icons/` - Social media icon components (GitHub, LinkedIn, X)
-- `src/styles/global.css` - Global CSS imports (primarily Tailwind)
-- `astro.config.mjs` - Astro configuration with Tailwind and sitemap integrations
+- `src/layouts/Layout.astro` - Meta tags, theme bootstrap, color tokens, entrance animations
+- `src/pages/index.astro` - Hero plus the first three featured projects
+- `src/pages/projects.astro` - All featured projects plus a compact list of smaller ones
+- `src/data/projects.ts` - Single source of project data (`featured` with preview images, `more` as rows)
+- `src/components/ProjectCard.astro` - Preview card shared by both pages
+- `src/components/ThemeToggle.astro` - Floating light/dark toggle with radial view transition
+- `scripts/generate-og.mjs` - Generates `public/og.png`
 
 ### Key Patterns
-
-**Astro Components**: Components use the `.astro` extension with frontmatter (---) for imports and logic, followed by template markup.
-
-**Interactive Elements**: Uses Alpine.js for client-side interactivity (expandable work experience cards). Alpine directives like `x-data`, `x-show`, and `@click` handle state and interactions.
-
-**Icon System**: Custom wrapper components around simple-icons-astro that extend a base layout component for consistent styling and accessibility.
-
-**Styling Approach**: 
-- Inline Tailwind classes for styling
-- Custom CSS classes for specific design tokens (colors like `#222`, `#444`)
-- Responsive design with mobile-first approach
-
-**SEO & Performance**:
-- Comprehensive meta tags in Layout.astro
-- Sitemap generation via @astrojs/sitemap
-- Optimized images and semantic HTML
-- Canonical domain configuration (akshit.io)
-
-### Content Management
-Work experience data is hardcoded in the main page component with Alpine.js for expand/collapse functionality. Each job includes title, duration, tech stack tags, and detailed descriptions.
+- Colors come from CSS variables (`--color-ink`, `--color-paper`, `--color-muted`, `--color-border`, ...) defined in `Layout.astro` for light and dark themes.
+- Elements sharing a `view-transition-name` (avatar, `preview-<slug>`) morph between pages.
+- To add a project, add an entry to `src/data/projects.ts`; featured ones need a 1200x630 preview image in `src/assets/projects/`.
 
 ### Deployment Configuration
 - Site URL configured as "https://akshit.io"

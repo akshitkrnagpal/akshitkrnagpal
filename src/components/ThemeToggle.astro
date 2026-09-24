@@ -134,8 +134,6 @@
 		setTheme(theme);
 
 		document.querySelectorAll<HTMLButtonElement>("[data-theme-toggle]").forEach((button) => {
-			if (button.dataset.themeToggleReady === "true") return;
-			button.dataset.themeToggleReady = "true";
 			button.addEventListener("click", () => toggleTheme(button));
 		});
 	}
@@ -152,7 +150,6 @@
 		setTheme(theme);
 	});
 
-	document.addEventListener("astro:page-load", setupThemeToggle);
 	setupThemeToggle();
 </script>
 

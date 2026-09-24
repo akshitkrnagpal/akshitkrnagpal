@@ -1,489 +1,89 @@
 ---
 import Layout from "../layouts/Layout.astro";
-
-interface ProjectLink {
-  label: string;
-  href: string;
-}
-
-interface Project {
-  name: string;
-  eyebrow: string;
-  description: string;
-  label: string;
-  image?: string;
-  links: ProjectLink[];
-}
-
-interface ProjectSection {
-  id: string;
-  title: string;
-  description: string;
-  featured?: boolean;
-  projects: Project[];
-  tools?: { name: string; description: string; links: ProjectLink[] }[];
-}
-
-const sections: ProjectSection[] = [
-  {
-    "id": "products",
-    "title": "Products",
-    "description": "Platforms for teams and businesses.",
-    "projects": [
-      {
-        "name": "PromptLens",
-        "eyebrow": "AI evals",
-        "description": "Catch prompt and model regressions before your next release.",
-        "label": "Early access",
-        "links": [
-          {
-            "label": "Visit",
-            "href": "https://www.promptlens.io"
-          }
-        ],
-        "image": "https://www.promptlens.io/icon-512.png"
-      },
-      {
-        "name": "OfferKit",
-        "eyebrow": "Commerce infrastructure",
-        "description": "Coupons, loyalty, gift cards, and referrals for your product.",
-        "label": "Open source",
-        "links": [
-          {
-            "label": "Visit",
-            "href": "https://offerkit.dev"
-          },
-          {
-            "label": "GitHub",
-            "href": "https://github.com/offerkit/offerkit"
-          }
-        ],
-        "image": "https://offerkit.dev/icon.webp"
-      },
-      {
-        "name": "Prosewire",
-        "eyebrow": "Publishing",
-        "description": "Add a publishing workflow to the website you already have.",
-        "label": "Open source",
-        "links": [
-          {
-            "label": "Visit",
-            "href": "https://prosewire.com"
-          },
-          {
-            "label": "Demo",
-            "href": "https://demo.prosewire.com"
-          },
-          {
-            "label": "GitHub",
-            "href": "https://github.com/prosewire/prosewire"
-          }
-        ],
-        "image": "https://prosewire.com/icon.png"
-      }
-    ]
-  },
-  {
-    "id": "apps",
-    "title": "Apps",
-    "description": "Small, useful apps for everyday life.",
-    "projects": [
-      {
-        "name": "HookBell",
-        "eyebrow": "Webhook notifications",
-        "description": "Signups, payments, and churn. Straight to your phone.",
-        "label": "iOS",
-        "links": [
-          {
-            "label": "Visit",
-            "href": "https://hookbell.com"
-          },
-          {
-            "label": "App Store",
-            "href": "https://apps.apple.com/us/app/hookbell/id6760628465"
-          }
-        ],
-        "image": "https://hookbell.com/icon-512.png"
-      },
-      {
-        "name": "Zuply",
-        "eyebrow": "Supplement reminders",
-        "description": "A simpler daily routine, with reminders and private iCloud sync.",
-        "label": "iOS · Free",
-        "links": [
-          {
-            "label": "App Store",
-            "href": "https://apps.apple.com/us/app/zuply/id6805640899"
-          }
-        ],
-        "image": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/b9/91/a8/b991a856-0d39-f9f7-229b-557ac35e3bf2/AppIcon-0-0-1x_U007ephone-0-1-85-220.png/512x512bb.jpg"
-      },
-      {
-        "name": "Fast36",
-        "eyebrow": "Fasting tracker",
-        "description": "Fasting sessions, readings, and history across your Apple devices.",
-        "label": "iOS · watchOS",
-        "links": [
-          {
-            "label": "Visit",
-            "href": "https://fast36.app"
-          },
-          {
-            "label": "App Store",
-            "href": "https://apps.apple.com/us/app/fast36/id6758402027"
-          }
-        ],
-        "image": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/a8/49/ef/a849ef62-6daf-f0e1-d226-8c113ca9cba9/AppIcon-1x_U007epad-0-1-85-220-0.png/512x512bb.jpg"
-      }
-    ]
-  },
-  {
-    "id": "open-source",
-    "title": "Open source",
-    "description": "Larger projects up front. Focused tools below.",
-    "featured": true,
-    "projects": [
-      {
-        "name": "EdgePush",
-        "eyebrow": "Push infrastructure",
-        "description": "Mobile push notifications on Cloudflare Workers, with your own credentials.",
-        "label": "Self-hostable",
-        "links": [
-          {
-            "label": "Visit",
-            "href": "https://edgepush.dev"
-          },
-          {
-            "label": "GitHub",
-            "href": "https://github.com/akshitkrnagpal/edgepush"
-          }
-        ]
-      },
-      {
-        "name": "TypesenseKit",
-        "eyebrow": "Search operations",
-        "description": "A CLI and MCP server for people and AI agents working with Typesense.",
-        "label": "CLI + MCP",
-        "links": [
-          {
-            "label": "Docs",
-            "href": "https://typesensekit.vercel.app"
-          },
-          {
-            "label": "GitHub",
-            "href": "https://github.com/typesensekit/typesensekit"
-          }
-        ],
-        "image": "https://typesensekit.vercel.app/images/typesensekit-robot-favicon-180.png"
-      },
-      {
-        "name": "nobg",
-        "eyebrow": "Background removal",
-        "description": "Remove backgrounds in your browser or through a self-hostable API.",
-        "label": "Image API",
-        "links": [
-          {
-            "label": "Visit",
-            "href": "https://nobg.akshit.io"
-          },
-          {
-            "label": "GitHub",
-            "href": "https://github.com/akshitkrnagpal/nobg"
-          }
-        ],
-        "image": "https://nobg.akshit.io/brand/nobg-icon-v1.png"
-      }
-    ],
-    "tools": [
-      {
-        "name": "OpenPlaceholder",
-        "description": "Custom placeholder images for prototypes, documentation, and previews.",
-        "links": [
-          {
-            "label": "Visit",
-            "href": "https://www.openplaceholder.com"
-          },
-          {
-            "label": "GitHub",
-            "href": "https://github.com/open-placeholder/open-placeholder"
-          }
-        ]
-      },
-      {
-        "name": "namescout",
-        "description": "Check names across domains, npm, and GitHub.",
-        "links": [
-          {
-            "label": "GitHub",
-            "href": "https://github.com/akshitkrnagpal/namescout"
-          }
-        ]
-      },
-      {
-        "name": "revcat",
-        "description": "Manage RevenueCat from your terminal.",
-        "links": [
-          {
-            "label": "GitHub",
-            "href": "https://github.com/akshitkrnagpal/revcat"
-          },
-          {
-            "label": "Docs",
-            "href": "https://revcat.vercel.app"
-          }
-        ]
-      },
-      {
-        "name": "tsctl",
-        "description": "Manage Typesense resources as code.",
-        "links": [
-          {
-            "label": "GitHub",
-            "href": "https://github.com/akshitkrnagpal/tsctl"
-          }
-        ]
-      },
-      {
-        "name": "tsproxy",
-        "description": "Caching, rate limits, and React search components. Early release.",
-        "links": [
-          {
-            "label": "GitHub",
-            "href": "https://github.com/akshitkrnagpal/tsproxy"
-          }
-        ]
-      },
-      {
-        "name": "secret-desk",
-        "description": "Edit Kubernetes secrets in your browser.",
-        "links": [
-          {
-            "label": "GitHub",
-            "href": "https://github.com/akshitkrnagpal/secret-desk"
-          }
-        ]
-      },
-      {
-        "name": "env-doctor",
-        "description": "Catch mistakes in your .env files.",
-        "links": [
-          {
-            "label": "GitHub",
-            "href": "https://github.com/akshitkrnagpal/env-doctor"
-          }
-        ]
-      }
-    ]
-  }
-];
+import ProjectCard from "../components/ProjectCard.astro";
+import { featured, more } from "../data/projects";
 ---
 
 <Layout
   title="Projects | Akshit Kr Nagpal"
   description="Products and open-source developer tools built by Akshit Kr Nagpal."
 >
-  <main class="min-h-dvh relative overflow-hidden">
-    <div class="absolute inset-0 opacity-[0.012] pointer-events-none" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%270 0 256 256%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cfilter id=%27noise%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.8%27 numOctaves=%274%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23noise)%27/%3E%3C/svg%3E');"></div>
-    <div class="absolute top-[-12rem] -right-32 w-[50vw] h-[50vw] max-w-[700px] max-h-[700px] rounded-full opacity-[0.035] blur-3xl" style="background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);"></div>
+  <main class="px-6 md:px-12 pb-20">
+    <nav class="page-nav max-w-6xl mx-auto flex items-center animate-fade-in">
+      <a href="/" class="flex items-center gap-3 text-sm font-medium hover:opacity-70 transition-opacity">
+        <img
+          src="https://avatars.githubusercontent.com/u/15872348"
+          alt=""
+          width="32"
+          height="32"
+          class="w-8 h-8 rounded-full object-cover"
+          style="view-transition-name: avatar"
+        />
+        Akshit Kr Nagpal
+      </a>
+    </nav>
 
-    <div class="relative z-10 min-h-dvh flex flex-col">
-      <nav class="page-nav w-full px-5 md:px-10 lg:px-14 py-5 flex justify-between items-center animate-fade-in">
-        <a href="/" class="text-sm tracking-wide font-medium transition-colors duration-300 hover:opacity-70 flex items-center gap-2" style="color: var(--color-ink);">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-          </svg>
-          Home
-        </a>
-        <div class="flex items-center gap-4">
-          <span class="hidden sm:inline text-xs tracking-[0.18em] uppercase font-medium" style="color: var(--color-muted);">Selected work</span>
-        </div>
-      </nav>
+    <div class="max-w-6xl mx-auto">
+      <header class="pt-8 md:pt-12 mb-12 md:mb-16 max-w-2xl">
+        <h1 class="text-5xl md:text-6xl leading-none mb-4 animate-fade-up" style="font-family: var(--font-display);">Projects</h1>
+        <p class="text-base md:text-lg leading-relaxed text-[var(--color-muted)] animate-fade-up delay-1">
+          Products I run and open-source tools I maintain, spanning AI evals, commerce, publishing, search, developer infrastructure, and mobile.
+        </p>
+      </header>
 
-      <div class="flex-1 px-5 md:px-10 lg:px-14 pt-3 md:pt-5 pb-12">
-        <div class="max-w-[86rem] mx-auto">
-          <header class="grid lg:grid-cols-[minmax(0,0.72fr)_minmax(24rem,0.9fr)] lg:items-end gap-3 lg:gap-12 mb-7 md:mb-8">
-            <div>
-              <p class="text-[11px] tracking-[0.28em] uppercase mb-2 animate-fade-up" style="color: var(--color-muted);">Selected projects</p>
-              <h1 class="text-4xl md:text-5xl leading-none animate-fade-up delay-1" style="font-family: var(--font-display);">Projects I've shipped</h1>
-            </div>
-            <p class="text-sm md:text-base leading-relaxed max-w-2xl animate-fade-up delay-2" style="color: var(--color-muted);">
-              Products I run and open-source tools I maintain, spanning AI evals, commerce, publishing, search, developer infrastructure, and mobile.
-            </p>
-          </header>
-
-          {sections.map((section) => (
-            <section class="project-section" id={section.id} aria-labelledby={`${section.id}-title`}>
-              <header class="section-heading">
-                <h2 id={`${section.id}-title`}>{section.title}</h2>
-                <p>{section.description}</p>
-              </header>
-              <div class="section-content">
-                {section.featured && <p class="group-label">Featured projects</p>}
-                <div class="project-grid">
-                  {section.projects.map((project) => (
-                    <article class="project-card">
-                      <div class="card-heading">
-                        <div class:list={["project-icon", { "project-icon--edgepush": project.name === "EdgePush" }]}>
-                          {project.image ? (
-                            <img src={project.image} width="36" height="36" alt="" loading="lazy" decoding="async" />
-                          ) : (
-                            <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
-                              <circle cx="18" cy="18" r="7" fill="#FF6B1A" />
-                            </svg>
-                          )}
-                        </div>
-                        <div>
-                          <h3>{project.name}</h3>
-                          <p class="project-category">{project.eyebrow}</p>
-                        </div>
-                      </div>
-                      <p class="project-description">{project.description}</p>
-                      <div class="card-footer">
-                        <span class="project-label">{project.label}</span>
-                        <div class="project-links">
-                          {project.links.map((link) => (
-                            <a href={link.href} target="_blank" rel="noopener noreferrer" aria-label={`${project.name}: ${link.label}`}>
-                              {link.label}<span aria-hidden="true"> ↗</span>
-                            </a>
-                          ))}
-                        </div>
-                      </div>
-                    </article>
-                  ))}
-                </div>
-                {section.tools && (
-                  <div class="more-projects">
-                    <p class="group-label" id="more-projects-title">More projects &amp; tools</p>
-                    <ul class="project-list" aria-labelledby="more-projects-title">
-                      {section.tools.map((project) => (
-                        <li class="project-row">
-                          <h3><a href={project.links[0].href} target="_blank" rel="noopener noreferrer">{project.name}</a></h3>
-                          <p>{project.description}</p>
-                          <div class="project-links">
-                            {project.links.map((link) => (
-                              <a href={link.href} target="_blank" rel="noopener noreferrer" aria-label={`${project.name}: ${link.label}`}>
-                                {link.label}<span aria-hidden="true"> ↗</span>
-                              </a>
-                            ))}
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
-            </section>
-          ))}
-
-          <div class="flex justify-center animate-fade-up delay-8">
-            <a href="https://github.com/akshitkrnagpal" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 px-5 py-2.5 text-sm font-medium border rounded-full transition-all duration-300 hover:bg-[var(--color-ink)] hover:text-[var(--color-paper)]" style="color: var(--color-ink); border-color: var(--color-border-strong);">
-              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
-              See all code
-            </a>
-          </div>
-        </div>
+      <div class="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+        {featured.map((project, i) => <ProjectCard project={project} index={i} />)}
       </div>
+
+      <section class="mt-24" aria-labelledby="more-title">
+        <h2 id="more-title" class="text-sm tracking-[0.18em] uppercase font-medium text-[var(--color-muted)] mb-4">More apps &amp; tools</h2>
+        <ul class="border-t border-[var(--color-border)]">
+          {more.map((project) => (
+            <li class="row">
+              <a href={project.links[0].href} target="_blank" rel="noopener noreferrer" class="row-name">{project.name}</a>
+              <p>{project.description}</p>
+              <span class="row-tag">{project.tag}</span>
+              <div class="row-links">
+                {project.links.map((link) => (
+                  <a href={link.href} target="_blank" rel="noopener noreferrer" aria-label={`${project.name}: ${link.label}`}>
+                    {link.label}<span aria-hidden="true"> ↗</span>
+                  </a>
+                ))}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <p class="mt-16 text-center text-sm text-[var(--color-muted)]">
+        Everything else lives on <a href="https://github.com/akshitkrnagpal" target="_blank" rel="noopener noreferrer" class="text-[var(--color-ink)] underline underline-offset-4">GitHub</a>.
+      </p>
     </div>
   </main>
 </Layout>
 
 <style>
-  .group-label {
-    font-size: 0.625rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-  }
-
-  h2, .project-card h3 {
-    font-family: var(--font-display);
-    font-weight: 400;
-    line-height: 1.1;
-  }
-
-  h2 { font-size: 1.875rem; }
-  .project-card h3 { font-size: 1.5rem; }
-
-  .project-section {
+  .row {
     display: grid;
-    grid-template-columns: 12.8125rem minmax(0, 1fr);
-    gap: 1.875rem;
-    border-top: 1px solid var(--color-border);
-    padding-top: 1.875rem;
-    margin-bottom: 1.875rem;
-  }
-
-  .section-heading p {
-    max-width: 10.5rem;
-    margin-top: 0.625rem;
-    color: var(--color-muted);
-    font-size: 0.75rem;
-    line-height: 1.7;
-  }
-
-  .section-content { min-width: 0; }
-  .group-label { color: var(--color-muted); margin-bottom: 0.75rem; }
-  .project-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.6875rem; }
-
-  .project-card {
-    display: flex;
-    flex-direction: column;
-    padding: 1rem;
-    border: 1px solid var(--color-border);
-    background: var(--color-surface);
-    transition: border-color 180ms ease, background-color 180ms ease;
-  }
-
-  .project-card:hover {
-    border-color: var(--color-border-strong);
-    background: var(--color-surface-hover);
-  }
-
-  .card-heading { display: flex; align-items: center; gap: 0.625rem; }
-  .card-heading > div:last-child { min-width: 0; }
-  .project-icon { width: 2.25rem; height: 2.25rem; border-radius: 0.5rem; overflow: hidden; flex-shrink: 0; border: 1px solid var(--color-border); }
-  .project-icon img { width: 100%; height: 100%; object-fit: cover; }
-  .project-icon--edgepush { background: #000; }
-  .project-category { font-size: 0.625rem; color: var(--color-muted); margin-top: 0.25rem; }
-  .project-description { flex: 1; font-size: 0.75rem; line-height: 1.65; color: var(--color-muted); margin: 0.875rem 0 1rem; }
-  .card-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.625rem; font-size: 0.625rem; }
-  .project-label { color: var(--color-accent); }
-  .project-links { display: flex; flex-wrap: wrap; gap: 0.375rem 0.75rem; }
-  .project-links a { white-space: nowrap; }
-  .more-projects { margin-top: 1.5rem; }
-  .project-list { list-style: none; }
-
-  .project-row {
-    display: grid;
-    grid-template-columns: 8.75rem minmax(0, 1fr) auto;
+    grid-template-columns: 10rem minmax(0, 1fr) 7rem 10rem;
     align-items: center;
-    gap: 0.625rem;
+    gap: 1rem;
     padding: 0.875rem 0;
     border-bottom: 1px solid var(--color-border);
+    font-size: 0.875rem;
   }
 
-  .project-row h3 { font-size: 0.75rem; font-weight: 500; }
-  .project-row p { font-size: 0.6875rem; color: var(--color-muted); }
-  .project-row .project-links { font-size: 0.625rem; justify-content: end; }
-  .section-content a { text-decoration: none; transition: color 180ms ease; }
-  .section-content a:hover { color: var(--color-accent); }
-  .section-content a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; border-radius: 2px; }
-
-  @media (max-width: 63.99rem) {
-    .project-section { grid-template-columns: minmax(0, 1fr); gap: 1.25rem; }
-    .section-heading p { max-width: none; margin-top: 0.375rem; }
-  }
+  .row-name { font-weight: 500; }
+  .row p { color: var(--color-muted); }
+  .row-tag { font-size: 0.75rem; color: var(--color-muted); }
+  .row-links { display: flex; gap: 1rem; justify-content: end; font-size: 0.8125rem; }
+  .row a { text-decoration: none; }
+  .row a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .row a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; border-radius: 2px; }
 
   @media (max-width: 43.99rem) {
-    .project-grid { grid-template-columns: minmax(0, 1fr); }
-    .project-card { padding: 1.25rem; }
-    .project-category, .card-footer { font-size: 0.6875rem; }
-    .project-description { font-size: 0.8125rem; }
-    .project-row { grid-template-columns: minmax(0, 1fr) auto; gap: 0.375rem 0.75rem; padding: 1rem 0; }
-    .project-row p { grid-column: 1 / -1; grid-row: 2; font-size: 0.75rem; }
-    .project-row .project-links { grid-column: 2; grid-row: 1; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .project-card, .section-content a { transition: none; }
+    .row { grid-template-columns: minmax(0, 1fr) auto; gap: 0.25rem 1rem; }
+    .row p { grid-column: 1 / -1; grid-row: 2; }
+    .row-tag { display: none; }
   }
 </style>
