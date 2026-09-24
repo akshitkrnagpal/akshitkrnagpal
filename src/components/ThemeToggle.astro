@@ -156,7 +156,8 @@
 <style>
 	.theme-toggle {
 		position: fixed;
-		top: max(1.5rem, env(safe-area-inset-top));
+		/* Vertically centered in the 4.75rem homepage navbar. */
+		top: max(1rem, env(safe-area-inset-top));
 		right: max(1.5rem, env(safe-area-inset-right));
 		z-index: 50;
 		view-transition-name: theme-toggle;

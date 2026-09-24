@@ -20,7 +20,7 @@ export interface Project {
   preview?: ImageMetadata;
 }
 
-// Flagship work, shown with a preview image. The first three also appear on the homepage.
+// Flagship work, shown with a preview image.
 export const featured: Project[] = [
   {
     slug: "promptlens",
