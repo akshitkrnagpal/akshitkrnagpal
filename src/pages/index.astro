@@ -31,6 +31,13 @@ const socials = [
         Akshit Kr Nagpal
       </a>
     </div>
+    <div class="navbar-socials">
+      {socials.map((s) => (
+        <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d={s.path} /></svg>
+        </a>
+      ))}
+    </div>
   </nav>
 
   <main id="top" class="px-6 md:px-12 pt-20 md:pt-28 pb-20">
@@ -122,9 +129,29 @@ const socials = [
     font-weight: 500;
     color: inherit;
     text-decoration: none;
+  }
+
+  /* Pinned just left of the floating theme toggle (2.75rem wide). */
+  .navbar-socials {
+    position: absolute;
+    right: calc(max(1.5rem, env(safe-area-inset-right)) + 3.75rem);
+    display: flex;
+    gap: 1rem;
+  }
+
+  .navbar-socials a {
+    display: grid;
+    color: var(--color-muted);
+    transition: color 200ms ease;
+  }
+
+  .navbar-socials a:hover { color: var(--color-ink); }
+  .navbar-socials svg { width: 1.125rem; height: 1.125rem; }
+
+  .navbar-profile,
+  .navbar-socials {
     opacity: 0;
-    transform: translateY(0.75rem) scale(0.9);
-    transform-origin: left center;
+    transform: translateY(0.75rem);
     transition: opacity 300ms ease, transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
@@ -143,7 +170,8 @@ const socials = [
     border-color: var(--color-border);
   }
 
-  :global(html[data-scrolled]) .navbar-profile {
+  :global(html[data-scrolled]) .navbar-profile,
+  :global(html[data-scrolled]) .navbar-socials {
     opacity: 1;
     transform: none;
   }
@@ -196,6 +224,6 @@ const socials = [
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .navbar, .navbar-profile { transition: none; }
+    .navbar, .navbar-profile, .navbar-socials, .navbar-socials a { transition: none; }
   }
 </style>
