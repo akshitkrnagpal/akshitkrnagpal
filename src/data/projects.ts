@@ -144,20 +144,6 @@ export const more: Project[] = [
     links: [{ label: "GitHub", href: "https://github.com/akshitkrnagpal/namescout" }],
   },
   {
-    slug: "tsctl",
-    name: "tsctl",
-    description: "Manage Typesense resources as code.",
-    tag: "CLI",
-    links: [{ label: "GitHub", href: "https://github.com/akshitkrnagpal/tsctl" }],
-  },
-  {
-    slug: "tsproxy",
-    name: "tsproxy",
-    description: "Caching, rate limits, and React search components for Typesense.",
-    tag: "Library",
-    links: [{ label: "GitHub", href: "https://github.com/akshitkrnagpal/tsproxy" }],
-  },
-  {
     slug: "secret-desk",
     name: "secret-desk",
     description: "Edit Kubernetes secrets in your browser.",
