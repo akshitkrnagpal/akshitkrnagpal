@@ -23,6 +23,12 @@ const socials = [
     path: "M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z",
   },
 ];
+
+// The hero intro, one line per entry: each piece of text is followed by a link chip.
+const intro = [
+  [["Browse my code at", "GitHub"]],
+  [["DM me at", "LinkedIn"], [" or", "X"]],
+];
 ---
 
 <Layout>
@@ -62,13 +68,16 @@ const socials = [
       <p class="text-lg md:text-xl leading-relaxed text-[var(--color-muted)] max-w-md mx-auto mb-8 animate-fade-up delay-2">
         {bio}
       </p>
-      <div class="flex justify-center gap-5 animate-fade-up delay-3">
-        {socials.map((s) => (
-          <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} class="text-[var(--color-muted)] transition-colors duration-300 hover:text-[var(--color-ink)]">
-            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d={s.path} /></svg>
-          </a>
+      <p class="intro animate-fade-up delay-3">
+        {intro.map((line) => (
+          <span class="block">
+            {line.map(([text, label]) => {
+              const s = socials.find((s) => s.label === label)!;
+              return <>{text}{" "}<a href={s.href} target="_blank" rel="noopener noreferrer" class="intro-chip"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d={s.path} /></svg>{s.label}</a></>;
+            })}
+          </span>
         ))}
-      </div>
+      </p>
     </section>
 
     <section id="projects" class="max-w-6xl mx-auto mt-20 md:mt-28 scroll-mt-24" aria-labelledby="projects-title">
@@ -152,6 +161,32 @@ const socials = [
 
   .navbar-socials a:hover { color: var(--color-ink); }
   .navbar-socials svg { width: 1.125rem; height: 1.125rem; }
+
+  .intro {
+    max-width: 36rem;
+    margin-inline: auto;
+    line-height: 2.25;
+    color: var(--color-muted);
+  }
+
+  .intro-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    vertical-align: middle;
+    line-height: 1.5;
+    padding: 0.125rem 0.625rem;
+    border-radius: 999px;
+    background: var(--color-surface-hover);
+    border: 1px solid var(--color-border);
+    color: var(--color-ink);
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 200ms ease, color 200ms ease, transform 200ms ease;
+  }
+
+  .intro-chip svg { width: 0.875rem; height: 0.875rem; }
+  .intro-chip:hover { background: var(--color-ink); color: var(--color-paper); transform: translateY(-1px); }
 
   .navbar-profile,
   .navbar-socials {
