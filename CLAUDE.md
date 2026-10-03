@@ -8,6 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Build for production**: `pnpm build` or `npm run build`
 - **Preview production build**: `pnpm preview` or `npm run preview`
 - **Package manager**: This project uses `pnpm` (preferred) but npm also works
+- **Refresh project previews**: `pnpm refresh:previews`, also run automatically by `pnpm build`
 
 ## Architecture Overview
 
@@ -30,6 +31,7 @@ This is an Astro-based personal portfolio website with the following key archite
 ### Key Patterns
 - Colors come from CSS variables (`--color-ink`, `--color-paper`, `--color-muted`, `--color-border`, ...) defined in `Layout.astro` for light and dark themes.
 - To add a project, add an entry to `src/data/projects.ts`; featured ones need a 1200x630 preview image in `src/assets/projects/`.
+- Featured product URLs live in `src/data/project-urls.json`. Before each build, `scripts/fetch-project-previews.mjs` reads each product's `og:image`, downloads it, and saves a PNG in the ignored `src/assets/projects/generated/` directory. Astro optimizes these into local images with content hashes in their filenames. Fetches have a 15-second timeout; failures use the last downloaded image if available, otherwise the checked-in preview. Development uses saved previews; run `pnpm refresh:previews` before starting the dev server to refresh them.
 
 ### Deployment Configuration
 - Site URL configured as "https://akshit.io"

@@ -1,6 +1,9 @@
 # build output
 dist/
 
+# OG images downloaded before each build
+src/assets/projects/generated/
+
 # generated types
 .astro/
 
