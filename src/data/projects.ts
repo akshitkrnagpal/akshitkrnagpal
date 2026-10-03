@@ -5,6 +5,16 @@ import prosewire from "../assets/projects/prosewire.jpg";
 import hookbell from "../assets/projects/hookbell.jpg";
 import edgepush from "../assets/projects/edgepush.png";
 import typesensekit from "../assets/projects/typesensekit.jpg";
+import projectUrls from "./project-urls.json";
+
+const generatedPreviews = import.meta.glob<ImageMetadata>(
+  "../assets/projects/generated/*.png",
+  { eager: true, import: "default" },
+);
+
+function preview(slug: string, fallback: ImageMetadata): ImageMetadata {
+  return generatedPreviews[`../assets/projects/generated/${slug}.png`] ?? fallback;
+}
 
 export interface Link {
   label: string;
@@ -27,17 +37,17 @@ export const featured: Project[] = [
     name: "PromptLens",
     description: "Catch prompt and model regressions before your next release.",
     tag: "AI evals · Early access",
-    preview: promptlens,
-    links: [{ label: "Visit", href: "https://www.promptlens.io" }],
+    preview: preview("promptlens", promptlens),
+    links: [{ label: "Visit", href: projectUrls.promptlens }],
   },
   {
     slug: "offerkit",
     name: "OfferKit",
     description: "Coupons, loyalty, gift cards, and referrals for your product.",
     tag: "Commerce · Open source",
-    preview: offerkit,
+    preview: preview("offerkit", offerkit),
     links: [
-      { label: "Visit", href: "https://offerkit.dev" },
+      { label: "Visit", href: projectUrls.offerkit },
       { label: "GitHub", href: "https://github.com/offerkit/offerkit" },
     ],
   },
@@ -46,9 +56,9 @@ export const featured: Project[] = [
     name: "HookBell",
     description: "Signups, payments, and churn. Straight to your phone.",
     tag: "iOS app",
-    preview: hookbell,
+    preview: preview("hookbell", hookbell),
     links: [
-      { label: "Visit", href: "https://hookbell.com" },
+      { label: "Visit", href: projectUrls.hookbell },
       { label: "App Store", href: "https://apps.apple.com/us/app/hookbell/id6760628465" },
     ],
   },
@@ -57,9 +67,9 @@ export const featured: Project[] = [
     name: "Prosewire",
     description: "Add a publishing workflow to the website you already have.",
     tag: "Publishing · Open source",
-    preview: prosewire,
+    preview: preview("prosewire", prosewire),
     links: [
-      { label: "Visit", href: "https://prosewire.com" },
+      { label: "Visit", href: projectUrls.prosewire },
       { label: "Demo", href: "https://demo.prosewire.com" },
       { label: "GitHub", href: "https://github.com/prosewire/prosewire" },
     ],
@@ -69,9 +79,9 @@ export const featured: Project[] = [
     name: "EdgePush",
     description: "Mobile push notifications on Cloudflare Workers, with your own credentials.",
     tag: "Infrastructure · Self-hostable",
-    preview: edgepush,
+    preview: preview("edgepush", edgepush),
     links: [
-      { label: "Visit", href: "https://edgepush.dev" },
+      { label: "Visit", href: projectUrls.edgepush },
       { label: "GitHub", href: "https://github.com/akshitkrnagpal/edgepush" },
     ],
   },
@@ -80,9 +90,9 @@ export const featured: Project[] = [
     name: "TypesenseKit",
     description: "A CLI and MCP server for people and AI agents working with Typesense.",
     tag: "Search · CLI + MCP",
-    preview: typesensekit,
+    preview: preview("typesensekit", typesensekit),
     links: [
-      { label: "Docs", href: "https://typesensekit.vercel.app" },
+      { label: "Docs", href: projectUrls.typesensekit },
       { label: "GitHub", href: "https://github.com/typesensekit/typesensekit" },
     ],
   },

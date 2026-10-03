@@ -4,7 +4,9 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "node scripts/fetch-project-previews.mjs && astro build",
+    "refresh:previews": "node scripts/fetch-project-previews.mjs",
+    "test": "node --test scripts/*.test.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "gen:og": "node scripts/generate-og.mjs"
@@ -18,6 +20,7 @@
   },
   "devDependencies": {
     "@resvg/resvg-js": "^2.6.2",
+    "node-html-parser": "^9.0.4",
     "satori": "^0.26.0"
   }
 }
