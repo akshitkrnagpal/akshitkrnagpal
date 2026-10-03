@@ -107,6 +107,16 @@ export const more: Project[] = [
     ],
   },
   {
+    slug: "portlessbar",
+    name: "PortlessBar",
+    description: "Open Portless localhost apps and control its proxy from the macOS menu bar.",
+    tag: "macOS · Open source",
+    links: [
+      { label: "Download", href: "https://github.com/akshitkrnagpal/portlessbar/releases/latest" },
+      { label: "GitHub", href: "https://github.com/akshitkrnagpal/portlessbar" },
+    ],
+  },
+  {
     slug: "nobg",
     name: "nobg",
     description: "Remove backgrounds in your browser or through a self-hostable API.",
