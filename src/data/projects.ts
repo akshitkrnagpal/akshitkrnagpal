@@ -1,7 +1,7 @@
 import type { ImageMetadata } from "astro";
 import promptlens from "../assets/projects/promptlens.png";
 import offerkit from "../assets/projects/offerkit.jpg";
-import prosewire from "../assets/projects/prosewire.jpg";
+import zenseo from "../assets/projects/zenseo.png";
 import hookbell from "../assets/projects/hookbell.jpg";
 import edgepush from "../assets/projects/edgepush.png";
 import typesensekit from "../assets/projects/typesensekit.jpg";
@@ -63,16 +63,12 @@ export const featured: Project[] = [
     ],
   },
   {
-    slug: "prosewire",
-    name: "Prosewire",
-    description: "Add a publishing workflow to the website you already have.",
-    tag: "Publishing · Open source",
-    preview: preview("prosewire", prosewire),
-    links: [
-      { label: "Visit", href: projectUrls.prosewire },
-      { label: "Demo", href: "https://demo.prosewire.com" },
-      { label: "GitHub", href: "https://github.com/prosewire/prosewire" },
-    ],
+    slug: "zenseo",
+    name: "ZenSEO",
+    description: "Send sitemap changes to search engines automatically and track every submission.",
+    tag: "SEO · Free",
+    preview: preview("zenseo", zenseo),
+    links: [{ label: "Visit", href: projectUrls.zenseo }],
   },
   {
     slug: "edgepush",
@@ -99,6 +95,17 @@ export const featured: Project[] = [
 ];
 
 export const more: Project[] = [
+  {
+    slug: "prosewire",
+    name: "Prosewire",
+    description: "Add a publishing workflow to the website you already have.",
+    tag: "Publishing · Open source",
+    links: [
+      { label: "Visit", href: "https://prosewire.com" },
+      { label: "Demo", href: "https://demo.prosewire.com" },
+      { label: "GitHub", href: "https://github.com/prosewire/prosewire" },
+    ],
+  },
   {
     slug: "zuply",
     name: "Zuply",
