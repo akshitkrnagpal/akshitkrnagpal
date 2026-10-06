@@ -1,197 +1,180 @@
-import { readFile, writeFile } from 'node:fs/promises'
-import { fileURLToPath } from 'node:url'
-import { dirname, join } from 'node:path'
-import satori from 'satori'
-import { Resvg } from '@resvg/resvg-js'
+import { readFile, writeFile } from "node:fs/promises";
+import { fileURLToPath } from "node:url";
+import { dirname, join } from "node:path";
+import satori from "satori";
+import { Resvg } from "@resvg/resvg-js";
 
-const here = dirname(fileURLToPath(import.meta.url))
-const fontsDir = join(here, 'fonts')
+const here = dirname(fileURLToPath(import.meta.url));
+const [serifItalic, sansBold, sansMedium, avatarBytes] = await Promise.all([
+  readFile(join(here, "fonts/InstrumentSerif-Italic.ttf")),
+  readFile(join(here, "fonts/DMSans-Bold.ttf")),
+  readFile(join(here, "fonts/DMSans-Medium.ttf")),
+  readFile(join(here, "../src/assets/avatar.jpg")),
+]);
+const avatarDataUrl = `data:image/jpeg;base64,${avatarBytes.toString("base64")}`;
+const PAPER = "#f7f5ee";
+const INK = "#242824";
+const MUTED = "#61635a";
+const BLUE = "#2955da";
+const el = (type, props) => ({ type, props });
 
-const [serifItalic, sansBold, sansMedium] = await Promise.all([
-  readFile(join(fontsDir, 'InstrumentSerif-Italic.ttf')),
-  readFile(join(fontsDir, 'DMSans-Bold.ttf')),
-  readFile(join(fontsDir, 'DMSans-Medium.ttf')),
-])
-
-const avatarUrl = 'https://avatars.githubusercontent.com/u/15872348?size=512'
-const avatarRes = await fetch(avatarUrl)
-if (!avatarRes.ok) throw new Error(`avatar fetch failed: ${avatarRes.status}`)
-const avatarType = avatarRes.headers.get('content-type') ?? 'image/jpeg'
-const avatarBytes = Buffer.from(await avatarRes.arrayBuffer())
-const avatarDataUrl = `data:${avatarType};base64,${avatarBytes.toString('base64')}`
-
-const PAPER = '#0a0a0b'
-const INK = '#e8e6e3'
-const MUTED = '#8a8a8a'
-const ACCENT = INK
-const COOL = '#4a90d9'
-
-const el = (type, props) => ({ type, props })
-
-const tree = el('div', {
+const tree = el("div", {
   style: {
-    width: '1200px',
-    height: '630px',
+    width: "1200px",
+    height: "630px",
     background: PAPER,
     color: INK,
-    fontFamily: 'DM Sans',
-    position: 'relative',
-    display: 'flex',
-    flexDirection: 'column',
-    overflow: 'hidden',
+    fontFamily: "DM Sans",
+    display: "flex",
+    flexDirection: "column",
+    padding: "48px 64px",
+    position: "relative",
+    overflow: "hidden",
   },
   children: [
-    el('div', {
+    el("div", {
       style: {
-        position: 'absolute',
-        top: '-180px',
-        right: '-160px',
-        width: '720px',
-        height: '720px',
-        borderRadius: '720px',
-        background: ACCENT,
-        opacity: 0.16,
-        filter: 'blur(120px)',
-      },
-    }),
-    el('div', {
-      style: {
-        position: 'absolute',
-        bottom: '-160px',
-        left: '-120px',
-        width: '560px',
-        height: '560px',
-        borderRadius: '560px',
-        background: COOL,
-        opacity: 0.1,
-        filter: 'blur(120px)',
-      },
-    }),
-    el('div', {
-      style: {
-        position: 'absolute',
-        top: '56px',
-        left: '64px',
-        right: '64px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        color: MUTED,
-        fontSize: '20px',
-        letterSpacing: '6px',
-        textTransform: 'uppercase',
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        borderBottom: "1px solid #deded2",
+        paddingBottom: "20px",
+        fontSize: "20px",
       },
       children: [
-        el('span', { children: 'Software engineering portfolio' }),
-        el('span', { style: { color: INK, letterSpacing: '2px' }, children: 'akshit.io' }),
+        el("span", { style: { fontWeight: 700 }, children: "akshit.io" }),
+        el("span", {
+          style: { color: MUTED, fontSize: "15px", letterSpacing: "2px" },
+          children: "A SMALL SOFTWARE WORKSHOP",
+        }),
       ],
     }),
-    el('div', {
-      style: {
-        flex: 1,
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: '64px',
-        padding: '0 96px',
-      },
+    el("div", {
+      style: { display: "flex", flex: 1, alignItems: "center", gap: "54px" },
       children: [
-        el('div', {
-          style: {
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: '300px',
-            height: '300px',
-            borderRadius: '300px',
-            border: `2px solid ${ACCENT}33`,
-            padding: '12px',
-            flexShrink: 0,
-          },
+        el("div", {
+          style: { display: "flex", flexDirection: "column", flex: 1 },
           children: [
-            el('img', {
-              src: avatarDataUrl,
-              width: 276,
-              height: 276,
+            el("div", {
               style: {
-                width: '276px',
-                height: '276px',
-                borderRadius: '276px',
-                objectFit: 'cover',
+                fontSize: "88px",
+                fontWeight: 700,
+                letterSpacing: "-5px",
+                lineHeight: 1.02,
               },
+              children: "Akshit Kr Nagpal.",
             }),
-          ],
-        }),
-        el('div', {
-          style: {
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'flex-start',
-            justifyContent: 'center',
-            flex: 1,
-          },
-          children: [
-            el('div', {
+            el("div", {
               style: {
-                fontFamily: 'Instrument Serif',
-                fontStyle: 'italic',
-                fontSize: '108px',
-                lineHeight: 0.96,
-                letterSpacing: '-2px',
-                color: INK,
-              },
-              children: 'Akshit Kr Nagpal',
-            }),
-            el('div', {
-              style: {
-                display: 'flex',
-                alignItems: 'center',
-                gap: '16px',
-                marginTop: '28px',
-                color: ACCENT,
-                fontSize: '20px',
-                fontWeight: 500,
-                letterSpacing: '6px',
-                textTransform: 'uppercase',
+                display: "flex",
+                flexDirection: "column",
+                fontFamily: "Instrument Serif",
+                fontStyle: "italic",
+                color: BLUE,
+                fontSize: "61px",
+                lineHeight: 1.1,
+                marginTop: "20px",
               },
               children: [
-                el('div', { style: { width: '40px', height: '2px', background: ACCENT } }),
-                el('span', { children: 'Senior Software Engineer · AI Systems' }),
+                el("div", { children: "Engineer by trade." }),
+                el("div", { children: "Builder by nature." }),
               ],
             }),
-            el('div', {
+            el("div", {
               style: {
-                marginTop: '28px',
                 color: MUTED,
-                fontSize: '24px',
-                fontWeight: 500,
-                lineHeight: 1.4,
-                maxWidth: '600px',
+                fontSize: "22px",
+                lineHeight: 1.5,
+                marginTop: "26px",
+                maxWidth: "630px",
               },
-              children: 'Senior software engineer expanding into AI engineering through agents, evals, developer tools, and production software.',
+              children:
+                "Senior full-stack engineer, now building AI agents, evals, and developer tools.",
             }),
           ],
         }),
+        el("div", {
+          style: {
+            display: "flex",
+            flexDirection: "column",
+            position: "relative",
+            width: "280px",
+            padding: "12px",
+            background: "#fffef8",
+            border: "1px solid #deded2",
+            boxShadow: "6px 6px 0 #deded2",
+            transform: "rotate(-6deg)",
+          },
+          children: [
+            el("div", {
+              style: {
+                position: "absolute",
+                top: "-15px",
+                left: "96px",
+                width: "80px",
+                height: "30px",
+                background: "#f6d975",
+                opacity: 0.8,
+                transform: "rotate(4deg)",
+              },
+            }),
+            el("img", {
+              src: avatarDataUrl,
+              width: 254,
+              height: 254,
+              style: { objectFit: "cover" },
+            }),
+            el("div", {
+              style: {
+                display: "flex",
+                justifyContent: "center",
+                fontFamily: "Instrument Serif",
+                fontStyle: "italic",
+                fontSize: "28px",
+                paddingTop: "13px",
+                paddingBottom: "4px",
+              },
+              children: "Hi, I'm the human",
+            }),
+          ],
+        }),
+      ],
+    }),
+    el("div", {
+      style: {
+        display: "flex",
+        alignItems: "center",
+        gap: "16px",
+        color: MUTED,
+        fontSize: "17px",
+        borderTop: "1px solid #deded2",
+        paddingTop: "20px",
+      },
+      children: [
+        el("span", { style: { color: BLUE, fontSize: "22px" }, children: "+" }),
+        el("span", { children: "Small tools. Big rabbit holes." }),
       ],
     }),
   ],
-})
+});
 
 const svg = await satori(tree, {
   width: 1200,
   height: 630,
   fonts: [
-    { name: 'Instrument Serif', data: serifItalic, weight: 400, style: 'italic' },
-    { name: 'DM Sans', data: sansBold, weight: 700, style: 'normal' },
-    { name: 'DM Sans', data: sansMedium, weight: 500, style: 'normal' },
+    {
+      name: "Instrument Serif",
+      data: serifItalic,
+      weight: 400,
+      style: "italic",
+    },
+    { name: "DM Sans", data: sansBold, weight: 700, style: "normal" },
+    { name: "DM Sans", data: sansMedium, weight: 500, style: "normal" },
   ],
-})
-
-const png = new Resvg(svg, { fitTo: { mode: 'width', value: 1200 } })
+});
+const png = new Resvg(svg, { fitTo: { mode: "width", value: 1200 } })
   .render()
-  .asPng()
-
-const outPath = join(here, '..', 'public', 'og.png')
-await writeFile(outPath, png)
-console.log(`wrote ${outPath} (${png.length} bytes)`)
+  .asPng();
+const outPath = join(here, "../public/og.png");
+await writeFile(outPath, png);
+console.log(`wrote ${outPath} (${png.length} bytes)`);

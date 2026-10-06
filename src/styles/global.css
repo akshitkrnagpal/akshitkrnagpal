@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+  }
+}
+
 /* Capture the new palette immediately, then reveal it through a circular mask. */
 html[data-theme-transition] *,
 html[data-theme-transition] *::before,
@@ -19,15 +27,6 @@ html[data-theme-transition]::view-transition-old(root) {
 
 html[data-theme-transition]::view-transition-new(root) {
   z-index: 2;
-}
-
-/* Dark mode reveals the new page around a shrinking light snapshot. */
-html[data-theme-transition="dark"]::view-transition-old(root) {
-  z-index: 2;
-}
-
-html[data-theme-transition="dark"]::view-transition-new(root) {
-  z-index: 1;
 }
 
 /* Keep the live control above the radial snapshots so its icons can animate. */

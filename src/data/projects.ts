@@ -26,6 +26,7 @@ export interface Project {
   name: string;
   description: string;
   tag: string;
+  category: "tools" | "apps" | "web";
   links: Link[];
   preview?: ImageMetadata;
 }
@@ -34,6 +35,7 @@ export interface Project {
 export const featured: Project[] = [
   {
     slug: "promptlens",
+    category: "tools",
     name: "PromptLens",
     description: "Catch prompt and model regressions before your next release.",
     tag: "AI evals · Early access",
@@ -42,6 +44,7 @@ export const featured: Project[] = [
   },
   {
     slug: "offerkit",
+    category: "web",
     name: "OfferKit",
     description: "Coupons, loyalty, gift cards, and referrals for your product.",
     tag: "Commerce · Open source",
@@ -53,6 +56,7 @@ export const featured: Project[] = [
   },
   {
     slug: "hookbell",
+    category: "apps",
     name: "HookBell",
     description: "Signups, payments, and churn. Straight to your phone.",
     tag: "iOS app",
@@ -64,6 +68,7 @@ export const featured: Project[] = [
   },
   {
     slug: "zenseo",
+    category: "web",
     name: "ZenSEO",
     description: "Send sitemap changes to search engines automatically and track every submission.",
     tag: "SEO · Free",
@@ -72,6 +77,7 @@ export const featured: Project[] = [
   },
   {
     slug: "edgepush",
+    category: "tools",
     name: "EdgePush",
     description: "Mobile push notifications on Cloudflare Workers, with your own credentials.",
     tag: "Infrastructure · Self-hostable",
@@ -83,6 +89,7 @@ export const featured: Project[] = [
   },
   {
     slug: "typesensekit",
+    category: "tools",
     name: "TypesenseKit",
     description: "A CLI and MCP server for people and AI agents working with Typesense.",
     tag: "Search · CLI + MCP",
@@ -97,6 +104,7 @@ export const featured: Project[] = [
 export const more: Project[] = [
   {
     slug: "zoppy",
+    category: "apps",
     name: "Zoppy",
     description: "Turn brain dumps into tasks and reminders with an iOS chat assistant for ADHD.",
     tag: "iOS · Waitlist",
@@ -104,6 +112,7 @@ export const more: Project[] = [
   },
   {
     slug: "prosewire",
+    category: "web",
     name: "Prosewire",
     description: "Add a publishing workflow to the website you already have.",
     tag: "Publishing · Open source",
@@ -115,6 +124,7 @@ export const more: Project[] = [
   },
   {
     slug: "zuply",
+    category: "apps",
     name: "Zuply",
     description: "Supplement reminders with private iCloud sync.",
     tag: "iOS",
@@ -122,6 +132,7 @@ export const more: Project[] = [
   },
   {
     slug: "fast36",
+    category: "apps",
     name: "Fast36",
     description: "Fasting sessions and history across your Apple devices.",
     tag: "iOS · watchOS",
@@ -132,6 +143,7 @@ export const more: Project[] = [
   },
   {
     slug: "portlessbar",
+    category: "tools",
     name: "PortlessBar",
     description: "Open Portless localhost apps and control its proxy from the macOS menu bar.",
     tag: "macOS · Open source",
@@ -142,6 +154,7 @@ export const more: Project[] = [
   },
   {
     slug: "nobg",
+    category: "tools",
     name: "nobg",
     description: "Remove backgrounds in your browser or through a self-hostable API.",
     tag: "Image API",
@@ -152,6 +165,7 @@ export const more: Project[] = [
   },
   {
     slug: "openplaceholder",
+    category: "web",
     name: "OpenPlaceholder",
     description: "Custom placeholder images for prototypes and docs.",
     tag: "Web",
@@ -162,6 +176,7 @@ export const more: Project[] = [
   },
   {
     slug: "revcat",
+    category: "tools",
     name: "revcat",
     description: "Manage RevenueCat from your terminal.",
     tag: "CLI",
@@ -172,6 +187,7 @@ export const more: Project[] = [
   },
   {
     slug: "namescout",
+    category: "tools",
     name: "namescout",
     description: "Check names across domains, npm, and GitHub.",
     tag: "CLI",
@@ -179,6 +195,7 @@ export const more: Project[] = [
   },
   {
     slug: "secret-desk",
+    category: "tools",
     name: "secret-desk",
     description: "Edit Kubernetes secrets in your browser.",
     tag: "Web",
@@ -186,6 +203,7 @@ export const more: Project[] = [
   },
   {
     slug: "env-doctor",
+    category: "tools",
     name: "env-doctor",
     description: "Catch mistakes in your .env files.",
     tag: "CLI",

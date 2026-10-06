@@ -22,15 +22,18 @@ This is an Astro-based personal portfolio website with the following key archite
 
 ### Project Structure
 - `src/layouts/Layout.astro` - Meta tags, theme bootstrap, color tokens, entrance animations
-- `src/pages/index.astro` - The whole site: hero, featured project grid, compact list of smaller projects, and a navbar that shows the profile once the hero scrolls away
-- `src/data/projects.ts` - Single source of project data (`featured` with preview images, `more` as rows)
-- `src/components/ProjectCard.astro` - Featured project card
+- `src/pages/index.astro` - The workbench homepage: editorial hero, framed project grid, compact side-quest list, category filters, random project picker, and social contact section
+- `src/data/projects.ts` - Single source of project data (`featured` with preview images, `more` as rows), including typed `tools`, `apps`, or `web` categories
+- `src/components/ProjectCard.astro` - Featured project card with a shared browser-style preview frame
 - `src/components/ThemeToggle.astro` - Floating light/dark toggle with radial view transition
 - `scripts/generate-og.mjs` - Generates `public/og.png`
+- `src/assets/avatar.jpg` - Local portrait, optimized by Astro for the hero and read by the OG generator
 
 ### Key Patterns
 - Colors come from CSS variables (`--color-ink`, `--color-paper`, `--color-muted`, `--color-border`, ...) defined in `Layout.astro` for light and dark themes.
-- To add a project, add an entry to `src/data/projects.ts`; featured ones need a 1200x630 preview image in `src/assets/projects/`.
+- To add a project, add an entry and a category to `src/data/projects.ts`; featured ones need a 1200x630 preview image in `src/assets/projects/`.
+- All projects render without JavaScript. The homepage script reveals filter controls, updates `aria-pressed` and the live status, and lets the random picker focus a visible project without opening its external link.
+- Reduced motion disables CSS transitions globally and skips the theme reveal. Both theme directions reveal the new page outward from the toggle.
 - Featured product URLs live in `src/data/project-urls.json`. Before each build, `scripts/fetch-project-previews.mjs` reads each product's `og:image`, downloads it, and saves a PNG in the ignored `src/assets/projects/generated/` directory. Astro optimizes these into local images with content hashes in their filenames. Fetches have a 15-second timeout; failures use the last downloaded image if available, otherwise the checked-in preview. Development uses saved previews; run `pnpm refresh:previews` before starting the dev server to refresh them.
 
 ### Deployment Configuration
