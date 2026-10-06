@@ -166,19 +166,20 @@
 		height: 2.75rem;
 		place-items: center;
 		flex: none;
-		border: 1px solid var(--color-border);
+		border: 2px solid var(--color-ink);
 		border-radius: 999px;
-		background: var(--color-paper);
-		box-shadow: 0 4px 16px rgb(0 0 0 / 0.08);
+		background: var(--color-card, var(--color-paper));
+		box-shadow: 3px 3px 0 var(--color-ink);
 		color: var(--color-ink);
 		cursor: pointer;
-		transition: border-color 180ms ease, background-color 180ms ease, transform 180ms ease;
+		transition: background-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
 	}
 
 	.theme-toggle:hover {
-		border-color: var(--color-border-strong);
-		background: var(--color-surface-hover);
-		transform: translateY(-1px);
+		background: var(--pop-yellow, var(--color-surface-hover));
+		color: var(--color-on-pop, var(--color-ink));
+		box-shadow: 5px 5px 0 var(--color-ink);
+		transform: translate(-2px, -2px) rotate(-12deg);
 	}
 
 	.theme-toggle:focus-visible {
@@ -194,7 +195,7 @@
 		stroke: currentColor;
 		stroke-linecap: round;
 		stroke-linejoin: round;
-		stroke-width: 1.5;
+		stroke-width: 2;
 		transform-origin: center;
 	}
 

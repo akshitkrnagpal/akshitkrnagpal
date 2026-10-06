@@ -29,6 +29,21 @@ const intro = [
   [["Browse my code at", "GitHub"]],
   [["DM me at", "LinkedIn"], [" or", "X"]],
 ];
+
+const pops = ["pink", "yellow", "mint", "blue", "orange", "lilac"];
+
+// Draggable stickers scattered under the hero. Tilt is in degrees.
+const stickers = [
+  { text: "full-stack since forever", pop: "yellow", tilt: -6 },
+  { text: "🤖 agent wrangler", pop: "mint", tilt: 4 },
+  { text: "evals > vibes", pop: "pink", tilt: -3 },
+  { text: "TypeScript ♥", pop: "blue", tilt: 7 },
+  { text: "MCP nerd", pop: "lilac", tilt: -5 },
+  { text: "☕ → code", pop: "orange", tilt: 3 },
+];
+
+const marquee = ["AI agents", "Evals", "Developer tools", "iOS apps", "Open source", "CLIs", "MCP servers", "Side quests"];
+const name = "Akshit Kr Nagpal";
 ---
 
 <Layout>
@@ -51,24 +66,53 @@ const intro = [
     </div>
   </nav>
 
-  <main id="top" class="px-6 md:px-12 pt-20 md:pt-28 pb-20">
-    <section class="max-w-2xl mx-auto text-center">
-      <div class="hero-avatar">
-        <img
-          src="https://avatars.githubusercontent.com/u/15872348"
-          alt="Akshit Kr Nagpal"
-          width="128"
-          height="128"
-          class="w-28 h-28 md:w-32 md:h-32 mx-auto mb-8 rounded-full object-cover ring-1 ring-[var(--color-border)] animate-scale-in"
-        />
+  <main id="top" class="overflow-x-clip pt-20 md:pt-24 pb-16">
+    <section class="hero px-6 md:px-12 max-w-4xl mx-auto text-center">
+      <div class="hero-avatar animate-scale-in">
+        <button type="button" class="avatar-button" data-confetti aria-label="Throw confetti">
+          <svg class="avatar-ring" viewBox="0 0 200 200" aria-hidden="true">
+            <defs>
+              <path id="ring-path" d="M100,100 m-84,0 a84,84 0 1,1 168,0 a84,84 0 1,1 -168,0" />
+            </defs>
+            <text>
+              <textPath href="#ring-path" textLength="520" lengthAdjust="spacing">agents ✦ evals ✦ dev tools ✦ open source ✦ click me ✦ </textPath>
+            </text>
+          </svg>
+          <img
+            src="https://avatars.githubusercontent.com/u/15872348"
+            alt="Akshit Kr Nagpal"
+            width="128"
+            height="128"
+          />
+        </button>
       </div>
-      <h1 data-hero-name class="text-5xl md:text-7xl leading-[1.05] mb-4 animate-fade-up delay-1" style="font-family: var(--font-display);">
-        Akshit Kr Nagpal
-      </h1>
-      <p class="text-lg md:text-xl leading-relaxed text-[var(--color-muted)] max-w-md mx-auto mb-8 animate-fade-up delay-2">
-        {bio}
+
+      <p class="kicker animate-fade-up delay-1">
+        <span class="wave" aria-hidden="true">👋</span> Hey there, I'm
       </p>
-      <p class="intro animate-fade-up delay-3">
+      <h1 data-hero-name class="hero-name animate-fade-up delay-1" aria-label={name}>
+        {name.split(" ").map((word, w, words) => {
+          const offset = words.slice(0, w).join("").length;
+          return <><span class="word" aria-hidden="true">{[...word].map((char, i) => (
+            <span class="letter" style={`--pop: var(--pop-${pops[(offset + i) % pops.length]})`}>{char}</span>
+          ))}</span>{w < words.length - 1 && " "}</>;
+        })}
+      </h1>
+      <p class="hero-bio animate-fade-up delay-2">
+        Senior full-stack engineer, now building
+        <mark style="--pop: var(--pop-pink); --tilt: -1.5deg">AI agents</mark>,
+        <mark style="--pop: var(--pop-yellow); --tilt: 1deg">evals</mark>, and
+        <mark style="--pop: var(--pop-mint); --tilt: -1deg">developer tools</mark>.
+      </p>
+
+      <ul class="stickers animate-fade-up delay-3" aria-label="A few things about me">
+        {stickers.map((s) => (
+          <li class="sticker" data-sticker style={`--pop: var(--pop-${s.pop}); --tilt: ${s.tilt}deg`}>{s.text}</li>
+        ))}
+      </ul>
+      <p class="hint animate-fade-in delay-4" aria-hidden="true">↑ psst, those stickers are draggable</p>
+
+      <p class="intro animate-fade-up delay-4">
         {intro.map((line) => (
           <span class="block">
             {line.map(([text, label]) => {
@@ -80,20 +124,38 @@ const intro = [
       </p>
     </section>
 
-    <section id="projects" class="max-w-6xl mx-auto mt-20 md:mt-28 scroll-mt-24" aria-labelledby="projects-title">
-      <h2 id="projects-title" class="label mb-8 animate-fade-up delay-4">Projects</h2>
-      <div class="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-        {featured.map((project, i) => <ProjectCard project={project} index={i + 4} />)}
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        {[0, 1].map(() => (
+          <span class="marquee-group">
+            {marquee.map((item) => <span>{item}<span class="marquee-star">✦</span></span>)}
+          </span>
+        ))}
+      </div>
+    </div>
+
+    <section id="projects" class="px-6 md:px-12 max-w-6xl mx-auto scroll-mt-24" aria-labelledby="projects-title">
+      <h2 id="projects-title" class="section-title">
+        Stuff I've <span class="squiggle">shipped</span>
+      </h2>
+      <p class="section-sub">Real products, real users, real bugs (now fixed, mostly).</p>
+      <div class="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 mt-12">
+        {featured.map((project, i) => <ProjectCard project={project} index={i} pop={pops[i % pops.length]} />)}
       </div>
 
-      <h2 id="more-title" class="label mt-24 mb-4">More apps &amp; tools</h2>
-      <ul class="border-t border-[var(--color-border)]" aria-labelledby="more-title">
-        {more.map((project) => (
-          <li class="row">
-            <a href={project.links[0].href} target="_blank" rel="noopener noreferrer" class="row-name">{project.name}</a>
+      <h2 id="more-title" class="section-title section-title--small mt-28">
+        More apps &amp; tools
+      </h2>
+      <p class="section-sub">Smaller experiments, utilities, and things I needed one weekend.</p>
+      <ul class="tiles mt-10" aria-labelledby="more-title">
+        {more.map((project, i) => (
+          <li class="tile" style={`--pop: var(--pop-${pops[(i + 2) % pops.length]})`}>
+            <div class="tile-head">
+              <a href={project.links[0].href} target="_blank" rel="noopener noreferrer" class="tile-name">{project.name}</a>
+              <span class="tile-tag">{project.tag}</span>
+            </div>
             <p>{project.description}</p>
-            <span class="row-tag">{project.tag}</span>
-            <div class="row-links">
+            <div class="tile-links">
               {project.links.map((link) => (
                 <a href={link.href} target="_blank" rel="noopener noreferrer" aria-label={`${project.name}: ${link.label}`}>
                   {link.label}<span aria-hidden="true"> ↗</span>
@@ -103,15 +165,28 @@ const intro = [
           </li>
         ))}
       </ul>
+    </section>
 
-      <p class="mt-16 text-center text-sm text-[var(--color-muted)]">
+    <footer class="px-6 md:px-12 max-w-3xl mx-auto mt-32 text-center">
+      <p class="footer-title">Say hi <span class="wave" aria-hidden="true">👋</span></p>
+      <p class="section-sub">I'm always up for talking agents, evals, or your weird side project.</p>
+      <div class="footer-links">
+        {socials.map((s, i) => (
+          <a href={s.href} target="_blank" rel="noopener noreferrer" class="footer-chip" style={`--pop: var(--pop-${pops[(i * 2 + 1) % pops.length]})`}>
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d={s.path} /></svg>{s.label}
+          </a>
+        ))}
+      </div>
+      <p class="mt-12 text-sm text-[var(--color-muted)]">
         Everything else lives on <a href="https://github.com/akshitkrnagpal" target="_blank" rel="noopener noreferrer" class="text-[var(--color-ink)] underline underline-offset-4">GitHub</a>.
       </p>
-    </section>
+    </footer>
   </main>
 </Layout>
 
 <script>
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
   // Show the navbar profile once the hero name scrolls under it.
   const name = document.querySelector("[data-hero-name]");
   if (name) {
@@ -120,6 +195,76 @@ const intro = [
       document.documentElement.toggleAttribute("data-scrolled", scrolled);
     }, { rootMargin: "-76px 0px 0px 0px" }).observe(name);
   }
+
+  // Clicking the avatar throws confetti from its center.
+  const confettiColors = ["--pop-pink", "--pop-yellow", "--pop-mint", "--pop-blue", "--pop-orange", "--pop-lilac"]
+    .map((token) => getComputedStyle(document.documentElement).getPropertyValue(token).trim());
+
+  function throwConfetti(x: number, y: number) {
+    if (reducedMotion.matches) return;
+    for (let i = 0; i < 60; i++) {
+      const piece = document.createElement("span");
+      piece.className = "confetti";
+      piece.style.left = `${x}px`;
+      piece.style.top = `${y}px`;
+      piece.style.background = confettiColors[i % confettiColors.length];
+      if (i % 3 === 0) piece.style.borderRadius = "999px";
+      document.body.append(piece);
+
+      const angle = Math.random() * Math.PI * 2;
+      const distance = 120 + Math.random() * 220;
+      const dx = Math.cos(angle) * distance;
+      const dy = Math.sin(angle) * distance - 120;
+      const spin = (Math.random() - 0.5) * 1080;
+      piece.animate(
+        [
+          { transform: "translate(-50%, -50%) rotate(0deg)", opacity: 1 },
+          { transform: `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) rotate(${spin / 2}deg)`, opacity: 1, offset: 0.55 },
+          { transform: `translate(calc(-50% + ${dx * 1.15}px), calc(-50% + ${dy + 260}px)) rotate(${spin}deg)`, opacity: 0 },
+        ],
+        { duration: 1300 + Math.random() * 700, easing: "cubic-bezier(0.2, 0.8, 0.3, 1)" },
+      ).finished.then(() => piece.remove());
+    }
+  }
+
+  document.querySelectorAll<HTMLButtonElement>("[data-confetti]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const { left, top, width, height } = button.getBoundingClientRect();
+      throwConfetti(left + width / 2, top + height / 2);
+      button.classList.remove("is-boing");
+      void button.offsetWidth;
+      button.classList.add("is-boing");
+    });
+  });
+
+  // Stickers can be dragged anywhere, and remember where they were dropped.
+  let topLayer = 1;
+  document.querySelectorAll<HTMLElement>("[data-sticker]").forEach((sticker) => {
+    let startX = 0;
+    let startY = 0;
+    let x = 0;
+    let y = 0;
+
+    sticker.addEventListener("pointerdown", (event) => {
+      if (event.button !== 0) return;
+      sticker.setPointerCapture(event.pointerId);
+      startX = event.clientX - x;
+      startY = event.clientY - y;
+      sticker.classList.add("is-dragging");
+      sticker.style.zIndex = String(++topLayer);
+    });
+
+    sticker.addEventListener("pointermove", (event) => {
+      if (!sticker.hasPointerCapture(event.pointerId)) return;
+      x = event.clientX - startX;
+      y = event.clientY - startY;
+      sticker.style.translate = `${x}px ${y}px`;
+    });
+
+    const drop = () => sticker.classList.remove("is-dragging");
+    sticker.addEventListener("pointerup", drop);
+    sticker.addEventListener("pointercancel", drop);
+  });
 </script>
 
 <style>
@@ -130,7 +275,7 @@ const intro = [
     display: flex;
     align-items: center;
     height: 4.75rem;
-    border-bottom: 1px solid transparent;
+    border-bottom: 2px solid transparent;
     pointer-events: none;
     transition: background-color 250ms ease, border-color 250ms ease;
   }
@@ -140,7 +285,7 @@ const intro = [
     align-items: center;
     gap: 0.75rem;
     font-size: 0.9375rem;
-    font-weight: 500;
+    font-weight: 600;
     color: inherit;
     text-decoration: none;
   }
@@ -156,37 +301,11 @@ const intro = [
   .navbar-socials a {
     display: grid;
     color: var(--color-muted);
-    transition: color 200ms ease;
+    transition: color 200ms ease, transform 200ms ease;
   }
 
-  .navbar-socials a:hover { color: var(--color-ink); }
+  .navbar-socials a:hover { color: var(--color-ink); transform: rotate(-12deg) scale(1.15); }
   .navbar-socials svg { width: 1.125rem; height: 1.125rem; }
-
-  .intro {
-    max-width: 36rem;
-    margin-inline: auto;
-    line-height: 2.25;
-    color: var(--color-muted);
-  }
-
-  .intro-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.375rem;
-    vertical-align: middle;
-    line-height: 1.5;
-    padding: 0.125rem 0.625rem;
-    border-radius: 999px;
-    background: var(--color-surface-hover);
-    border: 1px solid var(--color-border);
-    color: var(--color-ink);
-    font-weight: 500;
-    text-decoration: none;
-    transition: background-color 200ms ease, color 200ms ease, transform 200ms ease;
-  }
-
-  .intro-chip svg { width: 0.875rem; height: 0.875rem; }
-  .intro-chip:hover { background: var(--color-ink); color: var(--color-paper); transform: translateY(-1px); }
 
   .navbar-profile,
   .navbar-socials {
@@ -217,21 +336,247 @@ const intro = [
     width: 2.25rem;
     height: 2.25rem;
     border-radius: 999px;
+    border: 2px solid var(--color-ink);
+    background: var(--pop-yellow);
     object-fit: cover;
   }
 
   :global(html[data-scrolled]) .navbar {
     pointer-events: auto;
-    background: color-mix(in srgb, var(--color-paper) 85%, transparent);
+    background: color-mix(in srgb, var(--color-paper) 88%, transparent);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border-color: var(--color-border);
+    border-color: var(--color-ink);
   }
 
   :global(html[data-scrolled]) .navbar-profile,
   :global(html[data-scrolled]) .navbar-socials {
     opacity: 1;
     transform: none;
+  }
+
+  /* Hero */
+
+  .hero-avatar {
+    display: grid;
+    place-items: center;
+    margin-bottom: 1.25rem;
+  }
+
+  .avatar-button {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 12.5rem;
+    height: 12.5rem;
+    border: 0;
+    background: none;
+    color: var(--color-ink);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .avatar-button img {
+    grid-area: 1 / 1;
+    width: 8.5rem;
+    height: 8.5rem;
+    border-radius: 999px;
+    border: 3px solid var(--color-ink);
+    background: var(--pop-yellow);
+    box-shadow: 5px 5px 0 var(--color-ink);
+    object-fit: cover;
+    transition: transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 300ms ease;
+  }
+
+  .avatar-button:hover img { transform: rotate(-6deg) scale(1.04); box-shadow: 8px 8px 0 var(--color-ink); }
+  .avatar-button:focus-visible { outline: none; }
+  .avatar-button:focus-visible img { outline: 3px solid var(--pop-blue); outline-offset: 4px; }
+  .avatar-button.is-boing img { animation: boing 600ms cubic-bezier(0.34, 1.56, 0.64, 1); }
+
+  @keyframes boing {
+    0% { transform: scale(1); }
+    30% { transform: scale(0.85, 1.12); }
+    55% { transform: scale(1.12, 0.9); }
+    75% { transform: scale(0.96, 1.04); }
+    100% { transform: scale(1); }
+  }
+
+  .avatar-ring {
+    grid-area: 1 / 1;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    animation: spin 22s linear infinite;
+  }
+
+  .avatar-ring text {
+    fill: currentColor;
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .avatar-button:hover .avatar-ring { animation-duration: 6s; }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  .kicker {
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: var(--color-muted);
+  }
+
+  .wave {
+    display: inline-block;
+    transform-origin: 70% 70%;
+    animation: wave 2.4s ease-in-out infinite;
+  }
+
+  @keyframes wave {
+    0%, 60%, 100% { transform: rotate(0deg); }
+    10%, 30% { transform: rotate(16deg); }
+    20% { transform: rotate(-8deg); }
+    40% { transform: rotate(-4deg); }
+    50% { transform: rotate(10deg); }
+  }
+
+  .hero-name {
+    margin: 0.25rem 0 1.25rem;
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 11vw, 5.75rem);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+  }
+
+  .word {
+    display: inline-block;
+    white-space: nowrap;
+  }
+
+  .letter {
+    display: inline-block;
+    transition: transform 250ms cubic-bezier(0.34, 1.56, 0.64, 1), color 150ms ease;
+  }
+
+  .letter:hover {
+    color: var(--pop);
+    transform: translateY(-0.12em) rotate(-8deg) scale(1.12);
+    -webkit-text-stroke: 2px var(--color-ink);
+  }
+
+  .hero-bio {
+    max-width: 34rem;
+    margin-inline: auto;
+    font-size: clamp(1.125rem, 2.4vw, 1.375rem);
+    line-height: 1.7;
+    color: var(--color-muted);
+  }
+
+  .hero-bio mark {
+    display: inline-block;
+    padding: 0 0.4rem;
+    border-radius: 0.375rem;
+    background: var(--pop);
+    color: var(--color-on-pop);
+    font-weight: 600;
+    line-height: 1.5;
+    transform: rotate(var(--tilt));
+    transition: transform 250ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .hero-bio mark:hover { transform: rotate(calc(var(--tilt) * -2)) scale(1.06); }
+
+  .stickers {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.875rem 0.75rem;
+    margin: 2.5rem auto 0;
+    max-width: 38rem;
+    list-style: none;
+  }
+
+  .sticker {
+    position: relative;
+    padding: 0.4rem 0.9rem;
+    border: 2px solid var(--color-ink);
+    border-radius: 999px;
+    background: var(--pop);
+    color: var(--color-on-pop);
+    box-shadow: 3px 3px 0 var(--color-ink);
+    font-size: 0.875rem;
+    font-weight: 600;
+    white-space: nowrap;
+    transform: rotate(var(--tilt));
+    cursor: grab;
+    user-select: none;
+    touch-action: none;
+    transition: transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 200ms ease;
+  }
+
+  .sticker:hover { transform: rotate(calc(var(--tilt) * -1)) scale(1.06); }
+
+  .sticker.is-dragging {
+    cursor: grabbing;
+    transform: rotate(0deg) scale(1.12);
+    box-shadow: 8px 10px 0 var(--color-ink);
+  }
+
+  .hint {
+    margin-top: 1rem;
+    font-size: 0.8125rem;
+    color: var(--color-muted);
+    font-style: italic;
+  }
+
+  @media (hover: none) {
+    .hint { display: none; }
+  }
+
+  .intro {
+    max-width: 36rem;
+    margin: 2rem auto 0;
+    line-height: 2.6;
+    color: var(--color-muted);
+  }
+
+  .intro-chip,
+  .footer-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    vertical-align: middle;
+    line-height: 1.5;
+    padding: 0.2rem 0.75rem;
+    border-radius: 999px;
+    border: 2px solid var(--color-ink);
+    background: var(--color-card);
+    box-shadow: 3px 3px 0 var(--color-ink);
+    color: var(--color-ink);
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 150ms ease, color 150ms ease, transform 150ms ease, box-shadow 150ms ease;
+  }
+
+  .intro-chip svg { width: 0.875rem; height: 0.875rem; }
+
+  .intro-chip:hover,
+  .footer-chip:hover {
+    background: var(--color-ink);
+    color: var(--color-paper);
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0 var(--color-ink);
+  }
+
+  .intro-chip:active,
+  .footer-chip:active {
+    transform: translate(3px, 3px);
+    box-shadow: 0 0 0 var(--color-ink);
   }
 
   /* Shrink the hero avatar up toward the navbar as it scrolls away. */
@@ -249,39 +594,206 @@ const intro = [
     to { opacity: 0; transform: translateY(35%) scale(0.4); }
   }
 
-  .label {
-    font-size: 0.875rem;
-    font-weight: 500;
-    letter-spacing: 0.18em;
+  /* Marquee */
+
+  .marquee {
+    margin: 6rem -2rem 6rem;
+    padding: 0.875rem 0;
+    border-block: 3px solid var(--color-ink);
+    background: var(--pop-yellow);
+    color: var(--color-on-pop);
+    transform: rotate(-2deg);
+    overflow: hidden;
+  }
+
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 32s linear infinite;
+  }
+
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+
+  .marquee-group {
+    display: flex;
+    flex: none;
+  }
+
+  .marquee-group > span {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-display);
+    font-size: clamp(1.375rem, 3vw, 2rem);
+    font-weight: 800;
+    letter-spacing: -0.01em;
     text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .marquee-star {
+    display: inline-block;
+    margin: 0 1.5rem;
+    color: var(--pop-pink);
+    -webkit-text-stroke: 1.5px var(--color-on-pop);
+  }
+
+  @keyframes marquee {
+    to { transform: translateX(-50%); }
+  }
+
+  /* Sections */
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.25rem, 6vw, 3.75rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  .section-title--small { font-size: clamp(1.875rem, 4.5vw, 2.75rem); }
+
+  .squiggle {
+    position: relative;
+    display: inline-block;
+    white-space: nowrap;
+  }
+
+  .squiggle::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -0.18em;
+    height: 0.28em;
+    background: var(--pop-pink);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 10' preserveAspectRatio='none'%3E%3Cpath d='M0 5 Q5 0 10 5 T20 5 T30 5 T40 5' fill='none' stroke='black' stroke-width='3.2'/%3E%3C/svg%3E") repeat-x 0 0 / 1.1em 100%;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 10' preserveAspectRatio='none'%3E%3Cpath d='M0 5 Q5 0 10 5 T20 5 T30 5 T40 5' fill='none' stroke='black' stroke-width='3.2'/%3E%3C/svg%3E") repeat-x 0 0 / 1.1em 100%;
+  }
+
+  .section-sub {
+    margin-top: 0.875rem;
+    font-size: 1.0625rem;
     color: var(--color-muted);
   }
 
-  .row {
+  .tiles {
     display: grid;
-    grid-template-columns: 10rem minmax(0, 1fr) 7rem 10rem;
-    align-items: center;
-    gap: 1rem;
-    padding: 0.875rem 0;
-    border-bottom: 1px solid var(--color-border);
-    font-size: 0.875rem;
+    gap: 1.25rem;
+    list-style: none;
   }
 
-  .row-name { font-weight: 500; }
-  .row p { color: var(--color-muted); }
-  .row-tag { font-size: 0.75rem; color: var(--color-muted); }
-  .row-links { display: flex; gap: 1rem; justify-content: end; font-size: 0.8125rem; }
-  .row a { text-decoration: none; }
-  .row a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  @media (min-width: 44rem) {
+    .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+
+  @media (min-width: 64rem) {
+    .tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+
+  .tile {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.125rem 1.25rem 1rem;
+    border: 2px solid var(--color-ink);
+    border-radius: 1rem;
+    background: var(--color-card);
+    box-shadow: 4px 4px 0 var(--pop);
+    transition: transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 200ms ease;
+  }
+
+  .tile:hover {
+    transform: translate(-3px, -3px) rotate(-0.6deg);
+    box-shadow: 8px 8px 0 var(--pop);
+  }
+
+  .tile-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .tile-name {
+    font-family: var(--font-display);
+    font-size: 1.3125rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .tile-tag {
+    flex: none;
+    padding: 0.125rem 0.5rem;
+    border: 1.5px solid var(--color-ink);
+    border-radius: 999px;
+    background: var(--pop);
+    color: var(--color-on-pop);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .tile p {
+    flex: 1;
+    font-size: 0.875rem;
+    line-height: 1.55;
+    color: var(--color-muted);
+  }
+
+  .tile-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+  }
+
+  .tile a { color: inherit; text-decoration: none; }
+  .tile a:hover { text-decoration: underline; text-decoration-color: var(--pop); text-decoration-thickness: 3px; text-underline-offset: 3px; }
+
+  /* Footer */
+
+  .footer-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.75rem, 8vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .footer-chip {
+    padding: 0.5rem 1.125rem;
+    background: var(--pop);
+    color: var(--color-on-pop);
+    font-size: 1rem;
+  }
+
+  .footer-chip svg { width: 1rem; height: 1rem; }
+
   a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; border-radius: 2px; }
 
-  @media (max-width: 43.99rem) {
-    .row { grid-template-columns: minmax(0, 1fr) auto; gap: 0.25rem 1rem; }
-    .row p { grid-column: 1 / -1; grid-row: 2; }
-    .row-tag { display: none; }
+  :global(.confetti) {
+    position: fixed;
+    z-index: 100;
+    width: 0.625rem;
+    height: 0.875rem;
+    border-radius: 2px;
+    pointer-events: none;
   }
 
   @media (prefers-reduced-motion: reduce) {
     .navbar, .navbar-profile, .navbar-socials, .navbar-socials a { transition: none; }
+    .avatar-ring, .wave, .marquee-track { animation: none; }
+    .letter, .hero-bio mark, .sticker, .tile, .intro-chip, .footer-chip, .avatar-button img { transition: none; }
+    .avatar-button.is-boing img { animation: none; }
   }
 </style>

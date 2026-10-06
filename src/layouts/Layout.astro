@@ -67,7 +67,7 @@ const websiteSchema = {
 		<link rel="canonical" href={canonicalUrl} />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet" />
+		<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="author" content="Akshit Kr Nagpal" />
 		<title>{title}</title>
@@ -96,41 +96,55 @@ const websiteSchema = {
 		<style>
 			:root {
 				--color-ink: #1d1c1a;
-				--color-paper: #f7f5f1;
-				--color-muted: #6d6861;
+				--color-paper: #fbf6ec;
+				--color-card: #ffffff;
+				--color-muted: #6a645c;
 				--color-accent: var(--color-ink);
 				--color-accent-hover: var(--color-muted);
-				--color-border: rgba(29, 28, 26, 0.12);
-				--color-border-strong: rgba(29, 28, 26, 0.28);
+				--color-border: rgba(29, 28, 26, 0.14);
+				--color-border-strong: rgba(29, 28, 26, 0.32);
 				--color-surface: rgba(255, 255, 255, 0.5);
 				--color-surface-hover: rgba(255, 255, 255, 0.82);
-				--font-display: 'Instrument Serif', Georgia, serif;
+				--color-dots: rgba(29, 28, 26, 0.09);
+				/* Bright sticker colors. Text on top of them always uses --color-on-pop. */
+				--pop-pink: #ff8fc7;
+				--pop-yellow: #ffd23f;
+				--pop-mint: #5ce1b5;
+				--pop-blue: #7cb0ff;
+				--pop-orange: #ff8a4c;
+				--pop-lilac: #b9a1ff;
+				--color-on-pop: #1d1c1a;
+				--font-display: 'Bricolage Grotesque', 'DM Sans', system-ui, sans-serif;
 				--font-body: 'DM Sans', system-ui, sans-serif;
 			}
 
 			html[data-theme="dark"] {
-				--color-ink: #e8e6e3;
-				--color-paper: #0a0a0b;
-				--color-muted: #96928d;
+				--color-ink: #f3efe8;
+				--color-paper: #141311;
+				--color-card: #1f1d1a;
+				--color-muted: #a39e96;
 				--color-accent: var(--color-ink);
 				--color-accent-hover: var(--color-muted);
-				--color-border: rgba(232, 230, 227, 0.12);
-				--color-border-strong: rgba(232, 230, 227, 0.28);
+				--color-border: rgba(243, 239, 232, 0.14);
+				--color-border-strong: rgba(243, 239, 232, 0.32);
 				--color-surface: rgba(255, 255, 255, 0.025);
 				--color-surface-hover: rgba(255, 255, 255, 0.055);
+				--color-dots: rgba(243, 239, 232, 0.07);
 			}
 
 			@media (prefers-color-scheme: dark) {
 				:root:not([data-theme]) {
-					--color-ink: #e8e6e3;
-					--color-paper: #0a0a0b;
-					--color-muted: #96928d;
+					--color-ink: #f3efe8;
+					--color-paper: #141311;
+					--color-card: #1f1d1a;
+					--color-muted: #a39e96;
 					--color-accent: var(--color-ink);
 					--color-accent-hover: var(--color-muted);
-					--color-border: rgba(232, 230, 227, 0.12);
-					--color-border-strong: rgba(232, 230, 227, 0.28);
+					--color-border: rgba(243, 239, 232, 0.14);
+					--color-border-strong: rgba(243, 239, 232, 0.32);
 					--color-surface: rgba(255, 255, 255, 0.025);
 					--color-surface-hover: rgba(255, 255, 255, 0.055);
+					--color-dots: rgba(243, 239, 232, 0.07);
 				}
 			}
 
@@ -147,7 +161,9 @@ const websiteSchema = {
 
 			body {
 				font-family: var(--font-body);
-				background: var(--color-paper);
+				background-color: var(--color-paper);
+				background-image: radial-gradient(var(--color-dots) 1.2px, transparent 1.2px);
+				background-size: 22px 22px;
 				color: var(--color-ink);
 				line-height: 1.6;
 				-webkit-font-smoothing: antialiased;
@@ -156,8 +172,8 @@ const websiteSchema = {
 			}
 
 			::selection {
-				background: var(--color-accent);
-				color: var(--color-paper);
+				background: var(--pop-yellow);
+				color: var(--color-on-pop);
 			}
 
 			@keyframes fadeUp {
