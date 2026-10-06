@@ -96,6 +96,13 @@ export const featured: Project[] = [
 
 export const more: Project[] = [
   {
+    slug: "zoppy",
+    name: "Zoppy",
+    description: "Turn brain dumps into tasks and reminders with an iOS chat assistant for ADHD.",
+    tag: "iOS · Waitlist",
+    links: [{ label: "Join waitlist", href: "https://www.zoppy.app" }],
+  },
+  {
     slug: "prosewire",
     name: "Prosewire",
     description: "Add a publishing workflow to the website you already have.",
