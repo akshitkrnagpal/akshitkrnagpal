@@ -1,0 +1,492 @@
+---
+import { avatarUrl, bio, socials } from "../data/socials";
+
+// Cycled through after "I make" in the headline.
+const words = [
+  { text: "AI agents", pop: "yellow" },
+  { text: "evals", pop: "green" },
+  { text: "iOS apps", pop: "pink" },
+  { text: "CLIs", pop: "blue" },
+  { text: "MCP servers", pop: "purple" },
+  { text: "dev tools", pop: "red" },
+  { text: "tiny tools", pop: "yellow" },
+];
+
+// Draggable stickers around the polaroid. Positions are percentages of the playground.
+const stickers = [
+  { text: "TypeScript", className: "sticker-ts", x: 66, y: 4, r: 9, sm: [58, 0] },
+  { text: "ship it! ✦", className: "sticker-burst", x: -2, y: 62, r: -12, sm: [0, 60] },
+  { text: "evals ✓", className: "sticker-pill sticker-green", x: 70, y: 46, r: 6, sm: [64, 46] },
+  { text: "git push --force 😬", className: "sticker-key", x: 40, y: 86, r: -3, sm: [30, 84] },
+  { text: "Swift", className: "sticker-pill sticker-pink", x: 2, y: 16, r: -8, sm: [0, 20] },
+  { text: "open source ♥", className: "sticker-circle", x: 76, y: 70, r: 12, sm: [72, 64] },
+];
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero-copy">
+    <p class="status animate-fade-up">
+      <span class="status-dot" aria-hidden="true"></span>
+      Currently building AI agents &amp; evals
+    </p>
+
+    <h1 id="hero-title" class="headline">
+      <span class="headline-line animate-fade-up delay-1">
+        Hi, I'm Akshit<span class="wave" aria-hidden="true">👋</span>
+      </span>
+      <span class="headline-line animate-fade-up delay-2">
+        <span aria-hidden="true">I make</span>
+        <span class="rotator" aria-hidden="true" data-rotator>
+          {words.map((word, i) => (
+            <span class:list={["rotator-word", { "is-active": i === 0 }]} style={`--pop: var(--pop-${word.pop})`}>{word.text}</span>
+          ))}
+        </span>
+        <span class="sr-only">I make AI agents, evals, iOS apps, CLIs, MCP servers, and developer tools.</span>
+      </span>
+    </h1>
+
+    <p class="bio animate-fade-up delay-3">{bio}</p>
+
+    <div class="actions animate-fade-up delay-4">
+      <a href="#projects" class="button button-primary">See what I've shipped <span aria-hidden="true">↓</span></a>
+      {socials.map((s) => (
+        <a href={s.href} target="_blank" rel="noopener noreferrer" class="button button-icon" aria-label={s.label} title={s.label}>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d={s.path} /></svg>
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <div class="playground" data-playground>
+    <button type="button" class="sticker polaroid animate-pop-in delay-2" data-sticker data-polaroid style="--x: 22%; --y: 6%; --x-sm: 22%; --y-sm: 3%; --r: -4deg" aria-label="Akshit's photo. Click for confetti.">
+      <img src={avatarUrl} alt="" width="460" height="460" draggable="false" />
+      <span class="polaroid-caption">me, mid-deploy</span>
+    </button>
+
+    {stickers.map((s, i) => (
+      <span
+        class:list={["sticker animate-pop-in", s.className]}
+        data-sticker
+        aria-hidden="true"
+        style={`--x: ${s.x}%; --y: ${s.y}%; --x-sm: ${s.sm[0]}%; --y-sm: ${s.sm[1]}%; --r: ${s.r}deg; animation-delay: ${0.35 + i * 0.08}s`}
+      >{s.text}</span>
+    ))}
+
+    <p class="hint animate-fade-up" style="animation-delay: 1.1s" aria-hidden="true">
+      <svg viewBox="0 0 60 40" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+        <path d="M56 34C40 36 18 30 8 8" />
+        <path d="M4 18 8 7l11 4" />
+      </svg>
+      psst, these are draggable
+    </p>
+  </div>
+</section>
+
+<script>
+  import { confetti } from "../scripts/confetti";
+
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  // Rotate the "I make ___" word.
+  const rotator = document.querySelector<HTMLElement>("[data-rotator]");
+  if (rotator && !reducedMotion.matches) {
+    const words = [...rotator.querySelectorAll<HTMLElement>(".rotator-word")];
+    let current = 0;
+    window.setInterval(() => {
+      const previous = words[current];
+      current = (current + 1) % words.length;
+      previous.classList.remove("is-active");
+      previous.classList.add("is-leaving");
+      window.setTimeout(() => previous.classList.remove("is-leaving"), 500);
+      words[current].classList.add("is-active");
+    }, 2200);
+  }
+
+  // Drag stickers around. A press without movement counts as a click.
+  let zIndex = 10;
+  document.querySelectorAll<HTMLElement>("[data-sticker]").forEach((sticker) => {
+    let startX = 0;
+    let startY = 0;
+    let originX = 0;
+    let originY = 0;
+    let moved = false;
+
+    sticker.addEventListener("pointerdown", (event) => {
+      if (event.button !== 0) return;
+      sticker.setPointerCapture(event.pointerId);
+      startX = event.clientX;
+      startY = event.clientY;
+      originX = Number(sticker.dataset.dx ?? 0);
+      originY = Number(sticker.dataset.dy ?? 0);
+      moved = false;
+      zIndex += 1;
+      sticker.style.zIndex = String(zIndex);
+      sticker.classList.add("is-dragging");
+    });
+
+    sticker.addEventListener("pointermove", (event) => {
+      if (!sticker.hasPointerCapture(event.pointerId)) return;
+      const dx = event.clientX - startX;
+      const dy = event.clientY - startY;
+      if (Math.hypot(dx, dy) > 4) moved = true;
+      sticker.dataset.dx = String(originX + dx);
+      sticker.dataset.dy = String(originY + dy);
+      sticker.style.setProperty("--dx", `${originX + dx}px`);
+      sticker.style.setProperty("--dy", `${originY + dy}px`);
+    });
+
+    const release = (event: PointerEvent) => {
+      if (sticker.hasPointerCapture(event.pointerId)) sticker.releasePointerCapture(event.pointerId);
+      sticker.classList.remove("is-dragging");
+    };
+    sticker.addEventListener("pointerup", release);
+    sticker.addEventListener("pointercancel", release);
+
+    sticker.addEventListener("click", (event) => {
+      if (moved) {
+        event.preventDefault();
+        moved = false;
+        return;
+      }
+      if (sticker.hasAttribute("data-polaroid")) {
+        const { left, top, width } = sticker.getBoundingClientRect();
+        confetti(left + width / 2, top + 20, { count: 80, power: 14, emoji: ["🎉", "✨", "🚀", "💛"] });
+      }
+    });
+  });
+</script>
+
+<style>
+  .hero {
+    display: grid;
+    gap: 3rem;
+    align-items: center;
+    max-width: 76rem;
+    min-height: min(100svh, 56rem);
+    margin: 0 auto;
+    padding: 7rem 1.5rem 3rem;
+  }
+
+  @media (min-width: 64rem) {
+    .hero {
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+      padding-inline: 3rem;
+    }
+  }
+
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    margin-bottom: 1.75rem;
+    padding: 0.375rem 0.875rem 0.375rem 0.75rem;
+    border: 2px solid var(--color-line);
+    border-radius: 999px;
+    background: var(--color-card);
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .status-dot {
+    position: relative;
+    width: 0.625rem;
+    height: 0.625rem;
+    border-radius: 999px;
+    background: var(--pop-green);
+  }
+
+  .status-dot::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: inherit;
+    animation: ping 1.6s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+
+  @keyframes ping {
+    75%, 100% { transform: scale(2.4); opacity: 0; }
+  }
+
+  .headline {
+    font-family: var(--font-display);
+    font-size: clamp(2.75rem, 7.5vw, 5.75rem);
+    font-weight: 800;
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+  }
+
+  .headline-line { display: block; }
+
+  .wave {
+    display: inline-block;
+    margin-left: 0.15em;
+    transform-origin: 70% 75%;
+    animation: wave 2.4s ease-in-out 1s infinite;
+  }
+
+  @keyframes wave {
+    0%, 60%, 100% { transform: rotate(0deg); }
+    10%, 30% { transform: rotate(16deg); }
+    20%, 40% { transform: rotate(-10deg); }
+    50% { transform: rotate(10deg); }
+  }
+
+  .rotator {
+    position: relative;
+    display: inline-grid;
+    vertical-align: bottom;
+    margin-top: 0.1em;
+  }
+
+  .rotator-word {
+    grid-area: 1 / 1;
+    justify-self: start;
+    padding: 0 0.2em 0.04em;
+    border: 3px solid var(--color-line);
+    border-radius: 0.2em;
+    background: var(--pop);
+    box-shadow: 0.08em 0.08em 0 var(--color-line);
+    color: var(--on-pop);
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateY(0.6em) rotate(4deg);
+    transition: opacity 300ms ease, transform 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .rotator-word.is-active {
+    opacity: 1;
+    transform: rotate(-2deg);
+  }
+
+  .rotator-word.is-leaving {
+    opacity: 0;
+    transform: translateY(-0.6em) rotate(-6deg);
+  }
+
+  .bio {
+    max-width: 32rem;
+    margin-top: 1.75rem;
+    font-size: clamp(1.0625rem, 1.6vw, 1.25rem);
+    line-height: 1.55;
+    color: var(--color-muted);
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    height: 3rem;
+    padding: 0 1.25rem;
+    border: 2px solid var(--color-line);
+    border-radius: 999px;
+    background: var(--color-card);
+    box-shadow: 4px 4px 0 var(--color-line);
+    color: var(--color-ink);
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 150ms ease, box-shadow 150ms ease, background-color 150ms ease;
+  }
+
+  .button:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--color-line);
+  }
+
+  .button:active {
+    transform: translate(3px, 3px);
+    box-shadow: 1px 1px 0 var(--color-line);
+  }
+
+  .button-primary {
+    background: var(--pop-yellow);
+    color: var(--on-pop);
+  }
+
+  .button-icon {
+    width: 3rem;
+    padding: 0;
+  }
+
+  .button-icon:hover { background: var(--pop-blue); color: var(--on-blue); }
+  .button-icon svg { width: 1.125rem; height: 1.125rem; }
+
+  /* Sticker playground. */
+  .playground {
+    position: relative;
+    height: 26rem;
+    touch-action: pan-y;
+  }
+
+  @media (min-width: 64rem) {
+    .playground { height: 34rem; }
+  }
+
+  .sticker {
+    --dx: 0px;
+    --dy: 0px;
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    z-index: 2;
+    translate: var(--dx) var(--dy);
+    rotate: var(--r);
+    border: 2px solid var(--color-line);
+    box-shadow: 3px 3px 0 var(--color-line);
+    font-family: var(--font-display);
+    font-weight: 800;
+    color: var(--on-pop);
+    white-space: nowrap;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+    transition: rotate 200ms ease, box-shadow 200ms ease, scale 200ms ease;
+  }
+
+  .sticker:hover { rotate: calc(var(--r) * -0.5); scale: 1.04; }
+
+  .sticker.is-dragging {
+    cursor: grabbing;
+    scale: 1.08;
+    rotate: calc(var(--r) + 4deg);
+    box-shadow: 10px 12px 0 var(--color-line);
+    transition: rotate 200ms ease, box-shadow 200ms ease, scale 200ms ease;
+  }
+
+  .polaroid {
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    width: clamp(11rem, 42vw, 17rem);
+    padding: 0.625rem 0.625rem 0;
+    border-radius: 0.375rem;
+    background: #fffdf8;
+    box-shadow: 6px 6px 0 var(--color-line);
+    font: inherit;
+  }
+
+  .polaroid img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border: 2px solid #16130f;
+    border-radius: 0.125rem;
+    pointer-events: none;
+  }
+
+  .polaroid-caption {
+    padding: 0.375rem 0 0.5rem;
+    font-family: var(--font-hand);
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: center;
+    color: #16130f;
+  }
+
+  .sticker-ts {
+    padding: 0.5rem 0.875rem;
+    border-radius: 0.5rem;
+    background: var(--pop-blue);
+    color: var(--on-blue);
+    font-size: 1.125rem;
+  }
+
+  .sticker-pill {
+    padding: 0.375rem 1rem;
+    border-radius: 999px;
+    font-size: 1.125rem;
+  }
+
+  .sticker-green { background: var(--pop-green); }
+  .sticker-pink { background: var(--pop-pink); }
+
+  .sticker-burst {
+    display: grid;
+    place-items: center;
+    width: 8.5rem;
+    height: 8.5rem;
+    padding: 1rem;
+    border: none;
+    box-shadow: none;
+    background: var(--pop-yellow);
+    font-size: 1.0625rem;
+    text-align: center;
+    white-space: normal;
+    clip-path: polygon(50% 0%, 61% 15%, 79% 9%, 79% 27%, 97% 32%, 87% 48%, 97% 65%, 79% 71%, 79% 90%, 61% 84%, 50% 100%, 39% 84%, 21% 90%, 21% 71%, 3% 65%, 13% 48%, 3% 32%, 21% 27%, 21% 9%, 39% 15%);
+    filter: drop-shadow(3px 3px 0 var(--color-line));
+  }
+
+  .sticker-burst:hover,
+  .sticker-burst.is-dragging { box-shadow: none; }
+
+  .sticker-key {
+    padding: 0.5rem 0.875rem 0.625rem;
+    border-radius: 0.625rem;
+    background: #2b2620;
+    box-shadow: inset 0 -5px 0 rgb(0 0 0 / 0.35), 3px 3px 0 var(--color-line);
+    color: #f6eedf;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .sticker-circle {
+    display: grid;
+    place-items: center;
+    width: 6.5rem;
+    height: 6.5rem;
+    padding: 0.75rem;
+    border-radius: 999px;
+    background: var(--pop-red);
+    font-size: 0.9375rem;
+    line-height: 1.1;
+    text-align: center;
+    white-space: normal;
+  }
+
+  .hint {
+    position: absolute;
+    right: 4%;
+    bottom: -1.5rem;
+    display: flex;
+    align-items: flex-end;
+    gap: 0.25rem;
+    font-family: var(--font-hand);
+    font-size: 1.375rem;
+    font-weight: 600;
+    color: var(--color-muted);
+    pointer-events: none;
+  }
+
+  .hint svg {
+    width: 2.75rem;
+    height: 2rem;
+    rotate: 200deg;
+    margin-bottom: 0.75rem;
+  }
+
+  @media (max-width: 40rem) {
+    .playground { height: 25rem; }
+    .sticker { left: var(--x-sm); top: var(--y-sm); }
+    .polaroid { width: 11.5rem; }
+    .sticker-ts, .sticker-pill { font-size: 0.9375rem; }
+    .sticker-burst { width: 6.75rem; height: 6.75rem; font-size: 0.875rem; }
+    .sticker-circle { width: 5.25rem; height: 5.25rem; font-size: 0.8125rem; }
+    .sticker-key { font-size: 0.75rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .status-dot::after, .wave { animation: none; }
+    .button, .sticker, .rotator-word { transition: none; }
+  }
+</style>

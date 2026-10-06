@@ -156,9 +156,9 @@
 <style>
 	.theme-toggle {
 		position: fixed;
-		/* Vertically centered in the 4.75rem homepage navbar. */
+		/* Lines up with the floating nav pill on the homepage. */
 		top: max(1rem, env(safe-area-inset-top));
-		right: max(1.5rem, env(safe-area-inset-right));
+		right: max(1rem, env(safe-area-inset-right));
 		z-index: 50;
 		view-transition-name: theme-toggle;
 		display: inline-grid;
@@ -166,23 +166,27 @@
 		height: 2.75rem;
 		place-items: center;
 		flex: none;
-		border: 1px solid var(--color-border);
+		border: 2px solid var(--color-line);
 		border-radius: 999px;
-		background: var(--color-paper);
-		box-shadow: 0 4px 16px rgb(0 0 0 / 0.08);
-		color: var(--color-ink);
+		background: var(--pop-yellow);
+		box-shadow: 3px 3px 0 var(--color-line);
+		color: var(--on-pop);
 		cursor: pointer;
-		transition: border-color 180ms ease, background-color 180ms ease, transform 180ms ease;
+		transition: box-shadow 150ms ease, background-color 180ms ease, transform 150ms ease;
 	}
 
 	.theme-toggle:hover {
-		border-color: var(--color-border-strong);
-		background: var(--color-surface-hover);
-		transform: translateY(-1px);
+		transform: translate(-1px, -1px) rotate(-12deg);
+		box-shadow: 4px 4px 0 var(--color-line);
+	}
+
+	.theme-toggle:active {
+		transform: translate(2px, 2px);
+		box-shadow: 1px 1px 0 var(--color-line);
 	}
 
 	.theme-toggle:focus-visible {
-		outline: 2px solid var(--color-accent);
+		outline: 3px solid var(--pop-blue);
 		outline-offset: 3px;
 	}
 
@@ -194,7 +198,7 @@
 		stroke: currentColor;
 		stroke-linecap: round;
 		stroke-linejoin: round;
-		stroke-width: 1.5;
+		stroke-width: 2;
 		transform-origin: center;
 	}
 

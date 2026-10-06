@@ -1,0 +1,91 @@
+---
+import { featured, more } from "../data/projects";
+
+const names = [...featured, ...more].map((project) => project.name);
+const vibes = ["ship it", "agents", "evals", "side projects", "open source", "iOS", "CLIs", "MCP", "TypeScript", "Swift"];
+---
+
+<div class="tapes" aria-hidden="true">
+  <div class="tape tape-back">
+    <div class="tape-track tape-reverse">
+      {[0, 1].map(() => (
+        <span class="tape-run">{vibes.map((v) => <span>{v} <b>✦</b></span>)}</span>
+      ))}
+    </div>
+  </div>
+  <div class="tape tape-front">
+    <div class="tape-track">
+      {[0, 1].map(() => (
+        <span class="tape-run">{names.map((n) => <span>{n} <b>★</b></span>)}</span>
+      ))}
+    </div>
+  </div>
+</div>
+
+<style>
+  .tapes {
+    position: relative;
+    height: 10rem;
+    margin: 2rem 0 1rem;
+    overflow: hidden;
+  }
+
+  .tape {
+    position: absolute;
+    left: -5%;
+    width: 110%;
+    top: 50%;
+    border-block: 2px solid var(--color-line);
+    overflow: hidden;
+    font-family: var(--font-display);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--on-pop);
+  }
+
+  .tape-front {
+    translate: 0 -50%;
+    rotate: -3deg;
+    background: var(--pop-yellow);
+    font-size: 1.5rem;
+    padding: 0.5rem 0;
+    box-shadow: 0 6px 0 var(--color-line);
+  }
+
+  .tape-back {
+    translate: 0 -50%;
+    rotate: 2.5deg;
+    background: var(--pop-pink);
+    font-size: 1.125rem;
+    padding: 0.375rem 0;
+  }
+
+  .tape-track {
+    display: flex;
+    width: max-content;
+    animation: scroll 40s linear infinite;
+  }
+
+  .tape-reverse { animation-direction: reverse; animation-duration: 55s; }
+
+  .tape-run {
+    display: flex;
+    flex: none;
+  }
+
+  .tape-run > span {
+    padding-right: 1.25rem;
+    white-space: nowrap;
+  }
+
+  .tape b { padding-left: 1rem; font-weight: 800; }
+
+  @keyframes scroll {
+    to { transform: translateX(-50%); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tape-track { animation: none; }
+  }
+</style>

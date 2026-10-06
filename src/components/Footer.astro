@@ -1,0 +1,181 @@
+---
+import { socials } from "../data/socials";
+
+const blurbs: Record<string, string> = {
+  GitHub: "Browse the code",
+  LinkedIn: "DMs are open",
+  X: "Say hi",
+};
+const year = new Date().getFullYear();
+---
+
+<footer id="hi" class="footer scroll-mt-24">
+  <div class="cta" data-reveal>
+    <p class="cta-kicker">Got an idea? A bug? A meme?</p>
+    <h2 class="cta-title">Let's build something <span class="cta-fun">fun</span>.</h2>
+    <ul class="cta-links">
+      {socials.map((s) => (
+        <li>
+          <a href={s.href} target="_blank" rel="noopener noreferrer" class="cta-link">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d={s.path} /></svg>
+            <span>
+              <strong>{s.label}</strong>
+              <small>{blurbs[s.label]} · {s.handle}</small>
+            </span>
+            <span class="cta-arrow" aria-hidden="true">↗</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <p class="fine-print">
+    © {year} Akshit Kr Nagpal · Built with Astro and too many side projects ·
+    <button type="button" class="konami-hint" data-konami-hint>psst: ↑ ↑ ↓ ↓ ← → ← → B A</button>
+  </p>
+</footer>
+
+<style>
+  .footer {
+    max-width: 76rem;
+    margin: 0 auto;
+    padding: 0 1.5rem 2.5rem;
+  }
+
+  @media (min-width: 64rem) {
+    .footer { padding-inline: 3rem; }
+  }
+
+  .cta {
+    position: relative;
+    padding: clamp(2rem, 6vw, 4.5rem);
+    border: 2px solid var(--color-line);
+    border-radius: 2rem;
+    background: var(--pop-blue);
+    box-shadow: 10px 10px 0 var(--color-line);
+    color: var(--on-blue);
+    overflow: hidden;
+  }
+
+  .cta::before,
+  .cta::after {
+    content: "";
+    position: absolute;
+    border: 2px solid var(--color-line);
+    border-radius: 999px;
+    pointer-events: none;
+  }
+
+  .cta::before {
+    right: -4rem;
+    top: -4rem;
+    width: 14rem;
+    height: 14rem;
+    background: var(--pop-yellow);
+  }
+
+  .cta::after {
+    right: 7rem;
+    top: 5rem;
+    width: 4rem;
+    height: 4rem;
+    background: var(--pop-pink);
+  }
+
+  @media (max-width: 40rem) {
+    .cta::before { right: -5rem; top: -5rem; width: 9rem; height: 9rem; }
+    .cta::after { display: none; }
+  }
+
+  .cta-kicker {
+    position: relative;
+    font-family: var(--font-hand);
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .cta-title {
+    position: relative;
+    max-width: 14ch;
+    margin-top: 0.5rem;
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 7vw, 5.5rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+
+  .cta-fun {
+    display: inline-block;
+    padding: 0 0.15em;
+    border: 3px solid var(--color-line);
+    border-radius: 0.2em;
+    background: var(--pop-yellow);
+    box-shadow: 0.06em 0.06em 0 var(--color-line);
+    color: var(--on-pop);
+    rotate: -4deg;
+  }
+
+  .cta-links {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+    margin-top: 2.5rem;
+    list-style: none;
+  }
+
+  @media (min-width: 48rem) {
+    .cta-links { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+
+  .cta-link {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    padding: 1rem 1.125rem;
+    border: 2px solid var(--color-line);
+    border-radius: 1rem;
+    background: var(--color-card);
+    box-shadow: 4px 4px 0 var(--color-line);
+    color: var(--color-ink);
+    text-decoration: none;
+    transition: transform 150ms ease, box-shadow 150ms ease;
+  }
+
+  .cta-link:hover {
+    transform: translate(-2px, -3px) rotate(-1deg);
+    box-shadow: 7px 8px 0 var(--color-line);
+  }
+
+  .cta-link svg { flex: none; width: 1.5rem; height: 1.5rem; }
+  .cta-link span { display: flex; flex-direction: column; min-width: 0; }
+  .cta-link strong { font-family: var(--font-display); font-size: 1.25rem; font-weight: 800; line-height: 1.2; }
+  .cta-link small { font-size: 0.8125rem; color: var(--color-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .cta-link .cta-arrow { margin-left: auto; font-size: 1.25rem; transition: transform 150ms ease; }
+  .cta-link:hover .cta-arrow { transform: translate(2px, -2px); }
+
+  .fine-print {
+    margin-top: 2.5rem;
+    font-size: 0.8125rem;
+    text-align: center;
+    color: var(--color-muted);
+  }
+
+  .konami-hint {
+    border: none;
+    background: none;
+    color: inherit;
+    font: inherit;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    cursor: pointer;
+  }
+
+  .konami-hint:hover { color: var(--color-ink); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cta-link, .cta-link .cta-arrow { transition: none; }
+  }
+</style>

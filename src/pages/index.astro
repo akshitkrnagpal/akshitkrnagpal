@@ -1,287 +1,218 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Nav from "../components/Nav.astro";
+import Hero from "../components/Hero.astro";
+import Marquee from "../components/Marquee.astro";
+import Stats from "../components/Stats.astro";
 import ProjectCard from "../components/ProjectCard.astro";
-import { featured, more } from "../data/projects";
-
-const bio = "Senior full-stack engineer, now building AI agents, evals, and developer tools.";
-
-// Paths from simple-icons.
-const socials = [
-  {
-    label: "GitHub",
-    href: "https://github.com/akshitkrnagpal",
-    path: "M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12",
-  },
-  {
-    label: "LinkedIn",
-    href: "https://linkedin.com/in/akshitkrnagpal",
-    path: "M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z",
-  },
-  {
-    label: "X",
-    href: "https://x.com/akshit_io",
-    path: "M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z",
-  },
-];
-
-// The hero intro, one line per entry: each piece of text is followed by a link chip.
-const intro = [
-  [["Browse my code at", "GitHub"]],
-  [["DM me at", "LinkedIn"], [" or", "X"]],
-];
+import Terminal from "../components/Terminal.astro";
+import Footer from "../components/Footer.astro";
+import { featured } from "../data/projects";
 ---
 
 <Layout>
-  <nav class="navbar px-6 md:px-12" aria-label="Site">
-    <div class="max-w-6xl mx-auto w-full flex">
-      <a href="#top" class="navbar-profile">
-        <img src="https://avatars.githubusercontent.com/u/15872348" alt="" width="36" height="36" />
-        <span class="navbar-text">
-          Akshit Kr Nagpal
-          <span class="navbar-bio">{bio}</span>
-        </span>
-      </a>
-    </div>
-    <div class="navbar-socials">
-      {socials.map((s) => (
-        <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}>
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d={s.path} /></svg>
-        </a>
-      ))}
-    </div>
-  </nav>
+  <Nav />
 
-  <main id="top" class="px-6 md:px-12 pt-20 md:pt-28 pb-20">
-    <section class="max-w-2xl mx-auto text-center">
-      <div class="hero-avatar">
-        <img
-          src="https://avatars.githubusercontent.com/u/15872348"
-          alt="Akshit Kr Nagpal"
-          width="128"
-          height="128"
-          class="w-28 h-28 md:w-32 md:h-32 mx-auto mb-8 rounded-full object-cover ring-1 ring-[var(--color-border)] animate-scale-in"
-        />
+  <main id="top">
+    <Hero />
+    <Marquee />
+    <Stats />
+
+    <section id="projects" class="section scroll-mt-24" aria-labelledby="projects-title">
+      <header class="section-header" data-reveal>
+        <p class="section-kicker">the main characters</p>
+        <h2 id="projects-title" class="section-title">
+          Stuff I've <span class="squiggle">shipped<svg viewBox="0 0 200 14" preserveAspectRatio="none" aria-hidden="true"><path d="M2 9C20 2 30 13 48 7s28-6 46 0 28 6 46 0 30-6 58 1" /></svg></span>
+        </h2>
+        <p class="section-lede">Products I designed, built, and launched end to end. Poke around, they're all live.</p>
+      </header>
+      <div class="grid">
+        {featured.map((project, i) => <ProjectCard project={project} index={i} />)}
       </div>
-      <h1 data-hero-name class="text-5xl md:text-7xl leading-[1.05] mb-4 animate-fade-up delay-1" style="font-family: var(--font-display);">
-        Akshit Kr Nagpal
-      </h1>
-      <p class="text-lg md:text-xl leading-relaxed text-[var(--color-muted)] max-w-md mx-auto mb-8 animate-fade-up delay-2">
-        {bio}
-      </p>
-      <p class="intro animate-fade-up delay-3">
-        {intro.map((line) => (
-          <span class="block">
-            {line.map(([text, label]) => {
-              const s = socials.find((s) => s.label === label)!;
-              return <>{text}{" "}<a href={s.href} target="_blank" rel="noopener noreferrer" class="intro-chip"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d={s.path} /></svg>{s.label}</a></>;
-            })}
-          </span>
-        ))}
-      </p>
     </section>
 
-    <section id="projects" class="max-w-6xl mx-auto mt-20 md:mt-28 scroll-mt-24" aria-labelledby="projects-title">
-      <h2 id="projects-title" class="label mb-8 animate-fade-up delay-4">Projects</h2>
-      <div class="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-        {featured.map((project, i) => <ProjectCard project={project} index={i + 4} />)}
-      </div>
-
-      <h2 id="more-title" class="label mt-24 mb-4">More apps &amp; tools</h2>
-      <ul class="border-t border-[var(--color-border)]" aria-labelledby="more-title">
-        {more.map((project) => (
-          <li class="row">
-            <a href={project.links[0].href} target="_blank" rel="noopener noreferrer" class="row-name">{project.name}</a>
-            <p>{project.description}</p>
-            <span class="row-tag">{project.tag}</span>
-            <div class="row-links">
-              {project.links.map((link) => (
-                <a href={link.href} target="_blank" rel="noopener noreferrer" aria-label={`${project.name}: ${link.label}`}>
-                  {link.label}<span aria-hidden="true"> ↗</span>
-                </a>
-              ))}
-            </div>
-          </li>
-        ))}
-      </ul>
-
-      <p class="mt-16 text-center text-sm text-[var(--color-muted)]">
-        Everything else lives on <a href="https://github.com/akshitkrnagpal" target="_blank" rel="noopener noreferrer" class="text-[var(--color-ink)] underline underline-offset-4">GitHub</a>.
-      </p>
+    <section id="junk-drawer" class="section scroll-mt-24" aria-labelledby="drawer-title">
+      <header class="section-header" data-reveal>
+        <p class="section-kicker">the supporting cast</p>
+        <h2 id="drawer-title" class="section-title">The junk drawer</h2>
+        <p class="section-lede">
+          Smaller apps, CLIs, and experiments. It's a real terminal, so go ahead and type something.
+          Everything else lives on <a href="https://github.com/akshitkrnagpal" target="_blank" rel="noopener noreferrer">GitHub</a>.
+        </p>
+      </header>
+      <Terminal />
     </section>
   </main>
+
+  <Footer />
 </Layout>
 
 <script>
-  // Show the navbar profile once the hero name scrolls under it.
-  const name = document.querySelector("[data-hero-name]");
-  if (name) {
-    new IntersectionObserver(([entry]) => {
-      const scrolled = !entry.isIntersecting && entry.boundingClientRect.top < 0;
-      document.documentElement.toggleAttribute("data-scrolled", scrolled);
-    }, { rootMargin: "-76px 0px 0px 0px" }).observe(name);
+  import { party } from "../scripts/confetti";
+
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  // Reveal sections as they scroll into view.
+  const revealer = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      entry.target.classList.add("is-visible");
+      revealer.unobserve(entry.target);
+    }
+  }, { rootMargin: "0px 0px -10% 0px" });
+  document.querySelectorAll("[data-reveal]").forEach((el) => revealer.observe(el));
+
+  // Tilt project cards toward the pointer.
+  if (!reducedMotion.matches && window.matchMedia("(hover: hover)").matches) {
+    document.querySelectorAll<HTMLElement>("[data-tilt]").forEach((card) => {
+      const inner = card.firstElementChild as HTMLElement;
+      card.addEventListener("pointermove", (event) => {
+        const { left, top, width, height } = card.getBoundingClientRect();
+        const x = (event.clientX - left) / width - 0.5;
+        const y = (event.clientY - top) / height - 0.5;
+        card.classList.add("is-tilting");
+        inner.style.setProperty("--rx", `${(-y * 8).toFixed(2)}deg`);
+        inner.style.setProperty("--ry", `${(x * 10).toFixed(2)}deg`);
+      });
+      card.addEventListener("pointerleave", () => {
+        card.classList.remove("is-tilting");
+        inner.style.setProperty("--rx", "0deg");
+        inner.style.setProperty("--ry", "0deg");
+      });
+    });
   }
+
+  // Party mode: the Konami code, or the hint in the footer for people without arrow keys.
+  function partyMode() {
+    party(["🎉", "🕹️", "✨", "🚀"]);
+    if (reducedMotion.matches) return;
+    document.documentElement.classList.add("party");
+    window.setTimeout(() => document.documentElement.classList.remove("party"), 4000);
+  }
+
+  const code = ["arrowup", "arrowup", "arrowdown", "arrowdown", "arrowleft", "arrowright", "arrowleft", "arrowright", "b", "a"];
+  let progress = 0;
+  window.addEventListener("keydown", (event) => {
+    if ((event.target as HTMLElement).closest("input, textarea")) return;
+    const key = event.key.toLowerCase();
+    progress = key === code[progress] ? progress + 1 : key === code[0] ? 1 : 0;
+    if (progress === code.length) {
+      progress = 0;
+      partyMode();
+    }
+  });
+  document.querySelector("[data-konami-hint]")?.addEventListener("click", partyMode);
 </script>
 
 <style>
-  .navbar {
-    position: fixed;
-    inset: 0 0 auto;
-    z-index: 40;
-    display: flex;
-    align-items: center;
-    height: 4.75rem;
-    border-bottom: 1px solid transparent;
-    pointer-events: none;
-    transition: background-color 250ms ease, border-color 250ms ease;
+  .section {
+    max-width: 76rem;
+    margin: 0 auto;
+    padding: 6rem 1.5rem 0;
   }
 
-  .navbar-profile {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-size: 0.9375rem;
-    font-weight: 500;
-    color: inherit;
-    text-decoration: none;
+  .section + .section { padding-top: 7rem; }
+  .section:last-of-type { padding-bottom: 7rem; }
+
+  @media (min-width: 64rem) {
+    .section { padding-inline: 3rem; }
   }
 
-  /* Pinned just left of the floating theme toggle (2.75rem wide). */
-  .navbar-socials {
+  .section-header {
+    max-width: 40rem;
+    margin-bottom: 3rem;
+  }
+
+  .section-kicker {
+    font-family: var(--font-hand);
+    font-size: 1.625rem;
+    font-weight: 600;
+    line-height: 1;
+    color: var(--color-muted);
+    rotate: -2deg;
+    transform-origin: left;
+  }
+
+  .section-title {
+    margin-top: 0.375rem;
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 6vw, 4.25rem);
+    font-weight: 800;
+    line-height: 1.02;
+    letter-spacing: -0.04em;
+  }
+
+  .squiggle {
+    position: relative;
+    display: inline-block;
+  }
+
+  .squiggle svg {
     position: absolute;
-    right: calc(max(1.5rem, env(safe-area-inset-right)) + 3.75rem);
-    display: flex;
-    gap: 1rem;
+    left: 0;
+    bottom: -0.15em;
+    width: 100%;
+    height: 0.3em;
+    fill: none;
+    stroke: var(--pop-red);
+    stroke-width: 5;
+    stroke-linecap: round;
+    stroke-dasharray: 260;
+    stroke-dashoffset: 260;
+    transition: stroke-dashoffset 1s 300ms cubic-bezier(0.65, 0, 0.35, 1);
   }
 
-  .navbar-socials a {
-    display: grid;
+  :global(.is-visible) .squiggle svg,
+  :global(html:not(.js)) .squiggle svg { stroke-dashoffset: 0; }
+
+  .section-lede {
+    margin-top: 1rem;
+    font-size: 1.125rem;
     color: var(--color-muted);
-    transition: color 200ms ease;
   }
 
-  .navbar-socials a:hover { color: var(--color-ink); }
-  .navbar-socials svg { width: 1.125rem; height: 1.125rem; }
-
-  .intro {
-    max-width: 36rem;
-    margin-inline: auto;
-    line-height: 2.25;
-    color: var(--color-muted);
-  }
-
-  .intro-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.375rem;
-    vertical-align: middle;
-    line-height: 1.5;
-    padding: 0.125rem 0.625rem;
-    border-radius: 999px;
-    background: var(--color-surface-hover);
-    border: 1px solid var(--color-border);
+  .section-lede a {
     color: var(--color-ink);
-    font-weight: 500;
-    text-decoration: none;
-    transition: background-color 200ms ease, color 200ms ease, transform 200ms ease;
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: var(--pop-pink);
+    text-decoration-thickness: 3px;
+    text-underline-offset: 4px;
   }
 
-  .intro-chip svg { width: 0.875rem; height: 0.875rem; }
-  .intro-chip:hover { background: var(--color-ink); color: var(--color-paper); transform: translateY(-1px); }
-
-  .navbar-profile,
-  .navbar-socials {
-    opacity: 0;
-    transform: translateY(0.75rem);
-    transition: opacity 300ms ease, transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .navbar-text {
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    line-height: 1.3;
-  }
-
-  .navbar-bio {
-    font-size: 0.8125rem;
-    font-weight: 400;
-    color: var(--color-muted);
-  }
-
-  /* No room beside the socials on phones. */
-  @media (max-width: 47.99rem) {
-    .navbar-bio { display: none; }
-  }
-
-  .navbar-profile img {
-    width: 2.25rem;
-    height: 2.25rem;
-    border-radius: 999px;
-    object-fit: cover;
-  }
-
-  :global(html[data-scrolled]) .navbar {
-    pointer-events: auto;
-    background: color-mix(in srgb, var(--color-paper) 85%, transparent);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-color: var(--color-border);
-  }
-
-  :global(html[data-scrolled]) .navbar-profile,
-  :global(html[data-scrolled]) .navbar-socials {
-    opacity: 1;
-    transform: none;
-  }
-
-  /* Shrink the hero avatar up toward the navbar as it scrolls away. */
-  @supports (animation-timeline: view()) {
-    @media (prefers-reduced-motion: no-preference) {
-      .hero-avatar {
-        animation: avatar-exit linear both;
-        animation-timeline: view();
-        animation-range: exit-crossing 20% exit-crossing 100%;
-      }
-    }
-  }
-
-  @keyframes avatar-exit {
-    to { opacity: 0; transform: translateY(35%) scale(0.4); }
-  }
-
-  .label {
-    font-size: 0.875rem;
-    font-weight: 500;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--color-muted);
-  }
-
-  .row {
+  .grid {
     display: grid;
-    grid-template-columns: 10rem minmax(0, 1fr) 7rem 10rem;
-    align-items: center;
-    gap: 1rem;
-    padding: 0.875rem 0;
-    border-bottom: 1px solid var(--color-border);
-    font-size: 0.875rem;
+    gap: 2.5rem 2rem;
   }
 
-  .row-name { font-weight: 500; }
-  .row p { color: var(--color-muted); }
-  .row-tag { font-size: 0.75rem; color: var(--color-muted); }
-  .row-links { display: flex; gap: 1rem; justify-content: end; font-size: 0.8125rem; }
-  .row a { text-decoration: none; }
-  .row a:hover { text-decoration: underline; text-underline-offset: 3px; }
-  a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; border-radius: 2px; }
+  @media (min-width: 44rem) {
+    .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
 
-  @media (max-width: 43.99rem) {
-    .row { grid-template-columns: minmax(0, 1fr) auto; gap: 0.25rem 1rem; }
-    .row p { grid-column: 1 / -1; grid-row: 2; }
-    .row-tag { display: none; }
+  @media (min-width: 64rem) {
+    .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+
+  :global(html.party main) {
+    animation: party-hue 1.2s linear infinite;
+  }
+
+  :global(html.party [data-sticker]),
+  :global(html.party .stat),
+  :global(html.party .card) {
+    animation: party-wiggle 0.35s ease-in-out infinite alternate;
+  }
+
+  @keyframes party-hue {
+    to { filter: hue-rotate(360deg); }
+  }
+
+  @keyframes party-wiggle {
+    from { transform: rotate(-3deg); }
+    to { transform: rotate(3deg); }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .navbar, .navbar-profile, .navbar-socials, .navbar-socials a { transition: none; }
+    .squiggle svg { stroke-dashoffset: 0; transition: none; }
   }
 </style>

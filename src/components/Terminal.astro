@@ -1,0 +1,375 @@
+---
+import { featured, more } from "../data/projects";
+import { bio, socials } from "../data/socials";
+
+// Plain data for the interactive shell, so the client bundle skips the preview images.
+const shellData = {
+  bio,
+  socials: socials.map(({ label, handle, href }) => ({ label, handle, href })),
+  projects: [...featured, ...more].map(({ slug, name, description, tag, links }) => ({ slug, name, description, tag, links })),
+};
+
+const colors = ["#ffc93c", "#ff7ac6", "#34d399", "#8fa2ff", "#ff6a47", "#a48bff"];
+---
+
+<script type="application/json" id="shell-data" set:html={JSON.stringify(shellData)} />
+
+<div class="terminal" data-reveal>
+  <div class="terminal-bar">
+    <span class="terminal-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+    <span class="terminal-title">akshit@internet: ~/junk-drawer</span>
+  </div>
+
+  <div class="terminal-body" data-terminal-body>
+    <p class="line" aria-hidden="true"><span class="prompt">$</span> ls -l ~/junk-drawer</p>
+    <ul class="listing" aria-label="More apps and tools">
+      {more.map((project, i) => (
+        <li class="entry" style={`--c: ${colors[i % colors.length]}`}>
+          <a href={project.links[0].href} target="_blank" rel="noopener noreferrer" class="entry-name">{project.name}</a>
+          <p class="entry-description"><span aria-hidden="true"># </span>{project.description} <span class="entry-tag">[{project.tag.toLowerCase()}]</span></p>
+          <span class="entry-links">
+            {project.links.map((link) => (
+              <a href={link.href} target="_blank" rel="noopener noreferrer" aria-label={`${project.name}: ${link.label}`}>
+                {link.label.toLowerCase()}<span aria-hidden="true">↗</span>
+              </a>
+            ))}
+          </span>
+        </li>
+      ))}
+    </ul>
+
+    <div class="output" data-terminal-output aria-live="polite"></div>
+
+    <form class="line input-line" data-terminal-form>
+      <label for="terminal-input" class="prompt">$</label>
+      <input
+        id="terminal-input"
+        data-terminal-input
+        autocomplete="off"
+        autocapitalize="off"
+        spellcheck="false"
+        enterkeyhint="send"
+        aria-label="Terminal command. Type help for a list of commands."
+        placeholder="type 'help' and press enter"
+      />
+    </form>
+  </div>
+</div>
+
+<script>
+  import type { Link } from "../data/projects";
+  import { party } from "../scripts/confetti";
+
+  interface ShellProject {
+    slug: string;
+    name: string;
+    description: string;
+    tag: string;
+    links: Link[];
+  }
+
+  const { bio, socials, projects } = JSON.parse(document.getElementById("shell-data")?.textContent ?? "{}") as {
+    bio: string;
+    socials: { label: string; handle: string; href: string }[];
+    projects: ShellProject[];
+  };
+
+  const body = document.querySelector<HTMLElement>("[data-terminal-body]");
+  const output = document.querySelector<HTMLElement>("[data-terminal-output]");
+  const form = document.querySelector<HTMLFormElement>("[data-terminal-form]");
+  const input = document.querySelector<HTMLInputElement>("[data-terminal-input]");
+
+  const history: string[] = [];
+  let historyIndex = 0;
+
+  type Line = string | { text: string; href?: string; className?: string };
+
+  function print(lines: Line[], className = "") {
+    if (!output) return;
+    const block = document.createElement("div");
+    block.className = `output-block ${className}`;
+    for (const line of lines) {
+      const row = document.createElement("p");
+      const item = typeof line === "string" ? { text: line } : line;
+      if (item.href) {
+        const link = document.createElement("a");
+        link.href = item.href;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.textContent = item.text;
+        row.append(link);
+      } else {
+        row.textContent = item.text;
+      }
+      if (item.className) row.className = item.className;
+      block.append(row);
+    }
+    output.append(block);
+    body?.scrollTo({ top: body.scrollHeight });
+  }
+
+  function find(name: string) {
+    const query = name.trim().toLowerCase();
+    return projects.find((p) => p.name.toLowerCase() === query || p.slug === query);
+  }
+
+  const commands: Record<string, (args: string[]) => Line[] | void> = {
+    help: () => [
+      "available commands:",
+      "  ls              list everything I've built",
+      "  cat <project>   read about a project",
+      "  open <project>  open it in a new tab",
+      "  whoami          the human behind all this",
+      "  contact         ways to say hi",
+      "  party           🎉",
+      "  theme           flip the lights",
+      "  clear           tidy up",
+      "(there might be a few secret ones too)",
+    ],
+    ls: () => [projects.map((p) => p.slug).join("  ")],
+    cat: ([name]) => {
+      if (!name) return ["usage: cat <project>"];
+      const project = find(name);
+      if (!project) return [`cat: ${name}: No such file or directory`];
+      return [
+        { text: project.name, className: "accent" },
+        project.description,
+        `[${project.tag.toLowerCase()}]`,
+        ...project.links.map((link) => ({ text: `→ ${link.label}: ${link.href}`, href: link.href })),
+      ];
+    },
+    open: ([name]) => {
+      if (!name) return ["usage: open <project>"];
+      const project = find(name);
+      if (!project) return [`open: ${name}: not found. try 'ls'`];
+      window.open(project.links[0].href, "_blank", "noopener,noreferrer");
+      return [`opening ${project.name}… 🚀`];
+    },
+    whoami: () => ["akshit kr nagpal", bio],
+    contact: () => socials.map((s) => ({ text: `${s.label.padEnd(9)} ${s.handle}`, href: s.href })),
+    party: () => {
+      party();
+      return ["🎉 🎉 🎉"];
+    },
+    theme: () => {
+      document.querySelector<HTMLButtonElement>("[data-theme-toggle]")?.click();
+      return ["lights flipped ✨"];
+    },
+    clear: () => {
+      if (output) output.textContent = "";
+    },
+    sudo: (args) => {
+      if (args.join(" ").toLowerCase().includes("hire")) {
+        party(["💼", "🤝", "🎉"]);
+        return [
+          "[sudo] password for recruiter: ********",
+          "access granted. excellent decision.",
+          { text: "→ continue on LinkedIn", href: socials.find((s) => s.label === "LinkedIn")!.href },
+        ];
+      }
+      return ["nice try. this incident will be reported. 🚨"];
+    },
+    hire: () => commands.sudo(["hire"]),
+    coffee: () => ["☕ brewing…", "done. productivity +10%"],
+    rm: () => ["lol. no. 🙅"],
+    vim: () => ["you're stuck in vim now. good luck.", "(kidding, type :q)"],
+    ":q": () => ["see? easy. 😌"],
+    exit: () => ["there is no escape. (try scrolling)"],
+    echo: (args) => [args.join(" ")],
+    pwd: () => ["/home/akshit/junk-drawer"],
+    date: () => [new Date().toString()],
+  };
+
+  function run(raw: string) {
+    const value = raw.trim();
+    print([{ text: `$ ${value}`, className: "echo" }]);
+    if (!value) return;
+    const [name, ...args] = value.split(/\s+/);
+    const command = commands[name.toLowerCase()];
+    const result = command ? command(args) : [`zsh: command not found: ${name}. try 'help'`];
+    if (result) print(result);
+  }
+
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    if (!input) return;
+    const value = input.value;
+    if (value.trim()) history.push(value);
+    historyIndex = history.length;
+    input.value = "";
+    run(value);
+  });
+
+  input?.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowUp" && history.length) {
+      event.preventDefault();
+      historyIndex = Math.max(0, historyIndex - 1);
+      input.value = history[historyIndex];
+    } else if (event.key === "ArrowDown" && history.length) {
+      event.preventDefault();
+      historyIndex = Math.min(history.length, historyIndex + 1);
+      input.value = history[historyIndex] ?? "";
+    } else if (event.key === "Tab" && input.value.includes(" ")) {
+      // Complete project names after a command.
+      const [command, partial = ""] = input.value.split(/\s+/);
+      const match = projects.find((p) => p.slug.startsWith(partial.toLowerCase()));
+      if (match) {
+        event.preventDefault();
+        input.value = `${command} ${match.slug}`;
+      }
+    } else if (event.key === "l" && event.ctrlKey) {
+      event.preventDefault();
+      commands.clear([]);
+    }
+  });
+
+  // Clicking anywhere in the terminal focuses the prompt, unless it was a link or a text selection.
+  body?.addEventListener("click", (event) => {
+    if ((event.target as HTMLElement).closest("a")) return;
+    if (window.getSelection()?.toString()) return;
+    input?.focus({ preventScroll: true });
+  });
+</script>
+
+<style>
+  .terminal {
+    overflow: hidden;
+    border: 2px solid var(--color-line);
+    border-radius: 1.25rem;
+    background: #16130f;
+    box-shadow: 8px 8px 0 var(--pop-green), 8px 8px 0 2px var(--color-line);
+    color: #e9e1d2;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+  }
+
+  .terminal-bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1rem;
+    border-bottom: 2px solid #3a342b;
+    background: #221e19;
+  }
+
+  .terminal-dots {
+    position: absolute;
+    left: 1rem;
+    display: flex;
+    gap: 0.4375rem;
+  }
+
+  .terminal-dots i {
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 999px;
+    background: #ff5f57;
+  }
+
+  .terminal-dots i:nth-child(2) { background: #febc2e; }
+  .terminal-dots i:nth-child(3) { background: #28c840; }
+
+  .terminal-title {
+    font-size: 0.75rem;
+    color: #a99f8f;
+  }
+
+  .terminal-body {
+    max-height: 40rem;
+    overflow-y: auto;
+    padding: 1.25rem 1.5rem 1.5rem;
+    scrollbar-color: #3a342b transparent;
+  }
+
+  .line { white-space: pre-wrap; }
+  .prompt { color: #34d399; font-weight: 600; margin-right: 0.625rem; }
+
+  .listing {
+    margin: 0.75rem 0 1rem;
+    list-style: none;
+  }
+
+  .entry {
+    display: grid;
+    grid-template-columns: 9.5rem minmax(0, 1fr) auto;
+    grid-template-areas: "name description links";
+    gap: 0.25rem 1.25rem;
+    align-items: baseline;
+    padding: 0.4375rem 0.5rem;
+    margin-inline: -0.5rem;
+    border-radius: 0.375rem;
+    transition: background-color 120ms ease;
+  }
+
+  .entry:hover { background: rgb(255 255 255 / 0.05); }
+
+  .entry .entry-name {
+    grid-area: name;
+    color: var(--c);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .entry-tag { color: #8a8173; white-space: nowrap; }
+
+  .entry-description {
+    grid-area: description;
+    color: #a99f8f;
+  }
+
+  .entry-links {
+    grid-area: links;
+    display: flex;
+    gap: 0.875rem;
+    justify-content: end;
+  }
+
+  .entry a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .entry-links a { color: #e9e1d2; }
+  .entry-links a:hover, .entry-name:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .entry-links span { color: #a99f8f; }
+
+  @media (max-width: 40rem) {
+    .terminal-body { padding: 1rem; font-size: 0.8125rem; }
+
+    .entry {
+      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-areas: "name links" "description description";
+      padding-block: 0.5rem;
+    }
+  }
+
+  .output :global(.output-block) { margin-bottom: 0.5rem; white-space: pre-wrap; }
+  .output :global(.echo) { color: #e9e1d2; }
+  .output :global(.output-block:not(:has(.echo)) p) { color: #c9bfae; }
+  .output :global(.accent) { color: #ffc93c; font-weight: 600; }
+  .output :global(a) { color: #8fa2ff; text-decoration: underline; text-underline-offset: 3px; }
+
+  .input-line {
+    display: flex;
+    align-items: center;
+  }
+
+  .input-line input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    background: transparent;
+    color: #fffdf8;
+    font: inherit;
+    caret-color: #ffc93c;
+    outline: none;
+  }
+
+  .input-line input::placeholder { color: #8a8173; }
+  .input-line:focus-within { outline: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .entry { transition: none; }
+  }
+</style>
