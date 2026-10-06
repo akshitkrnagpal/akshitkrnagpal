@@ -67,7 +67,7 @@ const websiteSchema = {
 		<link rel="canonical" href={canonicalUrl} />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet" />
+		<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="author" content="Akshit Kr Nagpal" />
 		<title>{title}</title>
@@ -96,23 +96,33 @@ const websiteSchema = {
 		<style>
 			:root {
 				--color-ink: #1d1c1a;
-				--color-paper: #f7f5f1;
+				--color-paper: #fbf6ec;
 				--color-muted: #6d6861;
-				--color-accent: var(--color-ink);
+				--color-accent: #b54531;
 				--color-accent-hover: var(--color-muted);
 				--color-border: rgba(29, 28, 26, 0.12);
 				--color-border-strong: rgba(29, 28, 26, 0.28);
 				--color-surface: rgba(255, 255, 255, 0.5);
 				--color-surface-hover: rgba(255, 255, 255, 0.82);
+				--color-dot: rgba(29, 28, 26, .1);
+				--color-shadow: #292621;
+				--color-coral-soft: #f9e0d5;
+				--color-lime-soft: #e9f0cd;
+				--color-lavender-soft: #eee8f7;
 				--font-display: 'Instrument Serif', Georgia, serif;
 				--font-body: 'DM Sans', system-ui, sans-serif;
 			}
 
 			html[data-theme="dark"] {
-				--color-ink: #e8e6e3;
-				--color-paper: #0a0a0b;
-				--color-muted: #96928d;
-				--color-accent: var(--color-ink);
+				--color-ink: #f3eee5;
+				--color-paper: #17151a;
+				--color-muted: #b3adb7;
+				--color-accent: #ff9a83;
+				--color-dot: rgba(243, 238, 229, .09);
+				--color-shadow: #35303d;
+				--color-coral-soft: #3b2928;
+				--color-lime-soft: #2c3224;
+				--color-lavender-soft: #292431;
 				--color-accent-hover: var(--color-muted);
 				--color-border: rgba(232, 230, 227, 0.12);
 				--color-border-strong: rgba(232, 230, 227, 0.28);
@@ -122,10 +132,15 @@ const websiteSchema = {
 
 			@media (prefers-color-scheme: dark) {
 				:root:not([data-theme]) {
-					--color-ink: #e8e6e3;
-					--color-paper: #0a0a0b;
-					--color-muted: #96928d;
-					--color-accent: var(--color-ink);
+					--color-ink: #f3eee5;
+					--color-paper: #17151a;
+					--color-muted: #b3adb7;
+					--color-accent: #ff9a83;
+					--color-dot: rgba(243, 238, 229, .09);
+					--color-shadow: #35303d;
+					--color-coral-soft: #3b2928;
+					--color-lime-soft: #2c3224;
+					--color-lavender-soft: #292431;
 					--color-accent-hover: var(--color-muted);
 					--color-border: rgba(232, 230, 227, 0.12);
 					--color-border-strong: rgba(232, 230, 227, 0.28);
@@ -147,7 +162,9 @@ const websiteSchema = {
 
 			body {
 				font-family: var(--font-body);
-				background: var(--color-paper);
+				background-color: var(--color-paper);
+				background-image: radial-gradient(var(--color-dot) .8px, transparent .8px);
+				background-size: 22px 22px;
 				color: var(--color-ink);
 				line-height: 1.6;
 				-webkit-font-smoothing: antialiased;

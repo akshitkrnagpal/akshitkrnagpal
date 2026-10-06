@@ -11,27 +11,48 @@ const { project, index = 0 } = Astro.props;
 const [primary] = project.links;
 ---
 
-<article class="card animate-fade-up" style={`animation-delay: ${0.15 + index * 0.08}s`}>
+<article
+  class="card"
+  data-project={project.name}
+  style={`--card-tint: var(--color-${["coral", "lime", "lavender"][index % 3]}-soft)`}
+>
   {project.preview && (
-    <a href={primary.href} target="_blank" rel="noopener noreferrer" class="card-media" tabindex="-1" aria-hidden="true">
+    <a
+      href={primary.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="card-media"
+      tabindex="-1"
+      aria-hidden="true"
+    >
       <Image
         src={project.preview}
         alt=""
         widths={[480, 800, 1200]}
-        sizes="(min-width: 64rem) 30rem, (min-width: 44rem) 50vw, 100vw"
+        sizes="(min-width: 76rem) 540px, (min-width: 48rem) 50vw, 100vw"
       />
     </a>
   )}
   <div class="card-body">
+    <span class="card-tag">{project.tag}</span>
     <div class="card-title">
-      <h3><a href={primary.href} target="_blank" rel="noopener noreferrer">{project.name}</a></h3>
-      <span>{project.tag}</span>
+      <h3>
+        <a href={primary.href} target="_blank" rel="noopener noreferrer">
+          {project.name}
+        </a>
+      </h3>
     </div>
     <p>{project.description}</p>
     <div class="card-links">
       {project.links.map((link) => (
-        <a href={link.href} target="_blank" rel="noopener noreferrer" aria-label={`${project.name}: ${link.label}`}>
-          {link.label}<span aria-hidden="true"> ↗</span>
+        <a
+          href={link.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${project.name}: ${link.label}`}
+        >
+          {link.label}
+          <span aria-hidden="true"> ↗</span>
         </a>
       ))}
     </div>
@@ -42,72 +63,109 @@ const [primary] = project.links;
   .card {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    min-width: 0;
+    padding: 12px;
+    border: 1px solid var(--color-border-strong);
+    border-radius: 16px;
+    background: var(--color-paper);
+    box-shadow: 4px 4px 0 var(--color-shadow);
+    transition:
+      transform 200ms ease,
+      box-shadow 200ms ease;
+    scroll-margin-block: 32px;
   }
-
+  .card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--color-shadow);
+  }
+  .card[data-picked] {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 5px;
+  }
   .card-media {
     display: block;
     overflow: hidden;
-    border: 1px solid var(--color-border);
-    border-radius: 0.75rem;
+    border-radius: 8px;
+    padding: 10px;
+    background: var(--card-tint);
     aspect-ratio: 1200 / 630;
-    transition: border-color 200ms ease;
   }
-
   .card-media img {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    transition: transform 400ms ease;
   }
-
-  .card:hover .card-media { border-color: var(--color-border-strong); }
-  .card:hover .card-media img { transform: scale(1.03); }
-
-  .card-title {
+  .card:hover .card-media img {
+    transform: scale(1.015);
+  }
+  .card-body {
     display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 0.75rem;
+    flex-direction: column;
+    align-items: start;
+    flex: 1;
+    padding: 20px 12px 10px;
   }
-
+  .card-tag {
+    display: inline-block;
+    padding: 4px 8px;
+    font-size: 0.72rem;
+    font-weight: 500;
+    background: var(--card-tint);
+    border-radius: 6px;
+    margin-bottom: 12px;
+  }
   h3 {
-    font-family: var(--font-display);
-    font-size: 1.625rem;
-    font-weight: 400;
-    line-height: 1.1;
+    font-size: 1.65rem;
+    font-weight: 600;
+    letter-spacing: -0.045em;
+    line-height: 1.15;
   }
-
-  .card-title span {
-    font-size: 0.6875rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-muted);
-    white-space: nowrap;
-  }
-
   p {
-    margin-top: 0.375rem;
+    margin-top: 10px;
+    margin-bottom: 16px;
     font-size: 0.875rem;
-    line-height: 1.6;
+    line-height: 1.65;
     color: var(--color-muted);
   }
-
   .card-links {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.25rem 1rem;
-    margin-top: 0.625rem;
-    font-size: 0.8125rem;
+    gap: 4px 20px;
+    margin-top: auto;
+    font-size: 0.8rem;
   }
-
-  a { color: inherit; text-decoration: none; }
-  .card-links a:hover, h3 a:hover { text-decoration: underline; text-underline-offset: 3px; }
-  a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; border-radius: 2px; }
-
+  .card-links a {
+    min-height: 36px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .card-links a:hover,
+  h3 a:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  a:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
   @media (prefers-reduced-motion: reduce) {
-    .card-media, .card-media img { transition: none; }
-    .card:hover .card-media img { transform: none; }
+    .card,
+    .card-media img {
+      transition: none;
+    }
+    .card:hover,
+    .card:hover .card-media img {
+      transform: none;
+    }
   }
 </style>
